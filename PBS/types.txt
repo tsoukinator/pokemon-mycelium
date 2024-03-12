@@ -35,27 +35,27 @@ Immunities = ELECTRIC
 [ROCK]
 Name = Rock
 IconPosition = 5
-Weaknesses = FIGHTING,GROUND,STEEL,WATER,GRASS
+Weaknesses = FIGHTING,GROUND,STEEL,WATER,GRASS,MYCELIUM
 Resistances = NORMAL,FLYING,POISON,FIRE
 #-------------------------------
 [BUG]
 Name = Bug
 IconPosition = 6
 Weaknesses = FLYING,ROCK,FIRE
-Resistances = FIGHTING,GROUND,GRASS
+Resistances = FIGHTING,GROUND,GRASS,MYCELIUM
 #-------------------------------
 [GHOST]
 Name = Ghost
 IconPosition = 7
 Weaknesses = GHOST,DARK
 Resistances = POISON,BUG
-Immunities = NORMAL,FIGHTING
+Immunities = NORMAL,FIGHTING,MYCELIUM
 #-------------------------------
 [STEEL]
 Name = Steel
 IconPosition = 8
 Weaknesses = FIGHTING,GROUND,FIRE
-Resistances = NORMAL,FLYING,ROCK,BUG,STEEL,GRASS,PSYCHIC,ICE,DRAGON,FAIRY
+Resistances = NORMAL,FLYING,ROCK,BUG,STEEL,GRASS,PSYCHIC,ICE,DRAGON,FAIRY,MYCELIUM
 Immunities = POISON
 #-------------------------------
 [QMARKS]
@@ -68,20 +68,20 @@ Name = Fire
 IconPosition = 10
 IsSpecialType = true
 Weaknesses = GROUND,ROCK,WATER
-Resistances = BUG,STEEL,FIRE,GRASS,ICE,FAIRY
+Resistances = BUG,STEEL,FIRE,GRASS,ICE,FAIRY,MYCELIUM
 #-------------------------------
 [WATER]
 Name = Water
 IconPosition = 11
 IsSpecialType = true
-Weaknesses = GRASS,ELECTRIC
+Weaknesses = GRASS,ELECTRIC,MYCELIUM
 Resistances = STEEL,FIRE,WATER,ICE
 #-------------------------------
 [GRASS]
 Name = Grass
 IconPosition = 12
 IsSpecialType = true
-Weaknesses = FLYING,POISON,BUG,FIRE,ICE
+Weaknesses = FLYING,POISON,BUG,FIRE,ICE,MYCELIUM
 Resistances = GROUND,WATER,GRASS,ELECTRIC
 #-------------------------------
 [ELECTRIC]
@@ -95,7 +95,7 @@ Resistances = FLYING,STEEL,ELECTRIC
 Name = Psychic
 IconPosition = 14
 IsSpecialType = true
-Weaknesses = BUG,GHOST,DARK
+Weaknesses = BUG,GHOST,DARK,MYCELIUM
 Resistances = FIGHTING,PSYCHIC
 #-------------------------------
 [ICE]
@@ -103,7 +103,7 @@ Name = Ice
 IconPosition = 15
 IsSpecialType = true
 Weaknesses = FIGHTING,ROCK,STEEL,FIRE
-Resistances = ICE
+Resistances = ICE,MYCELIUM
 #-------------------------------
 [DRAGON]
 Name = Dragon
@@ -117,13 +117,21 @@ Name = Dark
 IconPosition = 17
 IsSpecialType = true
 Weaknesses = FIGHTING,BUG,FAIRY
-Resistances = GHOST,DARK
+Resistances = GHOST,DARK,MYCELIUM
 Immunities = PSYCHIC
 #-------------------------------
 [FAIRY]
 Name = Fairy
 IconPosition = 18
 IsSpecialType = true
-Weaknesses = POISON,STEEL
+Weaknesses = POISON,STEEL,MYCELIUM
 Resistances = FIGHTING,BUG,DARK
 Immunities = DRAGON
+#-------------------------------
+[MYCELIUM]
+Name = Mycelium
+IconPosition = 19
+IsSpecialType = true
+Weaknesses = FIRE,ICE,FLYING
+Resistances = FIGHTING,POISON,BUG,GRASS,FAIRY,ELECTRIC,GROUND,MYCELIUM
+Immunities = GRASS

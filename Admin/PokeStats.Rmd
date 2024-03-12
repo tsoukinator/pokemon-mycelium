@@ -1,0 +1,172 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(readxl)
+library(dplyr)
+library(readr)
+library(rlist)
+
+# Read moves from xls
+pkmnstats_xls <- readxl::read_excel("PokeDB.xlsx", sheet = "PkmnStats")
+
+pkmnstats_xls$Name <- trimws(pkmnstats_xls$Name)
+pkmnstats_xls$Types <- trimws(pkmnstats_xls$Abilities)
+pkmnstats_xls$HiddenAbilities <- trimws(pkmnstats_xls$HiddenAbilities)
+pkmnstats_xls$Types <- trimws(pkmnstats_xls$Types)
+pkmnstats_xls$Pokedex <- trimws(pkmnstats_xls$Pokedex)
+
+# Calculate percentile rank of points values
+pkmnstats_xls <- pkmnstats_xls %>%
+  mutate(HP_Pct = round((100 * rank(HP)/length(HP)),0), Attack_Pct = round((100 * rank(Attack)/length(Attack)),0), Def_Pct = round((100 * rank(Defence)/length(Defence)),0), SpAtk_Pct = round((100 * rank(`Special Attack`)/length(`Special Attack`)),0), SpDef_Pct = round((100 * rank(`Special Defence`)/length(`Special Defence`)),0), Speed_Pct = round((100 * rank(Speed)/length(Speed)),0))
+
+# Comparison
+compare <- dplyr::filter(pkmnstats_xls, Name %in% c("Edgarnator","Ragnarnator","Elsanator"))
+
+## Get Percentiles for comparison pkmn
+#pkmnstats_xls
+```
+
+```{r}
+
+#comparison_frame <- data.frame(Name = NA, HP = NA, Attack = NA, Defence = NA, Special_Attack = NA, Special_Defence = NA, Speed = NA, Proximity = NA)
+
+combined_frame <- comparison_frame
+
+for (i in 1:nrow(pkmnstats_xls)) {
+
+  ## Reset data frame
+  comparison_frame <- data.frame(Name = '', HP = 0, Attack = 0, Defence = 0, Special_Attack = 0, Special_Defence = 0, Speed = 0, Proximity = 0, Compare_to = '')
+  
+  for (j in 1:nrow(compare)) {
+  if (pkmnstats_xls$Name[i] == compare$Name[j]) {
+    # Do nothing
+    
+  } else {
+    ## Compare data
+    comparison_frame$Name = pkmnstats_xls$Name[i]
+    comparison_frame$Compare_to = compare$Name[j]
+    
+    ## Perform calculations
+    comparison_frame$HP <- compare$HP[j] - pkmnstats_xls$HP[i]
+    comparison_frame$Attack <- compare$Attack[j] - pkmnstats_xls$Attack[i]
+    comparison_frame$Defence <- compare$Defence[j] - pkmnstats_xls$Defence[i]
+    comparison_frame$Special_Attack <- compare$`Special Attack`[j] - pkmnstats_xls$`Special Attack`[i]
+    comparison_frame$Special_Defence <- compare$`Special Defence`[j] - pkmnstats_xls$`Special Defence`[i]
+    comparison_frame$Speed <- compare$Speed[j] - pkmnstats_xls$Speed[i]
+    
+    ## Calculate absolute difference
+    comparison_frame$Proximity <- abs(comparison_frame$HP) + abs(comparison_frame$Attack) + abs(comparison_frame$Defence) + abs(comparison_frame$Special_Attack) + abs(comparison_frame$Special_Defence) + abs(comparison_frame$Speed)
+  
+  
+    ### Create Dataframe of pokemon comparisons
+  if (i == 1) {
+    combined_frame <- comparison_frame
+  } else {
+    combined_frame <- rbind(combined_frame, comparison_frame)
+  }
+    
+  }
+    
+  }
+  
+}
+
+```
+
+```{r}
+## Subject PKMN
+subject <- "Edgarnator" #"Elsanator" #"Ragnarnator"# "Edgarnator"
+
+# Filter to pkmn
+subject_frame <- filter(combined_frame, Compare_to == subject)
+
+#combined_frame
+newdata <- subject_frame[order(subject_frame$Proximity),]
+newdata
+
+
+### Changes
+## Ragnarnator - Drop HP by 20, increase speed by 20, Increase special_attack by 5
+## Elsanator - Increase speed by 5
+## Edgarnator - Keep for now
+
+#Ragnarnator current stats: 90	80	75	110	80	80	(515)
+#Elsanator current stats: 75	90	70	100	70	110	(515)
+#Edgarnator current stats: 120	90	115	60	85	60	(530)
+
+#Ragnarnator modified stats: 90	80	75	110	80	80	(515)
+#Elsanator modified stats: 75	90	70	100	70	110	(515)
+#Edgarnator modified stats: 120	90	115	60	85	60	(530)
+
+compare
+```
+
+## Load Pokemon PBS
+```{r}
+og_pokemon_txt <- read_delim("./Original Backup Text Files/pokemon_tsouk.txt", delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Split on Equals sign
+og_pkmn_split <- data.frame(do.call('rbind', strsplit(as.character(og_pokemon_txt$X1),'=',fixed=TRUE)))
+og_pkmn_split$X1 <- trimws(og_pkmn_split$X1)
+og_pkmn_split$X2 <- trimws(og_pkmn_split$X2)
+
+pkmn_name <- ''
+og_pkmn_split$Name <- ''
+
+# Add pokemon name to dataframe
+for (i in 1:nrow(og_pkmn_split)) {
+  if (og_pkmn_split$X1[i] == "Name") {
+    pkmn_name <- og_pkmn_split$X2[i]
+    og_pkmn_split$Name[i-2] <- pkmn_name
+    og_pkmn_split$Name[i-1] <- pkmn_name
+  }
+  og_pkmn_split$Name[i] <- pkmn_name
+}
+
+
+# If any data in PkmnStats excel, add them in below (filter for no pokedex number)
+new_pkmn_stats <- filter(pkmnstats_xls, is.na(`Pokedex Number`))
+new_pkmn_stats
+
+#View(og_pkmn_split)
+
+## Create Stats column (HP,Atk,Def,Speed,SpA,SpD)
+new_pkmn_stats$BaseStats <- paste(new_pkmn_stats$HP,new_pkmn_stats$Attack,new_pkmn_stats$Defence,new_pkmn_stats$Speed,new_pkmn_stats$`Special Attack`,new_pkmn_stats$`Special Defence`,sep=',')
+
+## Keep columns
+keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Pokedex')
+
+pkmn_data = subset(new_pkmn_stats, select = keep_cols)
+as.data.frame(t(pkmn_data))
+
+## Replace stats if match in pkmnstats_xls
+#pkmn_data
+library(tidyr)
+gather(pkmn_data)
+
+# Use gather() to reshape the data
+gather_pkmn <- gather(pkmn_data, key = "Column", value = "Value", -Name)
+
+# Outer join on og data
+pkmn_combine <- left_join(og_pkmn_split,gather_pkmn,by=c('Name'='Name','X1'='Column'))
+
+## If there is data in the new column, replace the data in the old column
+
+pkmn_combine$NewValue <- ifelse(!is.na(pkmn_combine$Value),pkmn_combine$Value,pkmn_combine$X2)
+pkmn_combine$NewValue <- ifelse(pkmn_combine$NewValue==pkmn_combine$X1,'',pkmn_combine$NewValue)
+pkmn_combine$NewValue <- gsub('#-------------------------------','',pkmn_combine$NewValue)
+pkmn_combine$NewValue <- gsub('# See the documentation on the wiki to learn how to edit this file.','',pkmn_combine$NewValue)
+
+pkmn_combine$NewValue <- ifelse(pkmn_combine$NewValue == "",'',paste0(' = ',pkmn_combine$NewValue))
+
+pkmn_combine$Output <- paste0(pkmn_combine$X1,pkmn_combine$NewValue,sep="")
+
+# Write out updated pokemon to PBS directory
+lapply(as.data.frame(pkmn_combine$Output), write, "../PBS/pokemon2.txt", append=FALSE, ncolumns=1)
+
+```
+

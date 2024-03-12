@@ -23132,6 +23132,8 @@ Habitat = Grassland
 Category = Little Dog
 Pokedex = Always looking for food, Edgar will never rest until he has had a great meal!
 Generation = 3
+WildItemCommon = POTION
+WildItemUncommon = LEFTOVERS
 Evolutions = EDGARNATOR,Level,36
 #-------------------------------
 [EDGARNATOR]
@@ -23159,6 +23161,8 @@ Habitat = Grassland
 Category = Hulk Dog
 Pokedex = Always looking for food, Edgar will never rest until he has had a great meal!
 Generation = 3
+WildItemCommon = POTION
+WildItemUncommon = LEFTOVERS
 #-------------------------------
 [BABYRAGNAR]
 Name = Baby Ragnar
@@ -23171,7 +23175,7 @@ EVs = SPECIAL_ATTACK,1
 CatchRate = 255
 Happiness = 120
 Abilities = RUNAWAY,CUTECHARM
-HiddenAbilities = OVERCOAT
+HiddenAbilities = INTIMIDATE
 Moves = 1,CHARM,3,SCRATCH,5,GROWL,7,YAPYAP
 TutorMoves = HYPERBEAM
 EggMoves = CHARM,
@@ -23197,7 +23201,7 @@ BaseExp = 56
 EVs = SPECIAL_ATTACK,2
 CatchRate = 155
 Happiness = 120
-Abilities = ANGERPOINT
+Abilities = INTIMIDATE,ANGERPOINT
 HiddenAbilities = OVERCOAT
 Moves = 1,CHARM,3,SCRATCH,5,GROWL,7,YAPYAP,16,DRAGONRAGE,16,DICTATORDOG,20,UPROAR,22,REFLECT,24,LIGHTSCREEN,27,FIRESPIN,30,FLAMEBARK
 TutorMoves = HYPERBEAM
@@ -23224,7 +23228,7 @@ BaseExp = 56
 EVs = SPECIAL_ATTACK,2
 CatchRate = 155
 Happiness = 120
-Abilities = ANGERPOINT
+Abilities = INTIMIDATE,ANGERPOINT
 HiddenAbilities = OVERCOAT
 Moves = 0,FLAMETHROWER,1,CHARM,3,SCRATCH,5,GROWL,7,YAPYAP,16,DRAGONRAGE,16,DICTATORDOG,20,UPROAR,22,REFLECT,24,LIGHTSCREEN,27,FIRESPIN,30,FLAMEBARK,40,FIREBLAST
 TutorMoves = HYPERBEAM
@@ -23236,7 +23240,7 @@ Weight = 7
 Color = Brown
 Shape = Quadruped
 Habitat = Grassland
-Category = Angry Dog
+Category = Regal Dog
 Pokedex = Treated like a princess his whole life, now a king. His high temper now ignites through his fur.
 Generation = 3
 #-------------------------------
@@ -23289,10 +23293,10 @@ Weight = 7
 Color = Brown
 Shape = Quadruped
 Habitat = Grassland
-Category = Small Floof
-Pokedex = A small floofer. Very cute, but sometimes makes devil noises...
+Category = Tiny Puppy
+Pokedex = A tiny puppy. Very cute, but sometimes makes devil noises...
 Generation = 3
-Evolutions = ELSANATOR,Level,32
+Evolutions = ELSAMON,Level,32
 #-------------------------------
 [ELSANATOR]
 Name = Elsanator
@@ -23316,8 +23320,8 @@ Weight = 7
 Color = Brown
 Shape = Quadruped
 Habitat = Grassland
-Category = Snow Floof
-Pokedex = An ice floofer. Fur is cold to touch, but still a good floofer.
+Category = Tiny Puppy
+Pokedex = A tiny puppy. Very cute, but sometimes makes devil noises...
 Generation = 3
 #-------------------------------
 [TSOUKINATOR]
@@ -23426,7 +23430,7 @@ Color = White
 Shape = Bipedal
 Habitat = Grassland
 Category = USA SurferBro
-Pokedex = The american masquerading as an aussie! JJ embraces the surfing lifestyle of the locals, with his natural fitness to attract all the local birds.
+Pokedex = More aussie than many actual aussies, JJ embraces the surfing lifestyle of the locals, with his natural fitness to attract all the local birds.
 Generation = 3
 [XERRI]
 Name = Xerri
@@ -23451,7 +23455,7 @@ Color = White
 Shape = Bipedal
 Habitat = Urban
 Category = Odd
-Pokedex = Some people say that under all the extravagant stories a gentleman lives inside. His basement. He has a hostage.
+Pokedex = Some people say that under all the extravagant stories a gentleman lives inside. In his basement. He has a hostage.
 Generation = 3
 WildItemCommon = MAGICMUSHROOM
 Evolutions = TSOUKINATOR,Item,PURITYSTONE

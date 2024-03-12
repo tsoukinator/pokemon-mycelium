@@ -4043,3 +4043,34 @@ BackSprite = 0,0
 FrontSprite = -3,18
 ShadowX = 0
 ShadowSize = 3
+#-------------------------------
+[BABYEDGAR]
+BackSprite = -5,10
+FrontSprite = 0,3
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[EDGARMON]
+BackSprite = 0,0
+FrontSprite = 0,8
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[BABYRAGNAR]
+BackSprite = 0,10
+FrontSprite = 0,0
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[ELSAMON]
+BackSprite = 0,4
+FrontSprite = 0,0
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[ELSANATOR]
+BackSprite = 0,6
+FrontSprite = 0,0
+ShadowX = 0
+ShadowSize = 2
+

@@ -6563,3 +6563,45 @@ Pocket = 8
 Price = 0
 Flags = KeyItem
 Description = A faded sea chart that shows the way to a certain island.
+#-------------------------------
+[MAGICMUSHROOM]
+Name = Magic Mushroom
+NamePlural = Shrooms
+Pocket = 1
+Price = 500
+BPPrice = 1
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_10
+Description = A questionable item generally found in derelict locations. Can alter physical formes.
+#-------------------------------
+[PURITYSTONE]
+Name = Purity Stone
+NamePlural = Purity Stones
+Pocket = 1
+Price = 1000
+BPPrice = 2
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_30
+Description = An item used to reverse the effect of magic mushrooms.
+#-------------------------------
+[SOJU]
+Name = Soju
+NamePlural = Sojus
+Pocket = 4
+Price = 1000
+BPPrice = 1
+FieldUse = TR
+Flags = Fling_50
+Move = CRY
+Description = Intolerable level of crying.
+#-------------------------------
+[TRIPLESOJU]
+Name = x3 Soju
+NamePlural = x3 Sojus
+Pocket = 4
+Price = 1500
+BPPrice = 2
+FieldUse = TR
+Flags = Fling_50
+Move = FAINT
+Description = Be careful, too much soju can make you faint.

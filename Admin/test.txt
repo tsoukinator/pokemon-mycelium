@@ -1,0 +1,158 @@
+#-------------------------------
+[FART]
+Name = Fart
+Type = POISON
+Category = Special
+Power = 45
+Accuracy = 0
+TotalPP = 25
+Priority = 0
+EffectChance = 50
+Target = NearOther
+FunctionCode = PoisonTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user gives the foe an idea of what it had for lunch. Has a chance to poison.
+#-------------------------------
+[LEFTFOOTTUMBLE]
+Name = Left Foot Tumble
+Type = GROUND
+Category = Physical
+Power = 95
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 20
+Target = NearOther
+FunctionCode = FlinchTarget
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
+Description = The user unleashes an unexpected tumbling shot catching the opponent by surprise.
+#-------------------------------
+[CATCHPHRASE]
+Name = Catchphrase
+Type = NORMAL
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 40
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = ConfuseTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user comes up with a new and unique catchphrase, confusing the opponent.
+#-------------------------------
+[SPICYNOODLES]
+Name = Spicy Noodles
+Type = FIRE
+Category = Special
+Power = 55
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+EffectChance = 90
+Target = NearOther
+FunctionCode = BurnTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user creates a dish of x3 noodles. Almost certain to burn.
+#-------------------------------
+[HOTPOT]
+Name = Hot Pot
+Type = STEEL
+Category = Physical
+Power = 70
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 25
+Target = NearOther
+FunctionCode = BurnTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user orders an authentic panda hot pot for the opponent. May burn.
+#-------------------------------
+[CHINESEWATER]
+Name = Chinese Water
+Type = FIRE
+Category = Status
+Accuracy = 0
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = HealUserHalfOfTotalHP
+Description = The user heats up and drinks some Chinese water to heal their health.
+#-------------------------------
+[SHIRTDROP]
+Name = Shirt Drop
+Type = FIRE
+Category = Special
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 1
+EffectChance = 100
+Target = NearOther
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user drops their shirt, stunning their opponent.
+#-------------------------------
+[STUDYHARD]
+Name = Study Hard
+Type = PSYCHIC
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpAtkSpDefSpd1
+Description = The user engages in hardcore study activity, boosting their special and speed stats.
+#-------------------------------
+[CHISELEDJAW]
+Name = Chiseled Jaw
+Type = FIRE
+Category = Special
+Power = 90
+Accuracy = 100
+TotalPP = 15
+Priority = -1
+Target = NearOther
+FunctionCode = DisableTargetStatusMoves
+Flags = CanProtect,CanMirrorMove
+Description = The user takes a moment to pause, and show off their chiseled jawline, angering the foe.
+#-------------------------------
+[POLITICS]
+Name = Politics
+Type = PSYCHIC
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+EffectChance = 25
+Target = NearOther
+FunctionCode = SleepTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user discusses current world affairs with the foe. Has a chance to induce sleep.
+#-------------------------------
+[NATUREWALK]
+Name = Nature Walk
+Type = GRASS
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = None
+Flags = CanProtect,CanMirrorMove
+Description = The user goes on a rough hike through nature.
+#-------------------------------
+[MARATHON]
+Name = Marathon
+Type = ROCK
+Category = Physical
+Power = 30
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = BindTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user goes on a long marathon, taking 2-5 turns.
