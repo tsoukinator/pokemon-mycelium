@@ -277,6 +277,8 @@ class Battle::Move::BindTarget < Battle::Move
       msg = _INTL("{1} was squeezed by {2}!", target.pbThis, user.pbThis(true))
     when :CLAMP
       msg = _INTL("{1} clamped {2}!", user.pbThis, target.pbThis(true))
+    when :CHEWSLIPPERS
+      msg = _INTL("{1} mistook {2} for a pair of tasty slippers!", user.pbThis, target.pbThis(true))
     when :FIRESPIN
       msg = _INTL("{1} was trapped in the fiery vortex!", target.pbThis)
     when :INFESTATION

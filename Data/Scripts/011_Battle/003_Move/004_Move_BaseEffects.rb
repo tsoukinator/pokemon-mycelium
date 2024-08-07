@@ -422,11 +422,26 @@ class Battle::Move::RecoilMove < Battle::Move
     return if target.damageState.unaffected
     return if !user.takesIndirectDamage?
     return if user.hasActiveAbility?(:ROCKHEAD)
-    amt = pbRecoilDamage(user, target)
-    amt = 1 if amt < 1
-    user.pbReduceHP(amt, false)
-    @battle.pbDisplay(_INTL("{1} is damaged by recoil!", user.pbThis))
-    user.pbItemHPHealCheck
+    
+    if user.hasActiveAbility?(:CHONKYTHIGHS)
+      amt = pbRecoilDamage(user, target)
+      amt = amt / 1.5
+      amt = 1 if amt < 1
+      user.pbReduceHP(amt, false)
+      @battle.pbDisplay(_INTL("{1} legs absorb some recoil.", user.pbThis))
+      user.pbItemHPHealCheck
+      
+      if user.pbCanRaiseStatStage?(:ATTACK, user, self) && rand(1..3) > 1
+        user.pbRaiseStatStage(:ATTACK, 1, user)
+      end
+      
+    else
+      amt = pbRecoilDamage(user, target)
+      amt = 1 if amt < 1
+      user.pbReduceHP(amt, false)
+      @battle.pbDisplay(_INTL("{1} is damaged by recoil!", user.pbThis))
+      user.pbItemHPHealCheck
+    end
   end
 end
 

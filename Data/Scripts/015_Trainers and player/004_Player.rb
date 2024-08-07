@@ -16,6 +16,8 @@ class Player < Trainer
   attr_reader   :battle_points
   # @return [Integer] the player's soot
   attr_reader   :soot
+  # @return [Integer] the players Mycelium Dust (mush)
+  attr_reader   :mush
   # @return [Pokedex] the player's Pokédex
   attr_reader   :pokedex
   # @return [Boolean] whether the Pokédex has been obtained
@@ -44,6 +46,7 @@ class Player < Trainer
     @coins                 = 0
     @battle_points         = 0
     @soot                  = 0
+    @mush                  = 0
     @pokedex               = Pokedex.new
     @has_pokedex           = false
     @has_pokegear          = false
@@ -100,6 +103,13 @@ class Player < Trainer
   def soot=(value)
     validate value => Integer
     @soot = value.clamp(0, Settings::MAX_SOOT)
+  end
+  
+  # AT EDIT - Sets the player's mush amount. It can not exceed {Settings::MAX_SOOT}.
+  # @param value [Integer] new mush value
+  def mush=(value)
+    validate value => Integer
+    @mush = value.clamp(0, Settings::MAX_MUSH)
   end
 
   # @return [Integer] the number of Gym Badges owned by the player

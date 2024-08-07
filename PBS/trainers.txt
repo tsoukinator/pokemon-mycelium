@@ -1,10 +1,5 @@
 ﻿# See the documentation on the wiki to learn how to edit this file.
 #-------------------------------
-[CAMPER,Liam]
-LoseText = A very good battle, indeed!
-Pokemon = DIGLETT,10
-Pokemon = BONSLY,11
-#-------------------------------
 [LEADER_Brock,Brock]
 Items = FULLRESTORE,FULLRESTORE
 LoseText = Very good.
@@ -13,6 +8,7 @@ Pokemon = GEODUDE,12
     AbilityIndex = 0
     Gender = male
     IV = 20,20,20,20,20,20
+#-------------------------------
 Pokemon = ONIX,14
     Name = Rocky
     Moves = HEADSMASH,ROCKTHROW,RAGE,ROCKTOMB
@@ -34,62 +30,6 @@ Pokemon = BURMY,19
 Pokemon = WINGULL,19
 Pokemon = ELECTABUZZ,20
     Shadow = true
-#-------------------------------
-[YOUNGSTER,Ben]
-LoseText = Aww, I lost.
-Pokemon = RATTATA,11
-Pokemon = EKANS,11
-#-------------------------------
-[CAMPER,Jeff]
-LoseText = A very good battle, indeed!
-Pokemon = SPEAROW,16
-Pokemon = SENTRET,16
-#-------------------------------
-[CAMPER,Jeff,1]
-LoseText = You beat me again!
-Pokemon = FEAROW,29
-Pokemon = FURRET,29
-#-------------------------------
-[PICNICKER,Susie]
-LoseText = Defeated! Oh my!
-Pokemon = MEOWTH,18
-#-------------------------------
-[PICNICKER,Susie,1]
-LoseText = Defeated! Oh my!
-Pokemon = PERSIAN,32
-#-------------------------------
-[HIKER,Ford]
-LoseText = You're too good for me!
-Pokemon = MACHOP,19
-#-------------------------------
-[FISHERMAN,Andrew]
-LoseText = Washed out!
-Pokemon = MAGIKARP,14
-Pokemon = MAGIKARP,18
-#-------------------------------
-[BEAUTY,Bridget]
-LoseText = My Skitty!
-Pokemon = SKITTY,18
-#-------------------------------
-[LASS,Crissy]
-LoseText = You didn't have to win so convincingly!
-Pokemon = PLUSLE,17
-Pokemon = MINUN,17
-#-------------------------------
-[COOLCOUPLE,Alice & Bob]
-LoseText = Our teamwork failed!
-Pokemon = TURTWIG,19
-Pokemon = CHIMCHAR,19
-#-------------------------------
-[POKEMONTRAINER_May,May]
-LoseText = ...
-Pokemon = COMBUSKEN,19
-#-------------------------------
-[SWIMMER2_F,Ariel]
-LoseText = Washed out!
-Pokemon = STARYU,15
-Pokemon = GOLDEEN,11
-#-------------------------------
 [RIVAL1,Blue]
 LoseText = Not too shabby.
 Pokemon = PIDGEOTTO,17
@@ -116,3 +56,308 @@ Pokemon = CHARIZARD,63
     Item = SITRUSBERRY
 Pokemon = BLASTOISE,63
     Item = SITRUSBERRY
+#-------------------------------
+[FISHERMAN,Barry]
+LoseText = Why do I always lose?
+Pokemon = MAGIKARP,2
+Pokemon = MAGIKARP,4
+Pokemon = MAGIKARP,6
+SkillLevel = 0
+BaseMoney = 60
+Flags = UsePokemonInOrder, ReserveLastPokemon
+Gender = Male
+#-------------------------------
+[FISHERMAN,Darryl]
+LoseText = Who knew a fish would struggle on land?
+Pokemon = GOLDEEN,10
+Pokemon = MAGIKARP,15
+Pokemon = KRABBY,12
+SkillLevel = 0
+BaseMoney = 60
+Flags = UsePokemonInOrder, ReserveLastPokemon
+Gender = Male
+#-------------------------------
+[YOUNGSTER,Toby]
+LoseText = But, I was wearing my lucky shorts!
+Pokemon = RATTATA,2
+Pokemon = POOCHYENA,3
+#-------------------------------
+[YOUNGSTER,Harry]
+LoseText = Waaah, Mom....!!!
+Pokemon = ZIGZAGOON,3
+Pokemon = LECHONK,4
+#-------------------------------
+[BUGCATCHER,Gerald]
+LoseText = Aww, I lost.
+Pokemon = WEEDLE,5
+Pokemon = KAKUNA,10
+Pokemon = WEEDLE,5
+#-------------------------------
+[BUGCATCHER,Ivan]
+LoseText = How could you?
+Pokemon = LEDYBA,5
+Pokemon = WEEDLE,6
+Pokemon = KAKUNA,10
+#-------------------------------
+[BUGCATCHER,Daryl]
+LoseText = My bugs, why?
+Pokemon = WEEDLE,6
+Pokemon = WEEDLE,8
+Pokemon = SCATTERBUG,6
+#-------------------------------
+[BOSSCATCHER,Doug]
+LoseText = What? Noo!.
+Pokemon = KAKUNA,12
+Pokemon = BEEDRILL,10
+#-------------------------------
+[EDGYYOUNGSTER,Bob]
+LoseText = No, how could you do this to Ragnar?
+Pokemon = POOCHYENA,4
+Pokemon = BABYRAGNAR,6
+#-------------------------------
+[BEAUTY,Winter]
+LoseText = No, my Jigglys!
+Pokemon = JIGGLYPUFF,7
+Pokemon = JIGGLYPUFF,7
+Pokemon = XERRI,5
+#-------------------------------
+[BEAUTY,Giselle]
+LoseText = Not my cute Pokemon!
+Pokemon = EEVEE,7
+Pokemon = CLEFAIRY,7
+Pokemon = FOODBABY,5
+#-------------------------------
+[BUGCATCHER,Jon]
+LoseText = This wouldn't happen back in the 'States
+Pokemon = CATERPIE,6
+Pokemon = WEEDLE,6
+Pokemon = JJ,3
+#-------------------------------
+[BUGCATCHER,Tony]
+LoseText = I don't even like bugs.
+Pokemon = WEEDLE,5
+Pokemon = KAKUNA,8
+#-------------------------------
+[YOUNGSTER,Pixie]
+LoseText = No, my little Elsa!
+Pokemon = BABYELSA,6
+#-------------------------------
+[YOUNGSTER,Kenneth]
+LoseText = This couldn't have happened to anyone nicer...
+Pokemon = POOCHYENA,4
+Pokemon = RATTATA,4
+Pokemon = BABYEDGAR,4
+#-------------------------------
+[CAMPER,Genevieve]
+LoseText = This comes as a surprise.
+Pokemon = ZIGZAGOON,6
+Pokemon = LECHONK,8
+Pokemon = PSYDUCK,10
+#-------------------------------
+[CAMPER,Jessie]
+LoseText = How could this happen?
+Pokemon = BUDEW,6
+Pokemon = BEAUTIFLY,10
+#-------------------------------
+[HIKER,Joey]
+LoseText = Ah well, at least I still have my mud...
+Pokemon = GEODUDE,12
+Pokemon = BIDOOF,12
+Pokemon = MUDKIP,10
+#-------------------------------
+[BEAUTY,Jennifer]
+LoseText = Oh no, you beat me!
+Pokemon = BIDOOF,12
+Pokemon = JIGGLYPUFF,14
+Pokemon = BUTTERFREE,12
+#-------------------------------
+[BIRDKEEPER,David]
+LoseText = Ah dang it.
+Pokemon = PIDGEY,12
+Pokemon = STARLY,14
+Pokemon = TAILLOW,12
+#-------------------------------
+[LEADER_Shrek,Shrek]
+Items = SUPERPOTION
+LoseText = Gahh! You still haven't even answered my question!.
+Pokemon = GOOMY,10
+    AbilityIndex = 0
+    IV = 20,20,20,20,20,20
+#-------------------------------
+Pokemon = GRIMER,10
+    Moves = DISABLE,SLUDGE,MUDSLAP,TOXIC
+    AbilityIndex = 2
+    Gender = male
+    IV = 20,20,20,20,20,20
+#-------------------------------
+Pokemon = WOOPER,12
+    Moves = YAWN,MUDSHOT,WATERGUN,HAZE
+    Item = SITRUSBERRY
+    AbilityIndex = 1
+    Gender = male
+    IV = 20,20,20,20,20,20
+#-------------------------------
+Pokemon = MARSHTOMP,14
+    Moves = ICYWIND,WATERPULSE,ROCKSMASH,ROCKTOMB
+    AbilityIndex = 0
+    Gender = male
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[LEADER_TheShark,TheShark]
+Items = SUPERPOTION,FULLRESTORE
+LoseText = Oh well.
+Pokemon = WINGULL,14
+    Moves = SUPERSONIC,WINGATTACK,WATERGUN,QUICKATTACK
+    AbilityIndex = 0
+    IV = 15,15,15,15,15,15
+#-------------------------------
+Pokemon = KRABBY,14
+    Moves = METALCLAW,MUDSHOT,STOMP,BUBBLEBEAM
+    AbilityIndex = 2
+    Gender = male
+    IV = 15,15,15,15,15,15
+#-------------------------------
+Pokemon = JJ,12
+    Moves = FISHSLAP,WETSUIT,SURFSUP,SWAGGER
+    Item = SITRUSBERRY
+    AbilityIndex = 1
+    Gender = male
+    IV = 20,20,20,20,20,20
+#-------------------------------
+Pokemon = THESHARK,14
+    Moves = LOWSWEEP,WATERGUN,LEGHACK,PREWORKOUT
+    AbilityIndex = 0
+    Gender = male
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[LEADER_TheShark,TheShark,1]
+Items = SUPERPOTION,FULLRESTORE
+LoseText = Oh well.
+Pokemon = WINGULL,16
+    Moves = SUPERSONIC,WINGATTACK,WATERGUN,QUICKATTACK
+    AbilityIndex = 0
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[LEADER_TheShark,TheShark,2]
+Items = SUPERPOTION,FULLRESTORE
+LoseText = Oh well.
+Pokemon = WINGULL,19
+    Moves = SUPERSONIC,WINGATTACK,WATERGUN,QUICKATTACK
+    AbilityIndex = 0
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[RIVAL1,Tsoukinator,1]
+LoseText = Never give up, never surrender...
+Pokemon = EDGARMON,16
+Pokemon = MAGNEMITE,18
+Pokemon = TSOUKINATOR,18
+Pokemon = CARVANHA,20
+#-------------------------------
+[RIVAL1,Tsoukinator,2]
+LoseText = Never give up, never surrender...
+Pokemon = EDGARMON_1,28
+Pokemon = MAGNETON,28
+Pokemon = TSOUKINATOR,25
+Pokemon = CARVANHA,28
+#-------------------------------
+[RIVAL1,Tsoukinator,3]
+LoseText = Never give up, never surrender...
+Pokemon = EDGARNATOR,38
+Pokemon = MAGNETON,36
+Pokemon = TSOUKINATOR,40
+Pokemon = SHARPEDO,38
+#-------------------------------
+[RIVAL1,Family,1]
+LoseText = Oh no
+Pokemon = BROTHER,16
+Pokemon = UHRLEX,16
+Pokemon = TSOUKINATOR,16
+#-------------------------------
+[RIVAL1,Family,2]
+LoseText = Oh no
+Pokemon = BROTHER,25
+Pokemon = UHRLEX,25
+Pokemon = TSOUKINATOR,25
+#-------------------------------
+[RIVAL1,Family,3]
+LoseText = Oh no
+Pokemon = BROTHERHIVE,36
+Pokemon = UHRLEX_1,36
+Pokemon = TSOUKINATOR,36
+#-------------------------------
+[RIVAL1,PetTrainer,1]
+LoseText = Oh no
+Pokemon = RAGNARMON,16
+Pokemon = ELSAMON,16
+Pokemon = EDGARMON,16
+Pokemon = VUCKOMON,16
+Pokemon = FENOMON,16
+#-------------------------------
+[RIVAL1,PetTrainer,2]
+LoseText = Oh no
+Pokemon = RAGNARMON,26
+Pokemon = ELSAMON,27
+Pokemon = EDGARMON_1,28
+Pokemon = VUCKOMON,26
+Pokemon = FENOMON,26
+#-------------------------------
+[RIVAL1,PetTrainer,3]
+LoseText = Oh no
+Pokemon = RAGNARNATOR,36
+Pokemon = ELSANATOR,36
+Pokemon = EDGARNATOR,36
+Pokemon = VUCKOMON,40
+Pokemon = FENOMON,40
+#-------------------------------
+[RIVAL1,OtherDudes,1]
+LoseText = Oh no
+Pokemon = JAWLINE,16
+Pokemon = JJ,16
+Pokemon = THESHARK,16
+Pokemon = XERRI,16
+#-------------------------------
+[RIVAL1,OtherDudes,2]
+LoseText = Oh no
+Pokemon = JAWLINE,28
+Pokemon = JJ,26
+Pokemon = THESHARK,24
+Pokemon = XERRI,26
+#-------------------------------
+[RIVAL1,OtherDudes,3]
+LoseText = Oh no
+Pokemon = JAWLINE,40
+Pokemon = JJ,36
+Pokemon = THESHARK,36
+Pokemon = XERRI,38
+#-------------------------------
+[BEAUTY,FoodBaby,1]
+LoseText = GODDAMMIT
+Pokemon = CYNDAQUIL,15
+Pokemon = EDGARMON,16
+    Name = Gaga
+    Moves = YAWN,REST,CHEWSLIPPERS,SNORE
+Pokemon = TSOUKINATOR,14
+Pokemon = XERRI,14
+Pokemon = FOODBABY,16
+#-------------------------------
+[BEAUTY,FoodBaby,2]
+LoseText = GODDAMMIT
+Pokemon = QUILAVA,26
+Pokemon = EDGARMON_1,27
+    Name = Gaga
+    Moves = DIG,OVEREAT,REST,TOXIC
+Pokemon = TSOUKINATOR,26
+Pokemon = XERRI,26
+Pokemon = FOODBABY,28
+#-------------------------------
+[BEAUTY,FoodBaby,3]
+LoseText = GODDAMMIT
+Pokemon = TYPHLOSION,38
+Pokemon = EDGARNATOR,38
+    Name = Gaganator
+    Moves = BELLYDRUM,REST,HEADBUTT,EARTHQUAKE
+    Item = CHESTOBERRY
+Pokemon = TSOUKINATOR,37
+Pokemon = XERRI,36
+Pokemon = FOODBABY,40
+

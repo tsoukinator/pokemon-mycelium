@@ -4052,25 +4052,114 @@ ShadowSize = 2
 #-------------------------------
 [EDGARMON]
 BackSprite = 0,0
-FrontSprite = 0,8
+FrontSprite = 0,12
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[EDGARMON,1]
+BackSprite = 0,6
+FrontSprite = 0,0
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[EDGARNATOR]
+BackSprite = 0,0
+FrontSprite = 0,4
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
 [BABYRAGNAR]
 BackSprite = 0,10
-FrontSprite = 0,0
+FrontSprite = 0,12
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[RAGNARMON]
+BackSprite = 0,0
+FrontSprite = 0,28
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[RAGNARNATOR]
+BackSprite = 0,0
+FrontSprite = 0,2
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[BABYELSA]
+BackSprite = 0,0
+FrontSprite = 0,14
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
 [ELSAMON]
 BackSprite = 0,4
-FrontSprite = 0,0
+FrontSprite = 0,8
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
 [ELSANATOR]
 BackSprite = 0,6
-FrontSprite = 0,0
+FrontSprite = 0,4
 ShadowX = 0
 ShadowSize = 2
-
+#-------------------------------
+[BABYFEN]
+BackSprite = 0,0
+FrontSprite = 0,10
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[FENOMON]
+BackSprite = 0,0
+FrontSprite = 0,4
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[BABYVUCKO]
+BackSprite = 0,0
+FrontSprite = 0,10
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[VUCKOMON]
+BackSprite = 0,0
+FrontSprite = 0,8
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[PARAS,6]
+BackSprite = 5,10
+FrontSprite = -3,33
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[SHROOMISH,6]
+BackSprite = 5,10
+FrontSprite = -3,33
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[BRELOOM,6]
+BackSprite = 0,0
+FrontSprite = 0,12
+ShadowX = 0
+ShadowSize = 0
+#-------------------------------
+[GRAVELER,6]
+BackSprite = 5,10
+FrontSprite = -3,33
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[GOLEM,6]
+BackSprite = 5,10
+FrontSprite = -3,33
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[DANCEBABY]
+BackSprite = 0,4
+FrontSprite = -3,33
+ShadowX = 0
+ShadowSize = 2

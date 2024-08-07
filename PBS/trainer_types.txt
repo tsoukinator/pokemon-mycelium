@@ -55,6 +55,11 @@ Name = Bug Catcher
 Gender = Male
 BaseMoney = 16
 #-------------------------------
+[BOSSCATCHER]
+Name = Boss Catcher
+Gender = Male
+BaseMoney = 40
+#-------------------------------
 [BURGLAR]
 Name = Burglar
 Gender = Male
@@ -193,6 +198,11 @@ Name = Youngster
 Gender = Male
 BaseMoney = 16
 #-------------------------------
+[EDGYYOUNGSTER]
+Name = Edgy Youngster
+Gender = Male
+BaseMoney = 32
+#-------------------------------
 [LASS]
 Name = Lass
 Gender = Female
@@ -308,6 +318,20 @@ BaseMoney = 32
 Name = Rocket Boss
 Gender = Male
 BaseMoney = 100
+#-------------------------------
+[LEADER_Shrek]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 120
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_TheShark]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 140
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
 #-------------------------------
 [LEADER_Brock]
 Name = Gym Leader

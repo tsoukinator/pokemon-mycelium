@@ -185,6 +185,17 @@ class Battle::Battler
       pbChangeForm(newForm, _INTL("{1} transformed!", pbThis))
     end
   end
+  
+  def pbCheckFormOnMovesetChange
+    return if fainted? || @effects[PBEffects::Transform]
+    # EDGARMON - Knowing Overeat
+    if isSpecies?(:EDGARMON)
+      newForm = 0
+      newForm = 1 if pbHasMove?(:OVEREAT)
+      pbChangeForm(newForm, _INTL("{1} overate, and transformed into his CHONK form!", pbThis))
+      #pbChangeForm(newForm, _INTL("{1} transformed!", pbThis))
+    end
+  end
 
   def pbCheckFormOnWeatherChange(ability_changed = false)
     return if fainted? || @effects[PBEffects::Transform]

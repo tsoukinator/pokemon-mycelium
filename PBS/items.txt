@@ -5135,6 +5135,17 @@ Flags = Fling_90
 Move = ROCKCLIMB
 Description = A charging attack that may also leave the foe confused.
 #-------------------------------
+[TM101]
+Name = TM101
+NamePlural = TM101s
+Pocket = 4
+Price = 1000
+BPPrice = 8
+FieldUse = TR
+Flags = Fling_25
+Move = HEADBUTT
+Description = The user uses their head to smack the opponent (or a tree).
+#-------------------------------
 [HM01]
 Name = HM01
 NamePlural = HM01s
@@ -6564,8 +6575,8 @@ Price = 0
 Flags = KeyItem
 Description = A faded sea chart that shows the way to a certain island.
 #-------------------------------
-[MAGICMUSHROOM]
-Name = Magic Mushroom
+[STRANGEMUSHROOM]
+Name = Strange Mushroom
 NamePlural = Shrooms
 Pocket = 1
 Price = 500
@@ -6582,7 +6593,7 @@ Price = 1000
 BPPrice = 2
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_30
-Description = An item used to reverse the effect of magic mushrooms.
+Description = An item used to reverse the effect of STRANGEMUSHROOMS.
 #-------------------------------
 [SOJU]
 Name = Soju
@@ -6605,3 +6616,31 @@ FieldUse = TR
 Flags = Fling_50
 Move = FAINT
 Description = Be careful, too much soju can make you faint.
+#-------------------------------
+[DANCINGSHOES]
+Name = Dancing Shoes
+NamePlural = Dancing Shoes
+Pocket = 1
+Price = 500
+BPPrice = 1
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_10
+Description = An item used to unlock hidden kpop potential...
+#-------------------------------
+[PIXIEDUST]
+Name = Pixie Dust
+NamePlural = Pixie Dust
+Pocket = 1
+Price = 500
+BPPrice = 1
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_10
+Description = An item used to unlock hidden fairy forms...
+#-------------------------------
+[MUSHSACK]
+Name = Spore Satchel
+NamePlural = Spore Satchels
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A satchel used to gather mycelium spores.

@@ -93,8 +93,8 @@ class Battle::Move::HitThreeTimesAlwaysCriticalHit < Battle::Move
   def multiHitMove?;                   return true; end
   def pbNumHits(user, targets);        return 3;    end
   def pbCritialOverride(user, target); return 1;    end
-end
-
+  end
+  
 #===============================================================================
 # Hits 2-5 times.
 #===============================================================================

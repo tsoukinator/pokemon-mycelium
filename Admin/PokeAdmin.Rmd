@@ -110,7 +110,7 @@ new_pkmn_stats <- filter(pkmnstats_xls, is.na(`Pokedex Number`))
 new_pkmn_stats$BaseStats <- paste(new_pkmn_stats$HP,new_pkmn_stats$Attack,new_pkmn_stats$Defence,new_pkmn_stats$Speed,new_pkmn_stats$`Special Attack`,new_pkmn_stats$`Special Defence`,sep=',')
 
 ## Keep columns
-keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Pokedex','Category','Evolutions','WildItemCommon','WildItemUncommon')
+keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Pokedex','Category','Evolutions','WildItemCommon','WildItemUncommon','Moves')
 #drop_cols <- c("HP","Attack","Defence","Special Attack","Special Defence","Speed","Base Stat Total")
 
 pkmn_data = subset(new_pkmn_stats, select = keep_cols)
@@ -124,6 +124,7 @@ gather_pkmn <- gather(pkmn_data, key = "Column", value = "Value", -Name)
 
 # Outer join on og data
 pkmn_combine <- left_join(og_pkmn_split,gather_pkmn,by=c('Name'='Name','X1'='Column'))
+
 
 ## If there is data in the new column, replace the data in the old column
 
@@ -145,8 +146,25 @@ pkmn_combine_drop_NONE <- filter(pkmn_combine, Value != 'NONE')
 # Write out updated pokemon to PBS directory
 lapply(as.data.frame(pkmn_combine_drop_NONE$Output), write, "../PBS/pokemon.txt", append=FALSE, ncolumns=1)
 
-#rm(list=ls())
+rm(list=ls())
 ```
 
 
+```{r}
+
+library("data.table")
+og_pkmn_dex <- og_pkmn_split
+setDT(og_pkmn_dex)[ , ID := .GRP, by = Name]
+
+new_pkmn_text <- filter(og_pkmn_dex, ID >= 900 & Name != "Lechonk" & Name != "Oinkologne")
+
+unique(new_pkmn_text$Name)
+unique(gather_pkmn$Name)
+
+
+## Find Pokemon only in Excel (and not in .txt file)
+anti_join(new_pkmn_text,gather_pkmn,by=c('Name'='Name','X1'='Column'))
+
+
+```
 

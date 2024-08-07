@@ -48,6 +48,7 @@ class GameStats
   attr_accessor :coins_won, :coins_lost   # Not bought, not spent
   attr_accessor :battle_points_won, :battle_points_spent
   attr_accessor :soot_collected
+  attr_accessor :mush_collected #AT Edit
   # Special stats
   attr_accessor :gym_leader_attempts   # An array of integers
   attr_accessor :times_to_get_badges   # An array of times in seconds
@@ -131,6 +132,7 @@ class GameStats
     @battle_points_won             = 0
     @battle_points_spent           = 0
     @soot_collected                = 0
+    @mush_collected                = 0 # AT Edit
     # Special stats
     @gym_leader_attempts           = [0] * 50   # Incremented in Gym Leader events (50 is arbitrary but suitably large)
     @times_to_get_badges           = []   # Set with set_time_to_badge(number) in Gym Leader events

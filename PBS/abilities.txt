@@ -1070,3 +1070,63 @@ Description = Combines Unnerve and Chilling Neigh Abilities.
 [ASONEGRIMNEIGH]
 Name = As One
 Description = Combines Unnerve and Grim Neigh Abilities.
+#-------------------------------
+[INCHARACTER]
+Name = In Character
+Description = The user increases and decreases a random stat during the battle.
+#-------------------------------
+[MYCELIUMCURSE]
+Name = Mycelium Curse
+Description = The user exchanges their own lifeforce for attack.
+#-------------------------------
+[CONSTANTBARKING]
+Name = Constant Barking
+Description = May taunt the foe into attacking.
+#-------------------------------
+[SLEEPY]
+Name = Sleepy
+Description = May fall asleep and recover during battle.
+#-------------------------------
+[HIGHALERT]
+Name = High Alert
+Description = Boosts offense when foes faint. Can't fall asleep.
+#-------------------------------
+[CRYBABY]
+Name = Crybaby
+Description = May guilt opponents into lowering their offense.
+#-------------------------------
+[MOSSBODY]
+Name = Moss Body
+Description = Doubles turn-by-turn HP recovery.
+#-------------------------------
+[CHONKYTHIGHS]
+Name = Chonky Thighs
+Description = Padded thighs limit recoil. Recoil may raise attack.
+#-------------------------------
+[CATCHPHRASE]
+Name = Catchphrase
+Description = Makes interesting remarks, with interesting effects.
+#-------------------------------
+[INJURYPRONE]
+Name = Injury Prone
+Description = May injure self upon contact from foe.
+#-------------------------------
+[ANIMALBOND]
+Name = Animal Bond
+Description = May discourage foe from attacking.
+#-------------------------------
+[ENDURANCE]
+Name = Endurance
+Description = Recovers more HP throughout long battles.
+#-------------------------------
+[WAVERIDER]
+Name = Wave Rider
+Description = Being hit by water type moves increases speed.
+#-------------------------------
+[CREATIVEBURST]
+Name = Creative Burst
+Description = Increases power of moves with added effects.
+#-------------------------------
+[TESTABILITY]
+Name = Test - Ability
+Description = Interesting

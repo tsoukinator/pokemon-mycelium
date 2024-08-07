@@ -320,7 +320,7 @@ class Battle::Battler
 
   def pbSleepDuration(duration = -1)
     duration = 2 + @battle.pbRandom(3) if duration <= 0
-    duration = (duration / 2).floor if hasActiveAbility?(:EARLYBIRD)
+    duration = (duration / 2).floor if hasActiveAbility?(:EARLYBIRD, :HIGHALERT)
     return duration
   end
 

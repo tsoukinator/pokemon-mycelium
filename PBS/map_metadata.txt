@@ -396,3 +396,13 @@ Name = Tiall Region
 Outdoor = true
 MapPosition = 1,13,16
 BattleBack = city
+#-------------------------------
+[088]   # Whitehorse City - East
+Name = Whitehorse City - East
+#-------------------------------
+[102]   # Myalo Cave B2F
+Name = Myalo Cave B2F
+Environment = ForestGrass
+#-------------------------------
+[104]   # Sporeville
+Name = Sporeville

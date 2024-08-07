@@ -119,6 +119,7 @@ module PBEffects
   WaterSport          = 114
   WeightChange        = 115
   Yawn                = 116
+  Endurance           = 117
 
   #=============================================================================
   # These effects apply to a battler position

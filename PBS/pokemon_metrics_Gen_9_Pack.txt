@@ -1,0 +1,18 @@
+#-------------------------------
+[LECHONK]
+BackSprite = 0,0
+FrontSprite = 0,33
+ShadowX = 0
+ShadowSize = 1
+#-------------------------------
+[OINKOLOGNE]
+BackSprite = 0,0
+FrontSprite = 0,27
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[OINKOLOGNE,1]
+BackSprite = 0,0
+FrontSprite = -6,25
+ShadowX = 0
+ShadowSize = 2

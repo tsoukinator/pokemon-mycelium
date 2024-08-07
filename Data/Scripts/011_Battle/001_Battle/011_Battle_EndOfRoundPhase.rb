@@ -162,6 +162,27 @@ class Battle
       pbDisplay(_INTL("{1}'s HP was restored.", battler.pbThis))
     end
   end
+  
+  #=============================================================================
+  # End Of Round healing for MOSS FORMES
+  #=============================================================================
+  def pbEORTerrainHealing(battler)
+    return if battler.fainted?
+    # Grassy Terrain (healing)
+    form_id = battler.form
+    
+   # moss_species = [:PARAS, :PARASECT, :SHROOMISH, :BRELOOM]  # Add more species as needed
+   # if battler.form == 6 &&  moss_species.include?(battler.species)&& battler.canHeal?
+    if battler.form == 6 && battler.canHeal?
+      PBDebug.log("[Lingering effect] The moss heals #{battler.pbThis(true)}")
+      if battler.hasActiveAbility?(:MOSSBODY)
+          battler.pbRecoverHP(battler.totalhp / 8)
+        else
+          battler.pbRecoverHP(battler.totalhp / 16)
+        end
+      pbDisplay(_INTL("Moss restores {1}'s HP!", battler.pbThis))
+    end
+  end
 
   #=============================================================================
   # End Of Round various healing effects
@@ -199,6 +220,22 @@ class Battle
       end
       recipient.pbFaint if recipient.fainted?
     end
+    
+    # Endurance
+    priority.each do |battler|
+    if battler.hasActiveAbility?(:ENDURANCE) and battler.effects[PBEffects::Endurance] > 0
+      battler.effects[PBEffects::Endurance] += 1
+      #puts battler.effects[PBEffects::Endurance]
+      if battler.effects[PBEffects::Endurance].even? and battler.canHeal?
+        pbShowAbilitySplash(battler)
+        #hpGain = battler.totalhp / (16
+        hpGain = battler.totalhp / [(32/battler.effects[PBEffects::Endurance]),6].max
+        battler.pbRecoverHP(hpGain)
+        pbDisplay(_INTL("{1}'s endurance restored some HP!", battler.pbThis(true)))
+        pbHideAbilitySplash(battler)
+      end
+    end
+   end
   end
 
   #=============================================================================

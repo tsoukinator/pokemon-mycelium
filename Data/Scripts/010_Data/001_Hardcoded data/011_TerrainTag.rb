@@ -202,3 +202,13 @@ GameData::TerrainTag.register({
   :id                     => :NoEffect,
   :id_number              => 17
 })
+
+### AT EDIT: Mycelium Grass/Mushroom Grass
+### Copy of Soot Grass
+GameData::TerrainTag.register({
+  :id                     => :MushGrass,
+  :id_number              => 18,
+  :shows_grass_rustle     => true,
+  :land_wild_encounters   => true,
+  :battle_environment     => :Grass
+})

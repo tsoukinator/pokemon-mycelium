@@ -142,6 +142,28 @@ EventHandlers.add(:on_step_taken, :pick_up_soot,
   }
 )
 
+## AT EDIT
+# Gather Mycelium from Mush Grass (terrain tag 18)
+EventHandlers.add(:on_step_taken, :pick_up_mush,
+  proc { |event|
+    thistile = $map_factory.getRealTilePos(event.map.map_id, event.x, event.y)
+    map = $map_factory.getMap(thistile[0])
+    [2, 1, 0].each do |i|
+      tile_id = map.data[thistile[1], thistile[2], i]
+      next if tile_id.nil?
+      next if GameData::TerrainTag.try_get(map.terrain_tags[tile_id]).id != :MushGrass
+      if event == $game_player && $bag.has?(:MUSHSACK)
+        old_mush = $player.mush
+        $player.mush += 1
+        $stats.mush_collected += $player.mush - old_mush if $player.mush > old_mush
+      end
+      map.erase_tile(thistile[1], thistile[2], i)
+      #puts $stats.mush_collected
+      break
+    end
+  }
+)
+
 # Show grass rustle animation
 EventHandlers.add(:on_step_taken, :grass_rustling,
   proc { |event|
@@ -747,4 +769,28 @@ def pbBuyPrize(item, quantity = 1)
   pbMessage("\\CN" + _INTL("You put the {1} in\\nyour Bag's <icon=bagPocket{2}>\\c[1]{3}\\c[0] pocket.",
                            item_name, pocket, PokemonBag.pocket_names[pocket - 1]))
   return true
+end
+
+#=============================================================================
+# Altering a party or rearranging battlers
+#=============================================================================
+  def pbRemovePkmnFromParty()
+    for i in 0...$Trainer.party.length
+      if $Trainer.party[i].species==PBSpecies::MACHAMP
+      $Trainer.party[i]=nil
+      $Trainer.party.compact
+      break
+    end
+  end
+end
+
+#####
+def deleteSpecies(species)
+#delete the first Pokémon in the party of the given species
+for i in 0...$Trainer.pokemonParty.length
+  if ($Trainer.pokemonParty!=nil) && ($Trainer.pokemonParty.species == species)
+    pbRemovePokemonAt(i) #delete the mon
+      break #break out of the for loop
+      end
+    end
 end

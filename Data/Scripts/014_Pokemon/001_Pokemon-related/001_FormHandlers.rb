@@ -389,6 +389,14 @@ MultipleForms.register(:KELDEO, {
   }
 })
 
+MultipleForms.register(:EDGARMON, {
+  "getForm" => proc { |pkmn|
+    next 1 if pkmn.hasMove?(:OVEREAT)     # Chonk Form
+    next 0                                # Ordinary Form
+  }
+})
+
+
 MultipleForms.register(:MELOETTA, {
   "getFormOnLeavingBattle" => proc { |pkmn, battle, usedInBattle, endBattle|
     next 0

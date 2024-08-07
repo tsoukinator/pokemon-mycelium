@@ -52,8 +52,8 @@ LandNight,21
 Land,21
     50,RATTATA,12,15
     30,POOCHYENA,11,15
-    10,SHINX,10,11
     10,SHINX,10,12
+    10,SHINX,10,11
 Water,2
     60,MAGIKARP,7,10
     30,GOLDEEN,11,14
@@ -84,17 +84,17 @@ PokeRadar,10
 #-------------------------------
 [022] # Test Town
 Land,21
+    30,XERRI,10,14
     15,EDGARMON,4,5
     15,FOODBABY,6,12
-    30,XERRI,10,14
 #-------------------------------
 [028] # Natural Park
 Land,21
     20,CATERPIE,10
     20,SUNKERN,12
     20,WEEDLE,10
-    15,PIDGEY,12,14
     15,PIDGEY,10,14
+    15,PIDGEY,12,14
     5,KAKUNA,10
     5,METAPOD,10
 LandNight,21
@@ -172,6 +172,10 @@ Land,21
 Water,30
     10,MAGIKARP,2,5
 #-------------------------------
+[032,1] # Test Bushes
+Water,30
+    1,MAGIKARP,1
+#-------------------------------
 [034] # Ice Cave
 Cave,5
     40,SWINUB,16,18
@@ -192,6 +196,18 @@ Land,21
     40,SPEAROW,13,16
     10,SLUGMA,13,14
 #-------------------------------
+[042] # Friendly Fields
+Land,21
+    20,LECHONK,1,2
+    20,ZIGZAGOON,1,2
+    10,SENTRET,1,2
+OldRod
+    10,MAGIKARP,2,3
+#-------------------------------
+[042,1] # Friendly Fields
+Water,30
+    1,MAGIKARP,1
+#-------------------------------
 [044] # Route 6
 Land,21
     50,SHELLOS_1,12,15
@@ -210,19 +226,19 @@ RockSmash,50
 #-------------------------------
 [049] # Rock Cave 1F
 Cave,5
-    20,MAGNETON,14,17
     20,MAGNETON,14,16
-    20,NOSEPASS,13,14
+    20,MAGNETON,14,17
     20,NOSEPASS,14,15
+    20,NOSEPASS,13,14
     10,GEODUDE,13,15
     10,MAWILE,14,16
 #-------------------------------
 [050] # Rock Cave B1F
 Cave,5
-    20,MAGNETON,14,17
     20,MAGNETON,14,16
-    20,NOSEPASS,13,14
+    20,MAGNETON,14,17
     20,NOSEPASS,14,15
+    20,NOSEPASS,13,14
     10,BURMY,14,16
     10,GEODUDE,13,15
 #-------------------------------
@@ -250,8 +266,8 @@ Land,21
     20,RHYHORN,16,18
     10,AIPOM,14,17
     10,GIRAFARIG,16,17
-    10,VENONAT,15,18
     10,VENONAT,15,17
+    10,VENONAT,15,18
     5,HERACROSS,15,17
     5,TAUROS,15,16
     4,PINSIR,16
@@ -282,13 +298,13 @@ Land,21
     20,MAREEP,16,18
     20,ODDISH,15,17
     13,BONSLY,14,16
-    10,DITTO,16,18
     10,DITTO,15,17
+    10,DITTO,16,18
     10,LOTAD,15,18
     10,LOTAD,15,17
     5,BONSLY,14,17
-    1,BONSLY,15
     1,BONSLY,15,16
+    1,BONSLY,15
 Water,2
     60,TENTACOOL,14,19
     30,MANTYKE,15,16
@@ -325,3 +341,131 @@ Land,21
     10,PIKACHU,11,14
     10,SANDSHREW_1,11,14
     10,VULPIX_1,11,14
+#-------------------------------
+[077] # Kilcunda Forest - East
+Land,21
+    15,CATERPIE,3,5
+    15,WEEDLE,3,5
+    10,BABYFEN,3,5
+    10,JAWLINE,2,4
+    10,KAKUNA,6,8
+    10,NINCADA,3,7
+    10,SPINARAK,3,6
+    5,PIKACHU,3,5
+    1,BEEDRILL,8,10
+OldRod
+    20,MAGIKARP,3,8
+GoodRod
+    20,GYARADOS,22,30
+#-------------------------------
+[079] # Kilcunda Forest - West
+Land,21
+    20,LECHONK,2,4
+    20,ZIGZAGOON,2,3
+    15,WURMPLE,3,5
+    10,JAWLINE,1,3
+    10,JIGGLYPUFF,1,3
+    5,BABYFEN,1,3
+    5,NATU,2,4
+    5,TYROGUE,2,3
+OldRod
+    20,SLOWPOKE,3,8
+GoodRod
+    20,SLOWPOKE,5,8
+#-------------------------------
+[080] # Whitehorse City
+Land,21
+    15,DODUO,18,22
+    15,FENOMON,16,20
+    15,VUCKOMON,16,20
+    5,EEVEE,14,16
+OldRod
+    20,MAGIKARP,3,8
+GoodRod
+    20,MAGIKARP,5,8
+    5,CHINCHOU,4,8
+#-------------------------------
+[083] # Renmao Waterfront
+Land,21
+    10,FOODBABY,9,12
+    10,JJ,10,15
+    10,MARILL,8,12
+    10,WINGULL,10,12
+    5,BABYFEN,7,10
+    5,SQUIRTLE,6,8
+    5,TAILLOW,8,10
+OldRod
+    20,MAGIKARP,3,8
+GoodRod
+    20,MAGIKARP,5,12
+    5,CARVANHA,4,8
+    5,CHINCHOU,5,7
+#-------------------------------
+[085] # Sinking Marsh
+Land,21
+    15,WOOPER,9,12
+    10,BROTHER,9,12
+    10,POLIWAG,8,12
+    10,UHRLEX,10
+    5,GOOMY,5,8
+    5,LOTAD,8,10
+    5,MUDKIP,8,9
+    5,TOTODILE,6,8
+OldRod
+    20,MAGIKARP,3,8
+    5,BARBOACH,3,5
+GoodRod
+    20,MAGIKARP,5,8
+    5,GOLDEEN,4,8
+#-------------------------------
+[086] # Route 101
+Land,21
+    15,RATTATA,8,12
+    10,BABYVUCKO,5,6
+    10,PSYDUCK,7,10
+    10,XERRI,9,12
+    5,FLABEBE,6,10
+    5,PIDGEY,5,8
+    5,ROSELIA,6,9
+OldRod
+    20,MAGIKARP,3,8
+GoodRod
+    20,MAGIKARP,5,8
+    5,GOLDEEN,4,8
+#-------------------------------
+[090] # Myalo Cave Entrance
+Cave,5
+    20,DIGLETT,10,12
+    20,GEODUDE,10,12
+    10,THESHARK,12,16
+    10,TSOUKINATOR,14,16
+    5,HAWLUCHA,9,12
+    5,MAKUHITA,8,12
+Land,20
+    10,TEDDIURSA,9,12
+    5,BULBASAUR,5
+    5,UHRLEX_1,14,20
+    2,CHARMANDER,6,8
+#-------------------------------
+[092] # Myalo Cave B1F
+Cave,5
+    20,PARAS,12,16
+    10,BROTHER,10,12
+    10,FOONGUS,8,12
+    10,GLOOM,12,14
+    5,CHARMANDER,6,10
+    5,DITTO,10,12
+    5,GEODUDE,10,14
+    5,PARASECT,16,20
+    5,RHYHORN,10,14
+    5,SHROOMISH,8,14
+    5,SKORUPI,11,14
+    1,DUGTRIO,14,18
+Land,21
+    20,PARASECT_6,15,18
+    20,PARAS_6,11,15
+    1,OINKOLOGNE_1,12,16
+#-------------------------------
+[102] # Myalo Cave B2F
+Land,21
+    20,BULBASAUR,16

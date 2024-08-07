@@ -53,6 +53,8 @@ module Settings
   MAX_BATTLE_POINTS    = 9_999
   # The maximum amount of soot the player can have.
   MAX_SOOT             = 9_999
+  # AT Edit - Maximum amount of mush the player can have
+  MAX_MUSH             = 99_999
   # The maximum length, in characters, that the player's name can be.
   MAX_PLAYER_NAME_SIZE = 10
   # A set of arrays each containing a trainer type followed by a Game Variable

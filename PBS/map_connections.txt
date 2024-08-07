@@ -24,6 +24,8 @@
 21,East,0,23,West,1
 # Route 2 (21) - Route 7 (47)
 21,East,77,47,West,0
+# Test Bushes (32) - Test Town (22)
+32,0,14,22,9,0
 # Route 3 (31) - Lerucean Town (23)
 31,South,32,23,North,0
 # Route 3 (31) - Ingido Plateau outside (35)
@@ -34,9 +36,23 @@
 41,North,0,40,South,0
 # Route 5 (41) - Route 6 Cycling Road (45)
 41,South,6,45,North,0
+# Kilcunda Forest - West (79) - Friendly Fields (42)
+79,0,13,42,52,0
 # Route 7 (47) - Battle Frontier (52)
 47,East,8,52,West,0
 # Route 8 (69) - Safari Zone outside (66)
 69,North,0,66,South,10
-# Test Town (22) - Test Bushes (32)
-22,10,0,32,0,14
+# Kilcunda Forest - East (77) - Kilcunda Forest - West (79)
+77,West,1,79,East,0
+# Whitehorse City (80) - Route 101 (86)
+80,North,0,86,South,0
+# Whitehorse City - East (88) - Whitehorse City (80)
+88,West,18,80,East,0
+# Sinking Marsh (85) - Renmao Waterfront (83)
+85,North,0,83,South,0
+# Route 101 (86) - Sinking Marsh (85)
+86,North,0,85,South,0
+# Whitehorse City - East (88) - Route 101 (86)
+88,West,0,86,East,21
+# Sporeville East (105) - Sporeville (104)
+105,West,0,104,East,0

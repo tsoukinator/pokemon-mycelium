@@ -3,16 +3,27 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-
 ```{r}
 library(readxl)
 library(dplyr)
 library(readr)
 library(rlist)
+library(data.table)
+library(tidyr) # Gather, Spread
+library(stringr) ## str_sub
 
-# Read moves from xls
+# Read Pokemon from xls
 pkmnstats_xls <- readxl::read_excel("PokeDB.xlsx", sheet = "PkmnStats")
 
+# Read in New Custom forms
+pkmnforms_xls <- readxl::read_excel("PokeDB.xlsx", sheet = "PkmnForms")
+pkmnforms_xls$Name <- paste0(str_sub(pkmnforms_xls$Name,end=-3)," - (",pkmnforms_xls$Form,")")
+pk_forms <- pkmnforms_xls[,2:10]
+
+# Combine Pokemon Data + Custom with New Custom Forms
+pkmnstats_xls <- bind_rows(pkmnstats_xls,pk_forms)
+
+## Clean data
 pkmnstats_xls$Name <- trimws(pkmnstats_xls$Name)
 pkmnstats_xls$Types <- trimws(pkmnstats_xls$Abilities)
 pkmnstats_xls$HiddenAbilities <- trimws(pkmnstats_xls$HiddenAbilities)
@@ -21,25 +32,30 @@ pkmnstats_xls$Pokedex <- trimws(pkmnstats_xls$Pokedex)
 
 # Calculate percentile rank of points values
 pkmnstats_xls <- pkmnstats_xls %>%
-  mutate(HP_Pct = round((100 * rank(HP)/length(HP)),0), Attack_Pct = round((100 * rank(Attack)/length(Attack)),0), Def_Pct = round((100 * rank(Defence)/length(Defence)),0), SpAtk_Pct = round((100 * rank(`Special Attack`)/length(`Special Attack`)),0), SpDef_Pct = round((100 * rank(`Special Defence`)/length(`Special Defence`)),0), Speed_Pct = round((100 * rank(Speed)/length(Speed)),0))
+  mutate(HP_Pct = round((100 * rank(HP)/length(HP)),0), Attack_Pct = round((100 * rank(Attack)/length(Attack)),0), Def_Pct = round((100 * rank(Defence)/length(Defence)),0), SpAtk_Pct = round((100 * rank(`Special Attack`)/length(`Special Attack`)),0), SpDef_Pct = round((100 * rank(`Special Defence`)/length(`Special Defence`)),0), Speed_Pct = round((100 * rank(Speed)/length(Speed)),0), BST_Pct = round((100 * rank(`Base Stat Total`)/length(`Base Stat Total`)),0))
+
+## Import Smogon Tiers
+smogon <- read_csv("smogon.csv")
+smogon_tier <- subset(smogon, select = c('Name','Tier'))
+
+pkmnstats_xls <- left_join(pkmnstats_xls, smogon_tier, by = c("Name"="Name"))
+pkmnstats_xls$Tier[is.na(pkmnstats_xls$Tier)] <- "Untiered"
 
 # Comparison
-compare <- dplyr::filter(pkmnstats_xls, Name %in% c("Edgarnator","Ragnarnator","Elsanator"))
+#compare <- dplyr::filter(pkmnstats_xls, Name %in% c("Edgarnator","Ragnarnator","Elsanator","Fenwrath"))
+compare <- dplyr::filter(pkmnstats_xls, is.na(`Pokedex Number`))
 
 ## Get Percentiles for comparison pkmn
 #pkmnstats_xls
-```
 
-```{r}
-
-#comparison_frame <- data.frame(Name = NA, HP = NA, Attack = NA, Defence = NA, Special_Attack = NA, Special_Defence = NA, Speed = NA, Proximity = NA)
+comparison_frame <- data.frame(Name = NA, HP = NA, Attack = NA, Defence = NA, Special_Attack = NA, Special_Defence = NA, Speed = NA, Proximity = NA, BST_Proximity = NA, Tier = NA)
 
 combined_frame <- comparison_frame
 
 for (i in 1:nrow(pkmnstats_xls)) {
 
   ## Reset data frame
-  comparison_frame <- data.frame(Name = '', HP = 0, Attack = 0, Defence = 0, Special_Attack = 0, Special_Defence = 0, Speed = 0, Proximity = 0, Compare_to = '')
+  comparison_frame <- data.frame(Name = '', HP = 0, Attack = 0, Defence = 0, Special_Attack = 0, Special_Defence = 0, Speed = 0, Proximity = 0, BST_Proximity = 0, Compare_to = '')
   
   for (j in 1:nrow(compare)) {
   if (pkmnstats_xls$Name[i] == compare$Name[j]) {
@@ -57,6 +73,9 @@ for (i in 1:nrow(pkmnstats_xls)) {
     comparison_frame$Special_Attack <- compare$`Special Attack`[j] - pkmnstats_xls$`Special Attack`[i]
     comparison_frame$Special_Defence <- compare$`Special Defence`[j] - pkmnstats_xls$`Special Defence`[i]
     comparison_frame$Speed <- compare$Speed[j] - pkmnstats_xls$Speed[i]
+    comparison_frame$BST_Proximity <- compare$`Base Stat Total`[j] - pkmnstats_xls$`Base Stat Total`[i]
+    comparison_frame$BST_Proximity_Abs <- abs(compare$`Base Stat Total`[j] - pkmnstats_xls$`Base Stat Total`[i])
+    comparison_frame$Tier <- pkmnstats_xls$Tier[i]
     
     ## Calculate absolute difference
     comparison_frame$Proximity <- abs(comparison_frame$HP) + abs(comparison_frame$Attack) + abs(comparison_frame$Defence) + abs(comparison_frame$Special_Attack) + abs(comparison_frame$Special_Defence) + abs(comparison_frame$Speed)
@@ -75,20 +94,41 @@ for (i in 1:nrow(pkmnstats_xls)) {
   
 }
 
+### Create PCT Frame and Stat Summary
+keep_pct <- c('Name','HP_Pct','Attack_Pct','Def_Pct','SpAtk_Pct','SpDef_Pct','Speed_Pct','BST_Pct')
+keep_stats <- c('Name','HP','Attack','Defence','Special Attack','Special Defence','Speed','Base Stat Total')
+
+custom_pkmn <- filter(pkmnstats_xls, is.na(`Pokedex Number`))
+
+pkmn_percentile <- subset(custom_pkmn, select = keep_pct)
+pkmn_stats <- subset(custom_pkmn, select = keep_stats)
+
+gpp <- gather(pkmn_percentile, key = "Stat", value = "Percentile", -`Name`)
+gpp$Stat <- ifelse(gpp$Stat=="HP_Pct","HP",ifelse(gpp$Stat=="Attack_Pct","Attack",ifelse(gpp$Stat=="Def_Pct","Defence",ifelse(gpp$Stat=="SpAtk_Pct","Special Attack",ifelse(gpp$Stat=="SpDef_Pct","Special Defence",ifelse(gpp$Stat=="Speed_Pct","Speed",ifelse(gpp$Stat=="BST_Pct","Base Stat Total","")))))))
+  
+gps <- gather(pkmn_stats, key = "Stat", value = "Base Stats", -`Name`)
+
+new_pkmn_summary <- left_join(gps, gpp, by = c("Name"="Name", "Stat" = "Stat"))
+#filter(new_pkmn_summary, Name == "Tsoukinator")
 ```
+
 
 ```{r}
 ## Subject PKMN
-subject <- "Edgarnator" #"Elsanator" #"Ragnarnator"# "Edgarnator"
-
+subject <- "FoodBaby" #"Elsanator" #"Ragnarnator"# "Edgarnator"
 # Filter to pkmn
-subject_frame <- filter(combined_frame, Compare_to == subject)
-
-#combined_frame
-newdata <- subject_frame[order(subject_frame$Proximity),]
-newdata
-
-
+subject_frame <- filter(combined_frame, tolower(Compare_to) == tolower(subject))
+close_pokemon <- subject_frame[order(subject_frame$Proximity),]
+bst_prox_pkmn <- subset(subject_frame[order(subject_frame$BST_Proximity_Abs),], select = c("Name","Tier","BST_Proximity","BST_Proximity_Abs"))
+##### TIER RANKING #####
+top50tiers <- head(close_pokemon,50) %>% group_by(`Tier`) %>% summarise(Count = n())
+top50tiers[order(-top50tiers$Count),]
+##### PERCENTILE RANKING ######
+filter(new_pkmn_summary, tolower(Name) == tolower(subject)) # Stat Summary with Percentiles
+##### NEAREST NEIGHBOURS #####
+bst_prox_pkmn # Pkmn Closest in Base Stat Total
+close_pokemon # Pokemon with stats closest to this one - Minus denotes subject has LESS in that stat area
+```
 ### Changes
 ## Ragnarnator - Drop HP by 20, increase speed by 20, Increase special_attack by 5
 ## Elsanator - Increase speed by 5
@@ -102,71 +142,24 @@ newdata
 #Elsanator modified stats: 75	90	70	100	70	110	(515)
 #Edgarnator modified stats: 120	90	115	60	85	60	(530)
 
-compare
-```
 
-## Load Pokemon PBS
 ```{r}
-og_pokemon_txt <- read_delim("./Original Backup Text Files/pokemon_tsouk.txt", delim = "\n", trim_ws = TRUE, col_names = FALSE)
+####################################################
+### OUTPUT UPDATED ALL POKEMON PERCENTILES FILE ####
+####################################################
 
-# Split on Equals sign
-og_pkmn_split <- data.frame(do.call('rbind', strsplit(as.character(og_pokemon_txt$X1),'=',fixed=TRUE)))
-og_pkmn_split$X1 <- trimws(og_pkmn_split$X1)
-og_pkmn_split$X2 <- trimws(og_pkmn_split$X2)
+keep_cols <- c('Name','HP','Attack','Defence','Special Attack','Special Defence','Speed','Base Stat Total','HP_Pct','Attack_Pct','Def_Pct','SpAtk_Pct','SpDef_Pct','Speed_Pct','BST_Pct')
 
-pkmn_name <- ''
-og_pkmn_split$Name <- ''
+bst_summary <- subset(pkmnstats_xls, select = keep_cols)
 
-# Add pokemon name to dataframe
-for (i in 1:nrow(og_pkmn_split)) {
-  if (og_pkmn_split$X1[i] == "Name") {
-    pkmn_name <- og_pkmn_split$X2[i]
-    og_pkmn_split$Name[i-2] <- pkmn_name
-    og_pkmn_split$Name[i-1] <- pkmn_name
-  }
-  og_pkmn_split$Name[i] <- pkmn_name
-}
+## Import Smogon Tiers
+smogon <- read_csv("smogon.csv")
+smogon_tier <- subset(smogon, select = c('Name','Tier'))
 
+bst_summary_tiers <- left_join(bst_summary, smogon_tier, by = c("Name"="Name"))
+bst_summary_tiers$Tier[is.na(bst_summary_tiers$Tier)] <- "Untiered"
 
-# If any data in PkmnStats excel, add them in below (filter for no pokedex number)
-new_pkmn_stats <- filter(pkmnstats_xls, is.na(`Pokedex Number`))
-new_pkmn_stats
-
-#View(og_pkmn_split)
-
-## Create Stats column (HP,Atk,Def,Speed,SpA,SpD)
-new_pkmn_stats$BaseStats <- paste(new_pkmn_stats$HP,new_pkmn_stats$Attack,new_pkmn_stats$Defence,new_pkmn_stats$Speed,new_pkmn_stats$`Special Attack`,new_pkmn_stats$`Special Defence`,sep=',')
-
-## Keep columns
-keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Pokedex')
-
-pkmn_data = subset(new_pkmn_stats, select = keep_cols)
-as.data.frame(t(pkmn_data))
-
-## Replace stats if match in pkmnstats_xls
-#pkmn_data
-library(tidyr)
-gather(pkmn_data)
-
-# Use gather() to reshape the data
-gather_pkmn <- gather(pkmn_data, key = "Column", value = "Value", -Name)
-
-# Outer join on og data
-pkmn_combine <- left_join(og_pkmn_split,gather_pkmn,by=c('Name'='Name','X1'='Column'))
-
-## If there is data in the new column, replace the data in the old column
-
-pkmn_combine$NewValue <- ifelse(!is.na(pkmn_combine$Value),pkmn_combine$Value,pkmn_combine$X2)
-pkmn_combine$NewValue <- ifelse(pkmn_combine$NewValue==pkmn_combine$X1,'',pkmn_combine$NewValue)
-pkmn_combine$NewValue <- gsub('#-------------------------------','',pkmn_combine$NewValue)
-pkmn_combine$NewValue <- gsub('# See the documentation on the wiki to learn how to edit this file.','',pkmn_combine$NewValue)
-
-pkmn_combine$NewValue <- ifelse(pkmn_combine$NewValue == "",'',paste0(' = ',pkmn_combine$NewValue))
-
-pkmn_combine$Output <- paste0(pkmn_combine$X1,pkmn_combine$NewValue,sep="")
-
-# Write out updated pokemon to PBS directory
-lapply(as.data.frame(pkmn_combine$Output), write, "../PBS/pokemon2.txt", append=FALSE, ncolumns=1)
-
+### Output to CSV
+write_csv(x=bst_summary_tiers, file = "all_pokemon_percentiles.csv", append = FALSE)
 ```
 
