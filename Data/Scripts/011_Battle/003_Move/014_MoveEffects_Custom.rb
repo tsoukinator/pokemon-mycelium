@@ -679,7 +679,7 @@ class Battle::Move::CureUserRaiseSpDef1 < Battle::Move::StatUpMove
  # end
   def initialize(battle, move)
     super
-    @statUp   = [SPECIAL_DEFENSE, 1]
+    @statUp = [:SPECIAL_DEFENSE, 1]
     #@statDown = [:SPEED, 1]
   end
 
@@ -897,4 +897,130 @@ class Battle::Move::StartGrassyTerrainBoostDefSpD < Battle::Move::MultiStatUpMov
     @battle.pbStartTerrain(user, :Grassy)
   end
 
+end
+
+#=====================
+# Glowing Routine
+#=====================
+class Battle::Move::GlowingRoutine < Battle::Move
+
+  def pbEffectGeneral(user)
+    if user.pbCanRaiseStatStage?(:SPECIAL_DEFENSE, user, self)
+      user.pbRaiseStatStage(:SPECIAL_DEFENSE, 2, user)
+    end
+	  
+  user.effects[PBEffects::GlowingRoutine] = 4
+	@battle.pbDisplay(_INTL("{1} applied their glowing routine and became immune to status moves!", user.pbThis))
+  end
+end
+
+#=====================
+# Peanut Crash - Recoil if no glowing routine, can confuse target
+#=====================
+class Battle::Move::PeanutCrash < Battle::Move::RecoilMove
+  def pbRecoilDamage(user, target)
+    if user.effects[PBEffects::GlowingRoutine] == 0
+      return (target.damageState.totalHPLost / 3.0).round
+    else
+      return 0
+    end
+  end
+
+  def pbAdditionalEffect(user, target)
+    return if target.damageState.substitute
+    target.pbConfuse(user) if target.pbCanConfuse?(user, false, self)
+  end
+end
+
+
+#===============================================================================
+# Waifu Charm - Decreases stats, chance to attract
+#===============================================================================
+class Battle::Move::WaifuCharm < Battle::Move::TargetMultiStatDownMove
+  def initialize(battle, move)
+    super
+    @statDown = [:ATTACK, 1, :SPECIAL_ATTACK, 1]
+  end
+  
+  def ignoresSubstitute?(user); return true; end
+  def canMagicCoat?; return true; end
+
+ # def pbFailsAgainstTarget?(user, target, show_message)
+ #   return false if damagingMove?
+ #   return true if !target.pbCanAttract?(user, show_message)
+ #   return false
+ # end
+
+  def pbEffectAgainstTarget(user, target)
+    if target.pbCanLowerStatStage?(:ATTACK, target, self)
+      target.pbLowerStatStage(:ATTACK, 1, target)
+    end
+    if target.pbCanLowerStatStage?(:SPECIAL_ATTACK, target, self)
+      target.pbLowerStatStage(:SPECIAL_ATTACK, 1, target)
+    end
+    
+    if rand(1..100) <= 40
+      target.pbAttract(user)
+    end
+    #return if damagingMove?
+    #target.pbAttract(user)
+  end
+
+  #def pbAdditionalEffect(user, target)
+    #target.pbAttract(user)
+    #return if target.damageState.substitute
+    #target.pbAttract(user) if target.pbCanAttract?(user, false)
+  #end
+  
+end
+
+#===============================================================================
+# Final Rehearsal - Stat increase Doubled if used on first turn of battle
+#===============================================================================
+class Battle::Move::FinalRehearsal < Battle::Move
+
+  def pbEffectGeneral(user)
+    if user.turnCount == 1
+      increase = 2
+    else
+      increase = 1
+    end
+    
+    if user.pbCanRaiseStatStage?(:ATTACK, user, self)
+      user.pbRaiseStatStage(:ATTACK, increase, user)
+    end
+    if user.pbCanRaiseStatStage?(:SPEED, user, self)
+      user.pbRaiseStatStage(:SPEED, increase, user)
+    end
+  end
+end
+
+#===============================================================================
+# User locked into move for 3 turns. Increasing in power with each hit.
+#===============================================================================
+class Battle::Move::MultiTurnAttackIncreasingPower < Battle::Move
+  def pbBaseDamage(baseDmg, user, target)
+    dmg = 60  # Default damage value
+    if user.effects[PBEffects::Outrage] == 0
+      dmg = baseDmg * 1.0 # 60
+    elsif user.effects[PBEffects::Outrage] == 2
+      dmg = baseDmg * 1.5 # 90
+    elsif user.effects[PBEffects::Outrage] == 1
+      dmg = baseDmg * 2 # 120
+    end
+    puts "Return dmg"
+    puts dmg
+    return dmg
+  end
+
+  def pbEffectAfterAllHits(user, target)
+    if !target.damageState.unaffected && user.effects[PBEffects::Outrage] == 0
+      user.effects[PBEffects::Outrage] = 2 + @battle.pbRandom(2)
+      user.currentMove = @id
+    end
+    
+    if user.effects[PBEffects::Outrage] > 0
+      user.effects[PBEffects::Outrage] -= 1
+    end
+  end
 end

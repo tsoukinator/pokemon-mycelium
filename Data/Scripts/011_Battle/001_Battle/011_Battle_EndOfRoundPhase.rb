@@ -564,6 +564,15 @@ class Battle
         pbDisplay(_INTL("{1} is making an uproar!", battler.pbThis))
       end
     end
+    # Glowing Routine
+    if battler.effects[PBEffects::GlowingRoutine] > 0
+      battler.effects[PBEffects::GlowingRoutine] -= 1
+      if battler.effects[PBEffects::GlowingRoutine] == 0
+        pbDisplay(_INTL("{1} glowing routine faded.", battler.pbThis))
+      else
+        #pbDisplay(_INTL("{1} is making an uproar!", battler.pbThis))
+      end
+    end
     # Slow Start's end message
     if battler.effects[PBEffects::SlowStart] > 0
       battler.effects[PBEffects::SlowStart] -= 1
@@ -773,6 +782,7 @@ class Battle
       battler.effects[PBEffects::Obstruct]         = false
       battler.effects[PBEffects::Powder]           = false
       battler.effects[PBEffects::Prankster]        = false
+      battler.effects[PBEffects::GeminiPartyStarter]        = false
       battler.effects[PBEffects::PriorityAbility]  = false
       battler.effects[PBEffects::PriorityItem]     = false
       battler.effects[PBEffects::Protect]          = false

@@ -39,6 +39,27 @@ class Battle::Battler
       @lastRoundMoved = @battle.turnCount   # Done something this round
       return true
     end
+    
+    # Check if the Pokémon has the Random Move ability and is under 30% HP
+#    if hasActiveAbility?(:PANICMODE) && self.hp <= self.totalhp / 3
+      # Show the splash screen or message for ability activation
+      #@battle.pbDisplay(_INTL("{1}'s {2} activated!", self.pbThis, PBAbilities.getName(self.ability)))
+
+      # Randomly select one of the Pokémon's known moves
+ #     available_moves = []
+ #     @moves.each_with_index do |m, i|
+ #       available_moves.push(i) if m && m.id != 0
+ #     end
+ #     if available_moves.length > 0
+ #       random_move_index = available_moves.sample
+ #       @currentMove = @moves[random_move_index].id
+        #pbUseMove(@currentMove, false)
+        #pbUseMove(available_moves[1], false) #:SPICYNOODLES 836
+ #       pbUseMove("SPICYNOODLES".to_sym, false)
+ #       return
+ #     end
+ #   end
+    
     # If this battler's action for this round wasn't "use a move"
     if choice[0] != :UseMove
       # Clean up effects that end at battler's turn
@@ -521,6 +542,43 @@ class Battle::Battler
     pbHyperMode if @battle.choices[@index][0] != :None   # Not if self is replaced
     # End of move usage
     pbEndTurn(choice)
+    
+    # Panic Mode
+    #@battle.allBattlers.each do |b|
+    # Check if the Pokémon has the PANICMODE ability and is under 30% HP
+    #if hasActiveAbility?(:PANICMODE) && self.hp <= self.totalhp / 3
+      # Display the ability activation message
+      #@battle.pbDisplay(_INTL("{1}'s {2} activated!", self.pbThis, PBAbilities.getName(self.ability)))
+
+      # Randomly select one of the Pokémon's known moves
+    #  available_moves = []
+    #  @moves.each_with_index do |m, i|
+    #    available_moves.push(i) if m && m.id != 0
+    #  end
+        
+    #  random_move = available_moves.sample
+    #  idxMove = b.moves.index(random_move)
+    
+      # Store the last round moved, so we can reset it after using the move
+      #oldLastRoundMoved = b.lastRoundMoved
+
+      # Inform the player of the random move selection
+      #@battle.pbDisplay(_INTL("{1} panicked and used {2}!", b.pbThis, random_move.name))
+    
+      # Execute the move
+      #b.effects[PBEffects::Instructed] = true
+    #  if b.pbCanChooseMove?(random_move, false)
+    #    PBDebug.logonerr do
+    #      b.pbUseMoveSimple(random_move.id, b.lastRegularMoveTarget, idxMove, false)
+    #    end
+        #b.lastRoundMoved = oldLastRoundMoved
+    #    @battle.pbJudge
+        #break if @battle.decision > 0
+    #  end
+        #self.effects[PBEffects::Instructed] = false
+    #  end
+    #end
+
     # Instruct
     @battle.allBattlers.each do |b|
       next if !b.effects[PBEffects::Instruct] || !b.lastMoveUsed

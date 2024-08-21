@@ -24,6 +24,37 @@ class PokemonPauseMenu_Scene
     @sprites["infowindow"].visible = true
     @infostate = true
   end
+  
+  def pbShowInfoBottom(text)
+    info_window = @sprites["infowindow"]
+  
+    # Resize the info window to fit the text
+    info_window.resizeToFit(text, Graphics.height)
+  
+    # Calculate the position for the bottom-left corner
+    info_window.x = 0
+    info_window.y = Graphics.height - info_window.height
+  
+    # Set the text and make the window visible
+    info_window.text = text
+    info_window.visible = true
+    @infostate = true
+  end
+
+  def pbShowInfoFontSize(text, font_size = 16)  # Default font size is 32, you can adjust it or make it optional
+    info_window = @sprites["infowindow"]
+
+    # Set the font size
+    info_window.contents.font.size = font_size
+  
+    # Resize the info window to fit the text
+    info_window.resizeToFit(text, Graphics.height)
+  
+    # Set the text and make the window visible
+    info_window.text = text
+    info_window.visible = true
+    @infostate = true
+  end
 
   def pbShowHelp(text)
     @sprites["helpwindow"].resizeToFit(text, Graphics.height)
@@ -46,6 +77,23 @@ class PokemonPauseMenu_Scene
   end
 
   def pbShowCommands(commands)
+    
+  # Get the current moon phase index (number)
+  current_moon_index = moonphase(pbGetTimeNow())
+  # Get estimated day number in moon cycle
+  current_moon_day = moonphase_day(pbGetTimeNow())
+  # Get current moon phase (name)
+  current_moon_phase = moonphase_name(current_moon_index)
+  current_zodiac = zodiac(pbGetTimeNow().mon,pbGetTimeNow().day)
+  #current_zodiac_sign = zodiac_sign(current_zodiac)
+  current_zodiac_sign = moon_zodiac_sign(pbGetTimeNow())
+  current_moon_bonus = moon_bonus_text(current_moon_day-1)
+  ## Star Sign Code ##
+  moon_header = "Moon: Waxing Crescent\n^ Accuracy | Sign: Capricorn"
+  moon_header_bottom = "Moon: #{current_moon_phase} (Day #{current_moon_day}/28)\n^ #{current_moon_bonus} | Sign: #{current_zodiac_sign}"
+  moon_sign = "Sign: "
+  effect_desc = "Effect: "
+
     ret = -1
     cmdwindow = @sprites["cmdwindow"]
     cmdwindow.commands = commands
@@ -55,6 +103,9 @@ class PokemonPauseMenu_Scene
     cmdwindow.y        = 0
     cmdwindow.visible  = true
     loop do
+    pbShowInfoBottom(moon_header_bottom)
+    #pbShowInfo(moon_header)
+	  #pbShowInfoFontSize(moon_header,24) #26 seems to be menu size
       cmdwindow.update
       Graphics.update
       Input.update

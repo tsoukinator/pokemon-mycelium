@@ -1,0 +1,59 @@
+﻿Name       = Innate Abilities
+Version    = 1.4
+Essentials = 21.1
+Optional   = Generation 9 Pack
+Website    = https://eeveeexpo.com/resources/1518/
+Credits    = DemICE, Penelope, Bguy7, Tsoukinator
+#Honestly credits entirely to DemICE for making the All Abilities Mutation. I just made a separate ability list
+#Also credits to Penelope for helping solving a ton of problems lost in the update
+#Credits to Bguy7 for the suggestion of a case where a pokemon has neither an ability nor any innates defined.
+#Credits to Tsoukinator for the suggestion of an option to let pokemon with bigger innate pools have randomized, picked innates.
+#==========Known bugs=========
+#*Opportunist not working neither as an Innate nor as a Regular ability
+#*Guard Dog only blocks the drop of attack by Intimidate, but doesn't raise it after it
+#*Some abilities that don't use an ability handler have their names show incorrectly in the ability splash bar. While I automate a solution, you can hard-code the name
+#of the ability with the use of $aamName = GameData::Ability.get(:X).name right before the @battle.pbShowAbilitySplash in those instances (Sturdy for example)
+#The first option of the Innate abilities in the debug mode straight up does not work. Don't use it. It will crash your game. Still a WIP.
+#
+#Cangelog
+#=================v1.4.1=============
+#Added a uniqueness filter for the Randomized setting:
+#Now the randomly selected Innates will never have the same ID of the regular ability of the pokemon, nor in between them if you set them multiple times in the "Innates =",
+#this ensures that in between the possible innates and the regular ability, no ID appears more than once. This is only true for the randomizer as the user has full control of the
+#pokemon's innates if they don't use it, so it's not needed.
+#As such, the option for that has been update it in the Innate Shuffler, the Ability Capsule and the Ability Patch.
+#Also updated the Debug Menu, specially the randomizer option. Don't use the first option of the debug Innates menu because it provoques a crash. Still WIP.
+#Fixed (Hopefully) an error that caused crashes with Poison Puppeteer's code if the Gen 9 pack not being installed
+#=================v1.4=============
+#The "Randomized" Update
+#Added a pair of new settings in the AAM Settings file to choose if you want to limit the amount of innates a pokemon can have
+#from the entire "Innates =" section of the PBS. And randomly choose abilities from that same pool. So now 2 pokemon from the same
+#species can have different innates! I recommend to expand the amount of innates in the section if you want to use it.
+#Sligtly reworked the "Innate Page Summary" add-on to now reflect these changes.
+#=================v1.3.2=============
+#Reworked the file "Innate Abilities - Species" to modify only stuff added by the Innate abilities and nothing else
+#	-Therefore, solved compatibilities with the DBK/Animated Pokemon System plugin and the Dynamax plugin.
+#BE SURE TO RECOMPILE AND START A NEW SAVE FILE!
+#Added support for pokemon with no abilities/innates. Simply make a new ability with the id "NOABILITY" with a similar name and description, or
+#add the "abilities_innateabilities.txt" to your pbs folder.
+#=================v1.3.1=============
+#Updated the way the "INNATE_PROGRESS_WITH_LEVEL" works, so now you can give specific pokemon' species custom levels to which they can unlock their innates
+#Updated the "Innates in summary" page to reflect this change
+#=================v1.3=============
+#The "Progress" Update
+#Added new settings in AAM Settings, to choose if you want to enable locking and unlocking innates via either a
+#variable for all pokemon, or based on level for each individual pokemon
+#This is reflected in the Innate Summary page
+#Also added an "No Innate" text for when the pokemon doesn't have an Innate to show
+#=================v1.2=============
+#*Hopefully solved the problem with the "hasActiveAbility?" definition (Credits to Penelope)
+#*Protean and Libero now work as Innates
+#*Fixed the handler "ModifyMoveBaseType" so abilities that use it(Like Galvanize or Pixilate) now properly work as Innates
+#*Solved Poison Puppeteer working as an Innate now (Credits to Penelope for the code)
+#*Fixed an small typo in the Pokedex Data Page mod, so now reads "An Innate" and not "A Innate"
+##=================v1.1.2=============
+#*Fixed Tera Shell's ability splash not showing up while being a Regular/Non-innate ability
+#*Fixed Poison Puppeteer not working while being a regular ability
+#=================v1.1=============
+#*Fixed the problem with the gen 9 pack having moves learned at -1 level. Now -1 levels are an accepted value
+#*Fixed damage altering abilities that use the DamageCalcFromTarget and DamageCalcFromTargetNonIgnorable flag not working properly

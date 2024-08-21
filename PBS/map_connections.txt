@@ -56,3 +56,7 @@
 88,West,0,86,East,21
 # Sporeville East (105) - Sporeville (104)
 105,West,0,104,East,0
+# Lunea Fields (108) - Lunea Town (107)
+108,North,0,107,South,10
+# Dance Academy (109) - Route5-B4Dance (110)
+109,West,0,110,East,4

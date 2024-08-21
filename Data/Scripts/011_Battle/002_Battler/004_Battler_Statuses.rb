@@ -163,9 +163,15 @@ class Battle::Battler
       return false
     end
     # Safeguard immunity
-    if pbOwnSide.effects[PBEffects::Safeguard] > 0 && !self_inflicted && move &&
+    if (pbOwnSide.effects[PBEffects::Safeguard] > 0) && !self_inflicted && move &&
        !(user && user.hasActiveAbility?(:INFILTRATOR))
       @battle.pbDisplay(_INTL("{1}'s team is protected by Safeguard!", pbThis)) if showMessages
+      return false
+    end
+    # Glowing Routine immunity
+    if @effects[PBEffects::GlowingRoutine] > 0 && !self_inflicted && move &&
+       !(user && user.hasActiveAbility?(:INFILTRATOR))
+      @battle.pbDisplay(_INTL("{1} is protected by her glowing routine!", pbThis)) if showMessages
       return false
     end
     return true
@@ -206,7 +212,7 @@ class Battle::Battler
     end
     # Safeguard immunity
     # NOTE: user will have Synchronize, so it can't have Infiltrator.
-    if pbOwnSide.effects[PBEffects::Safeguard] > 0 &&
+    if (pbOwnSide.effects[PBEffects::Safeguard] > 0 or @effects[PBEffects::GlowingRoutine] > 0) &&
        !(user && user.hasActiveAbility?(:INFILTRATOR))
       return false
     end
@@ -307,6 +313,7 @@ class Battle::Battler
     #       drowsiness. I disagree with this too. Compare with the other sided
     #       effects Misty/Electric Terrain, which do prevent it.
     return false if pbOwnSide.effects[PBEffects::Safeguard] > 0
+    return false if @effects[PBEffects::GlowingRoutine] > 0
     return true
   end
 
@@ -468,9 +475,14 @@ class Battle::Battler
       end
       return false
     end
-    if pbOwnSide.effects[PBEffects::Safeguard] > 0 && !selfInflicted &&
+    if (pbOwnSide.effects[PBEffects::Safeguard] > 0 or @effects[PBEffects::GlowingRoutine] > 0) && !selfInflicted &&
        !(user && user.hasActiveAbility?(:INFILTRATOR))
       @battle.pbDisplay(_INTL("{1}'s team is protected by Safeguard!", pbThis)) if showMessages
+      return false
+    end
+  if (@effects[PBEffects::GlowingRoutine] > 0) && !selfInflicted &&
+       !(user && user.hasActiveAbility?(:INFILTRATOR))
+      @battle.pbDisplay(_INTL("{1} is protected by her glowing routine!", pbThis)) if showMessages
       return false
     end
     return true

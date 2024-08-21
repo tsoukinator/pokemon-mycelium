@@ -66,6 +66,30 @@ class Battle::Battler
     end
     return true
   end
+  
+    def pbRaiseStatStageSilent(stat, increment, user, showAnim = true, ignoreContrary = false)
+    # Contrary
+    if hasActiveAbility?(:CONTRARY) && !ignoreContrary && !@battle.moldBreaker
+      return pbLowerStatStage(stat, increment, user, showAnim, true)
+    end
+    # Perform the stat stage change
+    increment = pbRaiseStatStageBasic(stat, increment, ignoreContrary)
+    return false if increment <= 0
+    # Stat up animation and message
+    #@battle.pbCommonAnimation("StatUp", self) if showAnim
+    arrStatTexts = [
+      _INTL("{1}'s {2} rose!", pbThis, GameData::Stat.get(stat).name),
+      _INTL("{1}'s {2} rose sharply!", pbThis, GameData::Stat.get(stat).name),
+      _INTL("{1}'s {2} rose drastically!", pbThis, GameData::Stat.get(stat).name)
+    ]
+    #@battle.pbDisplay(arrStatTexts[[increment - 1, 2].min])
+    # Trigger abilities upon stat gain
+    if abilityActive?
+      Battle::AbilityEffects.triggerOnStatGain(self.ability, self, stat, user)
+    end
+    return true
+  end
+
 
   def pbRaiseStatStageByCause(stat, increment, user, cause, showAnim = true, ignoreContrary = false)
     # Contrary

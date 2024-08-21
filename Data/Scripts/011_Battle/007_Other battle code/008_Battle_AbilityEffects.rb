@@ -897,7 +897,7 @@ Battle::AbilityEffects::MoveBlocking.add(:ANIMALBOND,
   proc { |ability, bearer, user, targets, move, battle|
     next false if !bearer.opposes?(user)
     ret = false
-    targets.each { |b| ret = true if b.opposes?(user) and rand(1..4) == 1}
+    targets.each { |b| ret = true if b.opposes?(user) and rand(1..5) == 1}
     next ret
   }
 )
@@ -1311,12 +1311,6 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:HUSTLE,
 Battle::AbilityEffects::DamageCalcFromUser.add(:IRONFIST,
   proc { |ability, user, target, move, mults, power, type|
     mults[:power_multiplier] *= 1.2 if move.punchingMove?
-  }
-)
-
-Battle::AbilityEffects::DamageCalcFromUser.add(:CHONKYTHIGHS,
-  proc { |ability, user, target, move, mults, power, type|
-    mults[:power_multiplier] *= 1.2 if move.kickingMove?
   }
 )
 
@@ -1738,15 +1732,6 @@ Battle::AbilityEffects::OnBeingHit.add(:ANGERPOINT,
   }
 )
 
-Battle::AbilityEffects::OnBeingHit.add(:CATCHPHRASE,
-  proc { |ability, user, target, move, battle|
-    next if !target.damageState.critical
-    battle.pbShowAbilitySplash(target)
-    quotes = ["I don't like this","WAAAAH","V sad","Godddamit!!","Bully! Bully! Bully!"]
-    battle.pbDisplay(_INTL("{1}: {2}", target.pbThis, quotes.sample))
-    battle.pbHideAbilitySplash(target)
-  }
-)
 
 Battle::AbilityEffects::OnBeingHit.add(:COTTONDOWN,
   proc { |ability, user, target, move, battle|
@@ -2022,35 +2007,6 @@ Battle::AbilityEffects::OnBeingHit.add(:STAMINA,
   }
 )
 
-Battle::AbilityEffects::OnBeingHit.add(:INJURYPRONE,
-  proc { |ability, user, target, move, battle|
-  
-  roll = rand(1..20)
-  
-  if roll == 1
-    next if !move.pbContactMove?(user)
-    next if user.paralyzed?
-    battle.pbShowAbilitySplash(target)
-    if user.pbCanParalyze?(target, Battle::Scene::USE_ABILITY_SPLASH) &&
-       user.affectedByContactEffect?(Battle::Scene::USE_ABILITY_SPLASH)
-      msg = nil
-      if !Battle::Scene::USE_ABILITY_SPLASH
-        msg = _INTL("{1}'s {2} paralyzed {3}! It may be unable to move!",
-           target.pbThis, target.abilityName, user.pbThis(true))
-      end
-      user.pbParalyze(target, msg)
-    end
-    battle.pbHideAbilitySplash(target)
-  end
-    
-  if roll >= 2 and roll <= 3
-    stats = ["ATTACK","DEFENSE"]
-    selected_stat = stats.sample.to_sym
-  
-    target.pbLowerStatStageByAbility(selected_stat, 1, target)
-  end
-  }
-)
 
 Battle::AbilityEffects::OnBeingHit.add(:STATIC,
   proc { |ability, user, target, move, battle|
@@ -2152,17 +2108,6 @@ Battle::AbilityEffects::OnDealingHit.add(:POISONTOUCH,
   }
 )
 
-Battle::AbilityEffects::OnDealingHit.add(:CATCHPHRASE,
-  proc { |ability, user, target, move, battle|
-  if (target.damageState.critical or target.damageState.typeMod >= 2 )
-   # next if (!target.damageState.critical or target.damageState.typeMod >= 2 )
-    battle.pbShowAbilitySplash(user)
-    quotes = ["Hahaha!","Hahaha! Take that!","Cooool!"]
-    battle.pbDisplay(_INTL("{1}: {2}", user.pbThis, quotes.sample))
-    battle.pbHideAbilitySplash(user)
-  end
-  }
-)
 
 
 #===============================================================================
@@ -2414,285 +2359,6 @@ Battle::AbilityEffects::EndOfRoundWeather.add(:SOLARPOWER,
   }
 )
 
-Battle::AbilityEffects::EndOfRoundEffect.add(:MYCELIUMCURSE,
-  proc { |ability, battler, battle|
-    # A Pokémon's turnCount is 0 if it became active after the beginning of a
-    # round
-
-    stats = ["ATTACK","SPECIAL_ATTACK"]
-    selected_stat = stats.sample.to_sym
-    
-    if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-       battler.pbCanRaiseStatStage?(selected_stat, battler)
-      battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
-    end
-    
-    battle.scene.pbDamageAnimation(battler)
-    battler.pbReduceHP(battler.totalhp / 6, false)
-    battle.pbDisplay(_INTL("{1} is plagued by Mycelium Curse!", battler.pbThis))
-    battle.pbHideAbilitySplash(battler)
-    battler.pbItemHPHealCheck
-    
-  }
-)
-##################
-## Guilt - Crybaby
-#################
-Battle::AbilityEffects::EndOfRoundEffect.add(:CRYBABY,
-  proc { |ability, battler, battle|
-    battle.allOtherSideBattlers(battler.index).each do |b|
-      next if !b.near?(battler)
-     # 30% chance to lower opponents attacking stats
-      if rand(1..10) <= 3
-        battle.pbShowAbilitySplash(battler)
-        
-        if Battle::Scene::USE_ABILITY_SPLASH
-          battle.pbDisplay(_INTL("{1} is guilted by {2}'s crying!", b.pbThis, battler.pbThis(true)))
-        else
-          battle.pbDisplay(_INTL("{1} is guilted by {2}'s crying!",
-          b.pbThis, battler.pbThis(true)))
-        end
-           
-          if b.pbCanLowerStatStage?(:ATTACK, b)
-           b.pbLowerStatStage(:ATTACK, 1, b)
-         end
-          if b.pbCanLowerStatStage?(:SPECIAL_ATTACK, b)
-           b.pbLowerStatStage(:SPECIAL_ATTACK, 1, b)
-         end
-        battle.pbHideAbilitySplash(battler)
-      end
-	end
-  }
-)
-
-##################
-## Constant Barking
-#################
-Battle::AbilityEffects::EndOfRoundEffect.add(:CONSTANTBARKING,
-  proc { |ability, battler, battle|
-    battle.allOtherSideBattlers(battler.index).each do |b|
-      next if !b.near?(battler)
-     # 33% chance to taunt
-      if rand(1..3) == 3 and not battler.asleep? and not battler.frozen?
-        battle.pbShowAbilitySplash(battler)
-        #b.pbTakeEffectDamage(b.totalhp / 8) do |hp_lost|
-        b.effects[PBEffects::Taunt] = 4
-        
-        if Battle::Scene::USE_ABILITY_SPLASH
-          battle.pbDisplay(_INTL("{1} is tormented by {2}'s {3}!", b.pbThis, battler.pbThis(true), battler.abilityName))
-        else
-          battle.pbDisplay(_INTL("{1} is tormented by {2}'s {3}!",
-             b.pbThis, battler.pbThis(true), battler.abilityName))
-        end
-        battle.pbHideAbilitySplash(battler)
-        
-        # If taunted, 2/3 chance to get a stat boost
-      if rand(1..3) < 3
-        stats = ["SPEED","SPECIAL_ATTACK"]
-        selected_stat = stats.sample.to_sym
-    
-        if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-          battler.pbCanRaiseStatStage?(selected_stat, battler)
-          #battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
-          battler.pbRaiseStatStage(selected_stat, 1, battler)
-        end
-      end
-      
-        # If taunted, 1/2 chance to increase foes attack, or take 1/16 damage
-       if rand(1..2) == 1
-         if b.pbCanRaiseStatStage?(:ATTACK, b)
-           b.pbRaiseStatStage(:ATTACK, 1, b)
-         end
-       else
-          battle.scene.pbDamageAnimation(b)
-          b.pbReduceHP(b.totalhp / 16, false)
-          battle.pbDisplay(_INTL("{1} clapped their ears in frustration!", b.pbThis))
-          battle.pbHideAbilitySplash(b)
-          b.pbItemHPHealCheck
-       end
-       
-        
-      end
-    end
-
-  }
-)
-
-#################
-## Sleepy
-#################
-Battle::AbilityEffects::EndOfRoundEffect.add(:SLEEPY,
-  proc { |ability, battler, battle|
-    
-  # If already asleep, boost a defensive stat
-  if battler.status == :SLEEP
-    
-    #battle.pbShowAbilitySplash(battler)
-    
-    stats = ["DEFENSE","SPECIAL_DEFENSE"]
-    selected_stat = stats.sample.to_sym
-    
-    if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-      battler.pbCanRaiseStatStage?(selected_stat, battler)
-      battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
-
-    hpGain = [battler.totalhp - battler.hp, battler.totalhp/32].min
-    battler.pbRecoverHP(hpGain)
-      
-      battle.pbDisplay(_INTL("{1}'s nap increased their strength!", battler.pbThis))
-    end
-  end  
-  
-  # 10% chance to fall asleep each turn
-  if rand(1..10) <= 1 && battler.pbCanSleepYawn?
-    battle.pbShowAbilitySplash(battler)
-    battler.pbSleep
-
-    hpGain = battler.totalhp - battler.hp
-    battler.pbRecoverHP(hpGain)
-    battle.pbDisplay(_INTL("{1} dozed off and regained health!", battler.pbThis))
-    battle.pbHideAbilitySplash(battler)
-  end
-  
-  }
-)
-
-##################
-## CATCHPHRASE - FoodBaby
-#################
-Battle::AbilityEffects::EndOfRoundEffect.add(:CATCHPHRASE,
-  proc { |ability, battler, battle|
-  
-  if not battler.asleep? and not battler.frozen?
-  
-  if battler.status != :NONE and rand(1..2) == 2
-    # user status
-         # Shed Skin
-    # next if battler.status == :NONE
-    #next unless battle.pbRandom(100) < 30
-    battle.pbShowAbilitySplash(battler)
-      battle.pbDisplay(_INTL("{1}: I am never sick!!", battler.pbThis))
-      oldStatus = battler.status
-      battler.pbCureStatus(Battle::Scene::USE_ABILITY_SPLASH)
-      if !Battle::Scene::USE_ABILITY_SPLASH
-        case oldStatus
-        #when :SLEEP
-        #  battle.pbDisplay(_INTL("{1}'s {2} woke it up!", battler.pbThis, battler.abilityName))
-        when :POISON
-          battle.pbDisplay(_INTL("{1}'s {2} cured its poison!", battler.pbThis, battler.abilityName))
-        when :BURN
-          battle.pbDisplay(_INTL("{1}'s {2} healed its burn!", battler.pbThis, battler.abilityName))
-        when :PARALYSIS
-          battle.pbDisplay(_INTL("{1}'s {2} cured its paralysis!", battler.pbThis, battler.abilityName))
-        #when :FROZEN
-        #  battle.pbDisplay(_INTL("{1}'s {2} defrosted it!", battler.pbThis, battler.abilityName))
-      end
-    battle.pbHideAbilitySplash(battler)
-  end
-  
-  elsif rand(1..3) == 3
-  #  if rand(1..10) >= 1
-    
-  phrase_ids = [1,2,3,4,5,6]
-  # Select random number from array
-  p_sel = phrase_ids.sample
-  #p_sel = 5
-  
-  if p_sel <= 1
-	battle.allOtherSideBattlers(battler.index).each do |b|
-      next if !b.near?(battler)
-	  
-      case p_sel
-        when 1
-          ## Confuse
-          battle.pbShowAbilitySplash(battler)
-          phrases = ['Interesting theory','Oh - my - god!']
-          battle.pbDisplay(_INTL("{1}: {2}", battler.pbThis, phrases.sample))
-          b.pbConfuse(b) if b.pbCanConfuse?(b.pbThis, false, nil)
-		
-        end
-      end
-  else
-    case p_sel
-		when 2
-      
-      stats = ["ATTACK","SPECIAL_ATTACK"]
-      selected_stat = stats.sample.to_sym
-      battle.pbShowAbilitySplash(battler)
-      battle.pbDisplay(_INTL("{1}: How good!", battler.pbThis))
-              
-      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-        battler.pbCanRaiseStatStage?(selected_stat, battler)
-        battler.pbRaiseStatStage(selected_stat, 1, battler)
-      end
-    
-    when 3
-      stats = ["DEFENSE","SPECIAL_DEFENSE"]
-      selected_stat = stats.sample.to_sym
-      battle.pbShowAbilitySplash(battler)
-      battle.pbDisplay(_INTL("{1}: V good!", battler.pbThis))
-              
-      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-        battler.pbCanRaiseStatStage?(selected_stat, battler)
-        #battler.pbRaiseStatStageByAbility(:ATTACK, 1, battler)
-        battler.pbRaiseStatStage(selected_stat, 1, battler)
-      end
-      
-    when 4
-      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-        battler.pbCanRaiseStatStage?(:EVASION, battler)
-        battle.pbShowAbilitySplash(battler)
-        #battler.pbRaiseStatStageByAbility(:ATTACK, 1, battler)
-        battle.pbDisplay(_INTL("{1}: Check out my kpop moves.", battler.pbThis))
-        battler.pbRaiseStatStage(:EVASION, 1, battler)
-      end
-    when 5
-      battle.pbDisplay(_INTL("{1}: Wowwwww.", battler.pbThis))
-      if battler.effects[PBEffects::FocusEnergy] <= 2
-        battle.pbShowAbilitySplash(battler)
-        battle.pbCommonAnimation("StatUp", battler)
-        battler.effects[PBEffects::FocusEnergy] += 1
-        battle.pbDisplay(_INTL("{1} raised their chance for critical hits.", battler.pbThis))
-      end
-      
-    when 6
-      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-        battler.pbCanRaiseStatStage?(:ACCURACY, battler)
-        battle.pbShowAbilitySplash(battler)
-        battle.pbDisplay(_INTL("{1}: Hmmmmmmmmm....", battler.pbThis))
-        battler.pbRaiseStatStage(:ACCURACY, 1, battler)
-      end
-    end
-  end
-
-  battle.pbHideAbilitySplash(battler)
-  end
-  battle.pbHideAbilitySplash(battler)
-end
-	}
-)
-#################
-## High ALERT
-#################
-Battle::AbilityEffects::ChangeOnBattlerFainting.add(:HIGHALERT,
-proc { |ability, battler, fainted, battle|
-    
-#Battle::AbilityEffects::OnSwitchIn.add(:HIGHALERT,
-#  proc { |ability, battler, battle, switch_in|
-    #battle.pbShowAbilitySplash(battler)
-    stats = ["ATTACK","SPECIAL_ATTACK"]
-    selected_stat = stats.sample.to_sym
-    
-    if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
-      battler.pbCanRaiseStatStage?(selected_stat, battler)
-      battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
-
-      battle.pbDisplay(_INTL("{1} is alert to the continued danger...", battler.pbThis))
-      #battle.pbHideAbilitySplash(battler)
-    end
-  }
-)
-
 #===============================================================================
 # EndOfRoundHealing handlers
 #===============================================================================
@@ -2902,6 +2568,263 @@ Battle::AbilityEffects::EndOfRoundEffect.add(:SPEEDBOOST,
   }
 )
 
+
+#################
+## Sleepy
+#################
+Battle::AbilityEffects::EndOfRoundEffect.add(:SLEEPY,
+  proc { |ability, battler, battle|
+    
+  # If already asleep, boost a defensive stat
+  if battler.status == :SLEEP
+    
+    #battle.pbShowAbilitySplash(battler)
+    
+    stats = ["DEFENSE","SPECIAL_DEFENSE"]
+    selected_stat = stats.sample.to_sym
+    
+    if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+      battler.pbCanRaiseStatStage?(selected_stat, battler)
+      battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
+
+    hpGain = [battler.totalhp - battler.hp, battler.totalhp/32].min
+    battler.pbRecoverHP(hpGain)
+      
+      battle.pbDisplay(_INTL("{1}'s nap increased their strength!", battler.pbThis))
+    end
+  end  
+  
+  # 10% chance to fall asleep each turn
+  if rand(1..10) <= 1 && battler.pbCanSleepYawn?
+    battle.pbShowAbilitySplash(battler)
+    battler.pbSleep
+
+    hpGain = battler.totalhp - battler.hp
+    battler.pbRecoverHP(hpGain)
+    battle.pbDisplay(_INTL("{1} dozed off and regained health!", battler.pbThis))
+    battle.pbHideAbilitySplash(battler)
+  end
+  
+  }
+)
+##################
+## CATCHPHRASE - FoodBaby
+#################
+Battle::AbilityEffects::EndOfRoundEffect.add(:CATCHPHRASE,
+  proc { |ability, battler, battle|
+  
+  if not battler.asleep? and not battler.frozen?
+  
+  if battler.status != :NONE and rand(1..3) == 3
+    # user status
+         # Shed Skin
+    # next if battler.status == :NONE
+    #next unless battle.pbRandom(100) < 30
+    battle.pbShowAbilitySplash(battler)
+      battle.pbDisplay(_INTL("{1}: I am never sick!!", battler.pbThis))
+      oldStatus = battler.status
+      battler.pbCureStatus(Battle::Scene::USE_ABILITY_SPLASH)
+      if !Battle::Scene::USE_ABILITY_SPLASH
+        case oldStatus
+        #when :SLEEP
+        #  battle.pbDisplay(_INTL("{1}'s {2} woke it up!", battler.pbThis, battler.abilityName))
+        when :POISON
+          battle.pbDisplay(_INTL("{1}'s {2} cured its poison!", battler.pbThis, battler.abilityName))
+        when :BURN
+          battle.pbDisplay(_INTL("{1}'s {2} healed its burn!", battler.pbThis, battler.abilityName))
+        when :PARALYSIS
+          battle.pbDisplay(_INTL("{1}'s {2} cured its paralysis!", battler.pbThis, battler.abilityName))
+        #when :FROZEN
+        #  battle.pbDisplay(_INTL("{1}'s {2} defrosted it!", battler.pbThis, battler.abilityName))
+      end
+    battle.pbHideAbilitySplash(battler)
+  end
+  
+  elsif rand(1..3) == 3
+  #  if rand(1..10) >= 1
+    
+  phrase_ids = [1,2,3,4,5,6]
+  # Select random number from array
+  p_sel = phrase_ids.sample
+  #p_sel = 5
+  
+  if p_sel <= 1
+	battle.allOtherSideBattlers(battler.index).each do |b|
+      next if !b.near?(battler)
+	  
+      case p_sel
+        when 1
+          ## Confuse
+          battle.pbShowAbilitySplash(battler)
+          phrases = ['Interesting theory','Oh - my - god!']
+          battle.pbDisplay(_INTL("{1}: {2}", battler.pbThis, phrases.sample))
+          b.pbConfuse(b) if b.pbCanConfuse?(b.pbThis, false, nil)
+		
+        end
+      end
+  else
+    case p_sel
+		when 2
+      
+      stats = ["ATTACK","SPECIAL_ATTACK"]
+      selected_stat = stats.sample.to_sym
+      battle.pbShowAbilitySplash(battler)
+      battle.pbDisplay(_INTL("{1}: How good!", battler.pbThis))
+              
+      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+        battler.pbCanRaiseStatStage?(selected_stat, battler)
+        battler.pbRaiseStatStage(selected_stat, 1, battler)
+      end
+    
+    when 3
+      stats = ["DEFENSE","SPECIAL_DEFENSE"]
+      selected_stat = stats.sample.to_sym
+      battle.pbShowAbilitySplash(battler)
+      battle.pbDisplay(_INTL("{1}: V good!", battler.pbThis))
+              
+      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+        battler.pbCanRaiseStatStage?(selected_stat, battler)
+        #battler.pbRaiseStatStageByAbility(:ATTACK, 1, battler)
+        battler.pbRaiseStatStage(selected_stat, 1, battler)
+      end
+      
+    when 4
+      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+        battler.pbCanRaiseStatStage?(:EVASION, battler)
+        battle.pbShowAbilitySplash(battler)
+        #battler.pbRaiseStatStageByAbility(:ATTACK, 1, battler)
+        battle.pbDisplay(_INTL("{1}: Check out my kpop moves.", battler.pbThis))
+        battler.pbRaiseStatStage(:EVASION, 1, battler)
+      end
+    when 5
+      battle.pbDisplay(_INTL("{1}: Wowwwww.", battler.pbThis))
+      if battler.effects[PBEffects::FocusEnergy] <= 2
+        battle.pbShowAbilitySplash(battler)
+        battle.pbCommonAnimation("StatUp", battler)
+        battler.effects[PBEffects::FocusEnergy] += 1
+        battle.pbDisplay(_INTL("{1} raised their chance for critical hits.", battler.pbThis))
+      end
+      
+    when 6
+      if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+        battler.pbCanRaiseStatStage?(:ACCURACY, battler)
+        battle.pbShowAbilitySplash(battler)
+        battle.pbDisplay(_INTL("{1}: Hmmmmmmmmm....", battler.pbThis))
+        battler.pbRaiseStatStage(:ACCURACY, 1, battler)
+      end
+    end
+  end
+
+  battle.pbHideAbilitySplash(battler)
+  end
+  battle.pbHideAbilitySplash(battler)
+end
+	}
+)
+
+Battle::AbilityEffects::EndOfRoundEffect.add(:MYCELIUMCURSE,
+  proc { |ability, battler, battle|
+    # A Pokémon's turnCount is 0 if it became active after the beginning of a
+    # round
+
+    stats = ["ATTACK","SPECIAL_ATTACK"]
+    selected_stat = stats.sample.to_sym
+    
+    if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+       battler.pbCanRaiseStatStage?(selected_stat, battler)
+      battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
+    end
+    
+    battle.scene.pbDamageAnimation(battler)
+    battler.pbReduceHP(battler.totalhp / 6, false)
+    battle.pbDisplay(_INTL("{1} is plagued by Mycelium Curse!", battler.pbThis))
+    battle.pbHideAbilitySplash(battler)
+    battler.pbItemHPHealCheck
+    
+  }
+)
+##################
+## Guilt - Crybaby
+#################
+Battle::AbilityEffects::EndOfRoundEffect.add(:CRYBABY,
+  proc { |ability, battler, battle|
+    battle.allOtherSideBattlers(battler.index).each do |b|
+      next if !b.near?(battler)
+     # 30% chance to lower opponents attacking stats
+      if rand(1..10) <= 3
+        battle.pbShowAbilitySplash(battler)
+        
+        if Battle::Scene::USE_ABILITY_SPLASH
+          battle.pbDisplay(_INTL("{1} is guilted by {2}'s crying!", b.pbThis, battler.pbThis(true)))
+        else
+          battle.pbDisplay(_INTL("{1} is guilted by {2}'s crying!",
+          b.pbThis, battler.pbThis(true)))
+        end
+           
+          if b.pbCanLowerStatStage?(:ATTACK, b)
+           b.pbLowerStatStage(:ATTACK, 1, b)
+         end
+          if b.pbCanLowerStatStage?(:SPECIAL_ATTACK, b)
+           b.pbLowerStatStage(:SPECIAL_ATTACK, 1, b)
+         end
+        battle.pbHideAbilitySplash(battler)
+      end
+	end
+  }
+)
+
+##################
+## Constant Barking
+#################
+Battle::AbilityEffects::EndOfRoundEffect.add(:CONSTANTBARKING,
+  proc { |ability, battler, battle|
+    battle.allOtherSideBattlers(battler.index).each do |b|
+      next if !b.near?(battler)
+     # 33% chance to taunt
+      if rand(1..3) == 3 and not battler.asleep? and not battler.frozen?
+        battle.pbShowAbilitySplash(battler)
+        #b.pbTakeEffectDamage(b.totalhp / 8) do |hp_lost|
+        b.effects[PBEffects::Taunt] = 4
+        
+        if Battle::Scene::USE_ABILITY_SPLASH
+          battle.pbDisplay(_INTL("{1} is tormented by {2}'s {3}!", b.pbThis, battler.pbThis(true), battler.abilityName))
+        else
+          battle.pbDisplay(_INTL("{1} is tormented by {2}'s {3}!",
+             b.pbThis, battler.pbThis(true), battler.abilityName))
+        end
+        battle.pbHideAbilitySplash(battler)
+        
+        # If taunted, 2/3 chance to get a stat boost
+      if rand(1..3) < 3
+        stats = ["SPEED","SPECIAL_ATTACK"]
+        selected_stat = stats.sample.to_sym
+    
+        if battler.turnCount > 0 && battle.choices[battler.index][0] != :Run &&
+          battler.pbCanRaiseStatStage?(selected_stat, battler)
+          #battler.pbRaiseStatStageByAbility(selected_stat, 1, battler)
+          battler.pbRaiseStatStage(selected_stat, 1, battler)
+        end
+      end
+      
+        # If taunted, 1/2 chance to increase foes attack, or take 1/16 damage
+       if rand(1..2) == 1
+         if b.pbCanRaiseStatStage?(:ATTACK, b)
+           b.pbRaiseStatStage(:ATTACK, 1, b)
+         end
+       else
+          battle.scene.pbDamageAnimation(b)
+          b.pbReduceHP(b.totalhp / 16, false)
+          battle.pbDisplay(_INTL("{1} clapped their ears in frustration!", b.pbThis))
+          battle.pbHideAbilitySplash(b)
+          b.pbItemHPHealCheck
+       end
+       
+        
+      end
+    end
+
+  }
+)
 #===============================================================================
 # EndOfRoundGainItem handlers
 #===============================================================================

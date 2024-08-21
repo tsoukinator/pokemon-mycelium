@@ -8720,7 +8720,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = PoisonParalyzeOrSleepTarget
-Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate
+Flags = Contact,CanProtect,CanMirrorMove
 EffectChance = 50
 Description = The user may critically hit with its ruinous claws. May also leave the target poisoned, paralyzed, or asleep.
 #-------------------------------
@@ -8835,7 +8835,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = LowerTargetAttack1
 Flags = CanProtect,CanMirrorMove
-EffectChance = 30
+EffectChance = 100
 Description = The user attacks the target with spine-chilling resentment. This also lowers the target’s Attack stat.
 #-------------------------------
 [TRIPLEARROWS]
@@ -8847,7 +8847,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = LowerTargetDefense1FlinchTarget
-Flags = CanProtect,CanMirrorMove,HighCriticalHitRate,Kicking
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
 EffectChance = 100
 Description = The user fires arrows which may lower the target’s Defense or make it flinch. Critical hits land more easily.
 #-------------------------------
@@ -8859,7 +8859,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = LowerTargetSpeed1
+FunctionCode = LowerTargetSpeed1AlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 30
 Description = The user attacks with cold winds that cause opposing Pokémon to tremble. This may lower their Speed stats.
@@ -8872,7 +8872,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = ParalyzeTarget
+FunctionCode = ParalyzeTargetAlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user attacks opposing Pokémon with a thunderous tempest. This may also leave them paralyzed.
@@ -8885,7 +8885,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = BurnTarget
+FunctionCode = BurnTargetAlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user wraps fierce winds and hot sand around opponents. This may leave them with a burn.
@@ -9054,7 +9054,7 @@ Accuracy = 90
 TotalPP = 10
 Target = NearOther
 FunctionCode = CrashDamageIfFailsConfuseTarget
-Flags = Contact,CanProtect,CanMirrorMove,Kicking
+Flags = Contact,CanProtect,CanMirrorMove
 EffectChance = 30
 Description = Performs a downward kick which may confuse the target. The user takes damage if it misses.
 #-------------------------------
@@ -9103,7 +9103,7 @@ Category = Status
 Accuracy = 0
 TotalPP = 10
 Target = BothSides
-FunctionCode = StartHailWeatherSwitchOutUser
+FunctionCode = SwitchOutUserStartHailWeather
 Flags = CannotMetronome
 Description = The user tells a chillingly bad joke and switches out. This summons a snowstorm lasting five turns.
 #-------------------------------
@@ -9186,7 +9186,7 @@ Category = Status
 Accuracy = 0
 TotalPP = 10
 Target = NearOther
-FunctionCode = RaiseUserAtk2SpAtk2Speed2LoseHalfOfTotalHP
+FunctionCode = RaiseUserAtkSpAtkSpeed2LoseHalfOfTotalHP
 Flags = CannotMetronome
 Description = The user sharply boosts its Attack, Sp. Atk, and Speed stats by using its own HP.
 #-------------------------------
@@ -9512,7 +9512,7 @@ Type = NORMAL
 Category = Status
 Accuracy = 0
 TotalPP = 10
-Target = NearOther
+Target = User
 FunctionCode = RaiseUserAtkSpd1RemoveHazardsSubstitutes
 Flags = CannotMetronome
 EffectChance = 100
@@ -9603,7 +9603,6 @@ TotalPP = 15
 Target = NearOther
 FunctionCode = IncreasePowerInElectricTerrain
 Flags = Contact,CanProtect,CanMirrorMove,Slicing
-EffectChance = 10
 Description = The user rends the target with an ethereal blade whose power is boosted on Electric Terrain.
 #-------------------------------
 [BLOODMOON]
@@ -9758,7 +9757,7 @@ Name = Dragon Cheer
 Type = DRAGON
 Category = Status
 Accuracy = 0
-TotalPP = 10
+TotalPP = 15
 Target = AllAllies
 FunctionCode = RaiseAlliesCriticalHitRate1DragonTypes2
 Description = The user raises its allies’ critical hit ratio with a draconic cry. This rouses Dragon types more.
@@ -9983,7 +9982,7 @@ Priority = 0
 Target = NearOther
 FunctionCode = RecoilQuarterOfDamageDealt
 Flags = CanProtect,CanMirrorMove
-Description = The user goes on a rough hike through nature.
+Description = The user takes the opponent on a rough hike through nature.
 #-------------------------------
 [MARATHON]
 Name = Marathon
@@ -10046,10 +10045,11 @@ Power = 80
 Accuracy = 100
 TotalPP = 10
 Priority = 0
+EffectChance = 20
 Target = NearOther
-FunctionCode = None
+FunctionCode = SleepTarget
 Flags = CanProtect,CanMirrorMove
-Description = Educate the world on your learnings.
+Description = Educates the world on your learnings. Small chance to put the opponent to sleep.
 #-------------------------------
 [DANCEPRACTICE]
 Name = Dance Practice
@@ -11115,21 +11115,20 @@ EffectChance = 15
 Target = NearOther
 FunctionCode = HitThreeTimesParalyzeTarget
 Flags = CanProtect,CanMirrorMove,HighCriticalHitRate,Bomb
-Description = User blasts foe with a pixelated design energy beam. High critical hit rate.
+Description = User blasts foe with a pixelated design energy beam. High critical hit rate. Hits three times.
 #-------------------------------
 [AWKWARDSTARE]
 Name = Awkward Stare
 Type = PSYCHIC
 Category = Special
 Power = 20
-Accuracy = 100
 TotalPP = 15
 Priority = 0
 EffectChance = 50
 Target = NearOther
 FunctionCode = ConfuseTarget
 Flags = CanProtect,CanMirrorMove
-Description = User gives an awkward stare to their target, which may cause confusion.
+Description = User gives an inescapable awkward stare, which may cause confusion. This never misses.
 #-------------------------------
 [HIPSWING]
 Name = Hip Swing
@@ -11167,7 +11166,7 @@ EffectChance = 30
 Target = NearOther
 FunctionCode = ParalyzeTarget
 Flags = CanProtect,CanMirrorMove
-Description = User distracts foe with a wardrobe malfunction, then strikes immediately before the foe can react.
+Description = Distracts foe with a wardrobe malfunction, striking immediately before the foe can react.
 #-------------------------------
 [DAZZLINGWINK]
 Name = Dazzling Wink
@@ -11176,9 +11175,10 @@ Category = Special
 Power = 50
 TotalPP = 15
 Priority = 0
+Target = NearOther
 FunctionCode = ConfuseTarget
 Flags = CanProtect,CanMirrorMove
-Description = User stuns the target with an alluring wink. May cause confusion or infuatuation.
+Description = User stuns the target with an alluring wink. May cause confusion or infatuation.
 #-------------------------------
 [POWERPOSE]
 Name = Power Pose
@@ -11237,9 +11237,11 @@ Power = 150
 Accuracy = 90
 TotalPP = 10
 Priority = 0
+EffectChance = 20
 Target = NearOther
+FunctionCode = FlinchTarget
 Flags = CanProtect,CanMirrorMove
-Description = Summons a pineapple after thin air, and drop kicks it at the opponent.
+Description = Summons a pineapple after thin air, and drop kicks it at the opponent. May flinch the target.
 #-------------------------------
 [THEHATTRICK]
 Name = The Hattrick
@@ -11250,9 +11252,9 @@ Accuracy = 100
 TotalPP = 15
 Priority = 0
 Target = NearOther
-FunctionCode = MultiTurnAttackPreventSleeping
+FunctionCode = MultiTurnAttackIncreasingPower
 Flags = CanProtect,CanMirrorMove
-Description = User takes the foe out on a series of memorable experiences, over three turns.
+Description = Takes the foe out on memorable experiences over three turns, each one better than the last.
 #-------------------------------
 [ALLSMILES]
 Name = All Smiles
@@ -11287,3 +11289,191 @@ Target = UserAndAllies
 FunctionCode = HealUserAndAlliesQuarterOfTotalHP
 Flags = CanProtect,CanMirrorMove
 Description = Discovers a loophole in saving money, and restores a quarter HP of itself and allies in battle.
+#-------------------------------
+[JAWBREAK]
+Name = Jaw Break
+Type = FIGHTING
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 75
+Target = NearOther
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user throws a jawbreaking punch at the opponent. High likelihood to paralyze.
+#-------------------------------
+[THEFISH]
+Name = The Fish
+Type = NORMAL
+Category = Physical
+Power = 120
+Accuracy = 100
+TotalPP = 10
+Priority = 0
+Target = RandomNearFoe
+FunctionCode = MultiTurnAttackConfuseUserAtEnd
+Flags = CanProtect,CanMirrorMove
+Description = Flops around vigorously for 2-3 turns, striking all in it's path, then becomes confused.
+#-------------------------------
+[COASTERCRASH]
+Name = Coaster Crash
+Type = WATER
+Category = Physical
+Power = 140
+Accuracy = 95
+TotalPP = 5
+Priority = 0
+Target = NearOther
+FunctionCode = AttackAndSkipNextTurn
+Flags = CanProtect,CanMirrorMove
+Description = User takes the opponent out on a wild coaster ride. Cannot move next turn.
+#-------------------------------
+[GLOWINGROUTINE]
+Name = Glowing Routine
+Type = FAIRY
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = GlowingRoutine
+Flags = CanProtect,CanMirrorMove
+Description = Applies a skincare routine, boosting Special Defense, and providing status immunity for 3 turns.
+#-------------------------------
+[LASEREYES]
+Name = Laser Eyes
+Type = FIRE
+Category = Special
+Power = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = LowerTargetAttack2
+Flags = CanProtect,CanMirrorMove
+Description = Stares intensly into the foe's soul, targetting their insecurities. Sharply lowers foe attack.
+#-------------------------------
+[WAIFUCHARM]
+Name = Waifu Charm
+Type = FAIRY
+Category = Status
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 40
+Target = NearOther
+FunctionCode = WaifuCharm
+Flags = CanProtect,CanMirrorMove
+Description = Uses his waifu charm to lowers opponent atk/spatk by one stage. May cause attraction
+#-------------------------------
+[LEDGLOWUP]
+Name = LED Glowup
+Type = ELECTRIC
+Category = Special
+Power = 20
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = RaiseUserSpeed1
+Flags = CanProtect,CanMirrorMove
+Description = Impresses the foe with his latest LED Glowup. Also increases speed.
+#-------------------------------
+[RHYTHMSTEP]
+Name = Rhythm Step
+Type = ELECTRIC
+Category = Physical
+Power = 25
+Accuracy = 100
+TotalPP = 35
+Priority = 0
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove
+Description = Hits opponent with a flurry of well executed moves.
+#-------------------------------
+[MACHINESPIRIT]
+Name = Machine Spirit
+Type = STEEL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpDef1
+Flags = CanProtect,CanMirrorMove
+Description = Channels the power of the machine spirit, raising both defense and special defense.
+#-------------------------------
+[ALLERGYSHIELD]
+Name = Allergy Shield
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = GlowingRoutine
+Flags = CanProtect,CanMirrorMove
+Description = Protects against status moves for 3 turns. Offsets recoil of peanut based moves.
+#-------------------------------
+[PEANUTCRASH]
+Name = Peanut Crash
+Type = GRASS
+Category = Physical
+Power = 90
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 33
+Target = NearOther
+FunctionCode = PeanutCrash
+Flags = CanProtect,CanMirrorMove
+Description = Barrages opponent with salted peanuts. Receives half damage recoil. May confuse opponent.
+#-------------------------------
+[DANCEREVOLUTION]
+Name = Dance Revolution
+Type = ELECTRIC
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = MultiTurnAttackIncreasingPower
+Flags = CanProtect,CanMirrorMove
+Description = Three turn attack. Increases in power each turn.
+#-------------------------------
+[CHARLESTON]
+Name = Charleston
+Type = ELECTRIC
+Category = Status
+TotalPP = 20
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpeed2
+Flags = CanProtect,CanMirrorMove
+Description = User breaks out the Charleston dance. Sharply raising their speed.
+#-------------------------------
+[FINALREHEARSAL]
+Name = Final Rehearsal
+Type = FAIRY
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = FinalRehearsal
+Flags = CanProtect,CanMirrorMove
+Description = Boosts attack and speed. Doubles if used on the first turn the user is in battle.
+#-------------------------------
+[CURTAINCALL]
+Name = Curtain Call
+Type = NORMAL
+Category = Physical
+Power = 70
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = SwitchOutUserDamagingMove
+Flags = CanProtect,CanMirrorMove
+Description = Bows out of their performance, and returns to the trainer.

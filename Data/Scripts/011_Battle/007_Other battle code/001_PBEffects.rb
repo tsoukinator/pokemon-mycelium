@@ -120,7 +120,9 @@ module PBEffects
   WeightChange        = 115
   Yawn                = 116
   Endurance           = 117
-
+  GeminiPartyStarter  = 118
+  GlowingRoutine      = 119
+  
   #=============================================================================
   # These effects apply to a battler position
   #=============================================================================

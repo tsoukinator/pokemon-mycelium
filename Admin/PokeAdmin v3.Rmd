@@ -5,13 +5,16 @@ output: html_notebook
 
 ```{r}
 rm(list=ls()) # Clear workspace
-
+library(data.table)
 library(readxl)
 library(dplyr)
 library(readr)
 library(rlist)
 library(tidyr)
 
+############################################################################
+############################# MOVE LIST ####################################
+############################################################################
 # OG Movelist (combine with new moves)
 movelist_txt <- read_delim("./Original Backup Text Files/moves.txt", delim = "\n", trim_ws = TRUE, col_names = FALSE)
 
@@ -63,8 +66,11 @@ combined_moves <- rbind(movelist_txt,data.frame(X1=value_list))
 # Write out updated moves to PBS directory
 lapply(combined_moves, write, "../PBS/moves.txt", append=FALSE, ncolumns=1)
 
-##################################################################################
-########## output pokemon ########################################################
+
+############################################################################
+############################# POKEMON LIST ################################
+############################################################################
+
 # Read moves from xls
 pkmnstats_xls <- readxl::read_excel("PokeDB.xlsx", sheet = "PkmnStats")
 # Remove anything without a HP value
@@ -108,7 +114,9 @@ for (i in 1:nrow(og_pkmn_split)) {
 # Assign ID order to existing Pokemon List
 setDT(og_pkmn_split)[, id := .GRP, by = Name]
 
-global_innate_abilities <- 'OWNTEMPO,LIMBER'
+global_innate_abilities <- 'ARIESBATTLECHARGE,TAURUSHARDYBULL,GEMINIPARTYSTARTER,CANCERPROTECTIVESHELL,LEOPRIDEFULROAR,VIRGOPUREFOCUS,LIBRAHARMONYGUARD,SCORPIOVENOMSTARE,SAGITTARIUSSHARPEYE,CAPRICORNENDURINGWILL,AQUARIUSINNOVATIVESPARK,PISCESMYSTICVEIL'
+#global_innate_abilities <- 'AQUARIUSINNOVATIVESPARK'
+#'OWNTEMPO,LIMBER'
 
 ## Add hardcoded list of innates for all regular pokemon
 og_pkmn_split <- rbind(setDT(og_pkmn_split), og_pkmn_split[, tail(.SD, 1) , by = id
@@ -125,7 +133,7 @@ new_pkmn_stats <- filter(pkmnstats_xls, is.na(`Pokedex Number`))
 new_pkmn_stats$BaseStats <- paste(new_pkmn_stats$HP,new_pkmn_stats$Attack,new_pkmn_stats$Defence,new_pkmn_stats$Speed,new_pkmn_stats$`Special Attack`,new_pkmn_stats$`Special Defence`,sep=',')
 
 ## Keep columns
-keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Innates','Pokedex','Category','Evolutions','WildItemCommon','WildItemUncommon','Moves','GenderRatio','GrowthRate','BaseExp','EVs','CatchRate','Happiness','FormName','Height','Weight','EggGroups','HatchSteps')
+keep_cols <- c('Name','BaseStats','Types','Abilities','HiddenAbilities','Pokedex','Category','Evolutions','WildItemCommon','WildItemUncommon','Moves','GenderRatio','GrowthRate','BaseExp','EVs','CatchRate','Happiness','FormName','Height','Weight','EggGroups','HatchSteps')
 #drop_cols <- c("HP","Attack","Defence","Special Attack","Special Defence","Speed","Base Stat Total")
 
 pkmn_data = subset(new_pkmn_stats, select = keep_cols)
@@ -210,8 +218,9 @@ final_output <- rbind(data.frame(Output = pkmn_combine_drop_NONE$Output), data.f
 lapply(as.data.frame(final_output$Output), write, "../PBS/pokemon.txt", append=FALSE, ncolumns=1)
 
 
-#####################################
-########### POKEMON FORMS ###########
+############################################################################
+############################# POKEMON FORMS ################################
+############################################################################
 
 og_pokemon_forms <- read_delim("./Original Backup Text Files/pokemon_forms.txt", delim = "\n", trim_ws = TRUE, col_names = FALSE)
 
@@ -260,12 +269,73 @@ for (i in 1:nrow(pkmnforms_xls)) {
 
 #new_form_rows$Output
 
-########################################################
 ########## APPEND TO ORIGINAL FORMS LIST, AND OUTPUT TO DIRECTORY
 form_output <- rbind(data.frame(Output = og_pokemon_forms$X1), data.frame(Output = new_form_rows$Output))
 
 # Write out updated pokemon to PBS directory
 lapply(as.data.frame(form_output$Output), write, "../PBS/pokemon_forms.txt", append=FALSE, ncolumns=1)
+
+
+#########################################################################
+############################# INNATE SETS ###############################
+#########################################################################
+
+# Star sign list - can add multiple abilities within this set to provide more than 1 ability per set
+star_sign_list <-  c('ARIESBATTLECHARGE','TAURUSHARDYBULL','GEMINIPARTYSTARTER','CANCERPROTECTIVESHELL','LEOPRIDEFULROAR','VIRGOPUREFOCUS','LIBRAHARMONYGUARD','SCORPIOVENOMSTARE','SAGITTARIUSSHARPEYE','CAPRICORNENDURINGWILL','AQUARIUSINNOVATIVESPARK','PISCESMYSTICVEIL')
+
+#star_sign_list <-  c('LIMBER,OWNTEMPO','INTIMIDATE,VOLTABSORB')
+
+
+dog_innate_list <- c('ARIESBATTLECHARGE,PICKUP,DOGARMY','TAURUSHARDYBULL,PICKUP,DOGARMY','GEMINIPARTYSTARTER,,PICKUP,DOGARMY','CANCERPROTECTIVESHELL,PICKUP,DOGARMY','LEOPRIDEFULROAR,PICKUP,DOGARMY','VIRGOPUREFOCUS,PICKUP,DOGARMY','LIBRAHARMONYGUARD,PICKUP,DOGARMY','SCORPIOVENOMSTARE,PICKUP,DOGARMY','SAGITTARIUSSHARPEYE,PICKUP,DOGARMY','CAPRICORNENDURINGWILL,PICKUP,DOGARMY','AQUARIUSINNOVATIVESPARK,PICKUP,DOGARMY','PISCESMYSTICVEIL,PICKUP,DOGARMY')
+
+# Combine Pokemon and Form together into single dataframe
+poke_list <- filter(final_output, substr(Output,0,1) == "[")
+# Get form names, replace comma in form name with underscore
+form_list <- filter(form_output, substr(Output,0,1) == "[")
+form_list$Output <- gsub(",","_",form_list$Output)
+all_pkmn_list <- rbind(poke_list, form_list)
+
+
+# Create table of Pokemon with innates already assigned from XLS
+#pkmn_with_innates = filter(pkmnstats_xls, !is.na(Innates))
+pkmn_with_innates = filter(bind_rows(pkmnstats_xls,pkmnforms_xls), !is.na(Innates))
+pkmn_with_innates$NAME_UPPER <- paste0("[",toupper(pkmn_with_innates$Name),"]")
+
+###########
+# Create new innate frame
+innate_frame <- data.frame(Output = "#----------------------------------------")
+
+## Loop through all pokemon and assign innates
+for (i in 1:nrow(all_pkmn_list)) {
+    ## Add Pokemon Name to List
+    innate_frame[nrow(innate_frame) + 1,] = c(all_pkmn_list$Output[i])
+    
+    ## Filter for any existing innates
+    existing_innates <- filter(pkmn_with_innates, NAME_UPPER == all_pkmn_list$Output[i])
+    
+    # Add assigned innates from XLS (one set)
+    if (nrow(existing_innates) == 1) {
+      #print("HasInnate")
+      innate_frame[nrow(innate_frame) + 1,] = c(paste0("Innates = ",existing_innates$Innates))
+    }  
+    # If Pokemon has no innates - generate the 16-set starsign set
+    else if (nrow(existing_innates) == 0) {
+      #print("NoInnate")
+      for (j in 1:length(star_sign_list)) {
+        if (all_pkmn_list$Output[i] %in% c("[EDGARMON]","[EDGARNATOR]","[RAGNARMON]","[RAGNARNATOR]","[ELSAMON]","[ELSANATOR]") ) {
+          innate_frame[nrow(innate_frame) + 1,] = c(paste0("Innates",j," = ",dog_innate_list[j]))
+        } else {
+          innate_frame[nrow(innate_frame) + 1,] = c(paste0("Innates",j," = ",star_sign_list[j]))
+        }
+      }
+    }
+    
+    ## End with line divide before next pkmn
+    innate_frame[nrow(innate_frame) + 1,] = c("#----------------------------------------")
+  }
+
+## Output Innate Frame
+lapply(as.data.frame(innate_frame$Output), write, "../PBS/innate_sets.txt", append=FALSE, ncolumns=1)
 
 rm(list=ls())
 ```

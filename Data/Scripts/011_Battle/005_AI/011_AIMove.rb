@@ -180,7 +180,7 @@ class Battle::AI::AIMove
       end
       if target.ability_active?
         case target.ability_id
-        when :FILTER, :SOLIDROCK
+        when :FILTER, :SOLIDROCK, :CANCERPROTECTIVESHELL
           if Effectiveness.super_effective_type?(calc_type, *target.pbTypes(true))
             multipliers[:final_damage_multiplier] *= 0.75
           end

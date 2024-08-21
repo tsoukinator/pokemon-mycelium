@@ -182,6 +182,7 @@ class Battle::Battler
     @effects[PBEffects::Foresight]           = false
     @effects[PBEffects::FuryCutter]          = 0
     @effects[PBEffects::GemConsumed]         = nil
+    @effects[PBEffects::GlowingRoutine]      = 0
     @effects[PBEffects::Grudge]              = false
     @effects[PBEffects::HelpingHand]         = false
     @effects[PBEffects::HyperBeam]           = 0
@@ -229,12 +230,14 @@ class Battle::Battler
       b.effects[PBEffects::Octolock] = -1 if b.effects[PBEffects::Octolock] == @index
     end
     @effects[PBEffects::Outrage]             = 0
+    @effects[PBEffects::GlowingRoutine]      = 0
     @effects[PBEffects::ParentalBond]        = 0
     @effects[PBEffects::PickupItem]          = nil
     @effects[PBEffects::PickupUse]           = 0
     @effects[PBEffects::Pinch]               = false
     @effects[PBEffects::Powder]              = false
     @effects[PBEffects::Prankster]           = false
+    @effects[PBEffects::GeminiPartyStarter]           = false
     @effects[PBEffects::PriorityAbility]     = false
     @effects[PBEffects::PriorityItem]        = false
     @effects[PBEffects::Protect]             = false

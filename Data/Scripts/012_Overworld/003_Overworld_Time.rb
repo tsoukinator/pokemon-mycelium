@@ -307,3 +307,9 @@ end
 def zodiacComplements(sign)
   return [(sign + 1) % 12, (sign + 11) % 12]
 end
+
+zodiac_signs = [
+  "Aries", "Taurus", "Gemini", "Cancer", 
+  "Leo", "Virgo", "Libra", "Scorpio", 
+  "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+]
