@@ -9,6 +9,7 @@ Data/*
 !Data/Scripts.rxdata
 !Data/Scripts/
 !Data/messages_core.dat
+!Data/Map*
 
 # Files in the main project folder
 errorlog.txt
