@@ -1,0 +1,120 @@
+#----------------------------------------
+[077] # Kilcunda Forest - East
+GoodRod
+    20,GYARADOS,22,30
+Land,21
+    15,CATERPIE,3,5
+    15,WEEDLE,3,5
+    10,BABYFEN,3,5
+    10,JAWLINE,2,4
+    10,KAKUNA,6,8
+    10,NINCADA,3,7
+    10,SPINARAK,3,6
+    5,PIKACHU,3,5
+    1,BEEDRILL,8,10
+OldRod
+    20,MAGIKARP,3,8
+[079] # Kilcunda Forest - West
+GoodRod
+    20,SLOWPOKE,5,8
+Land,21
+    20,LECHONK,2,4
+    20,ZIGZAGOON,2,3
+    15,WURMPLE,3,5
+    10,JAWLINE,1,3
+    10,JIGGLYPUFF,1,3
+    5,BABYFEN,1,3
+    5,NATU,2,4
+    5,TYROGUE,2,3
+OldRod
+    20,SLOWPOKE,3,8
+[080] # Whitehorse City
+GoodRod
+    20,MAGIKARP,5,8
+    5,CHINCHOU,4,8
+Land,21
+    15,DODUO,18,22
+    15,FENOMON,16,20
+    15,VUCKOMON,16,20
+    5,EEVEE,14,16
+OldRod
+    20,MAGIKARP,3,8
+[083] # Renmao Waterfront
+GoodRod
+    20,MAGIKARP,5,12
+    5,CARVANHA,4,8
+    5,CHINCHOU,5,5
+Land,21
+    10,FOODBABY,9,12
+    10,JJ,10,15
+    10,MARILL,8,12
+    10,WINGULL,10,12
+    5,BABYFEN,7,10
+    5,SQUIRTLE,6,8
+    5,TAILLOW,8,10
+OldRod
+    20,MAGIKARP,3,8
+[085] # Sinking Marsh
+GoodRod
+    20,MAGIKARP,5,8
+    5,GOLDEEN,4,8
+Land,21
+    15,WOOPER,9,12
+    10,BROTHER,9,12
+    10,POLIWAG,8,12
+    10,UHRLEX,10,10
+    5,GOOMY,5,8
+    5,LOTAD,8,10
+    5,MUDKIP,8,9
+    5,TOTODILE,6,8
+OldRod
+    20,MAGIKARP,3,8
+    5,BARBOACH,3,5
+[086] # Route 101
+GoodRod
+    20,MAGIKARP,5,8
+    5,GOLDEEN,4,8
+Land,21
+    15,RATTATA,8,12
+    10,BABYVUCKO,5,6
+    10,PSYDUCK,7,10
+    10,XERRI,9,12
+    5,FLABEBE,6,10
+    5,PIDGEY,5,8
+    5,ROSELIA,6,9
+OldRod
+    20,MAGIKARP,3,8
+[090] # Myalo Cave Entrance
+Cave,5
+    20,DIGLETT,10,12
+    20,GEODUDE,10,12
+    10,THESHARK,12,16
+    10,TSOUKINATOR,14,16
+    5,HAWLUCHA,9,12
+    5,MAKUHITA,8,12
+Land,20
+    10,TEDDIURSA,9,12
+    5,BULBASAUR,5,5
+    5,UHRLEX_1,14,20
+    2,CHARMANDER,6,8
+[092] # Myalo Cave B1F
+Cave,5
+    20,PARAS,12,16
+    10,BROTHER,10,12
+    10,FOONGUS,8,12
+    10,GLOOM,12,14
+    5,CHARMANDER,6,10
+    5,DITTO,10,12
+    5,GEODUDE,10,14
+    5,PARASECT,16,20
+    5,RHYHORN,10,14
+    5,SHROOMISH,8,14
+    5,SKORUPI,11,14
+    1,DUGTRIO,14,18
+Land,21
+    20,PARASECT,15,18
+    20,PARAS_6,11,15
+    1,OINKOLOGNE,12,16
+[102] # Myalo Cave B2F
+Land,21
+    20,BULBASAUR,16,16

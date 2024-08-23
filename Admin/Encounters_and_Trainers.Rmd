@@ -1,0 +1,73 @@
+---
+title: "Pokemon Route Encounters"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(data.table)
+library(googlesheets4)
+library(readr)
+
+gs4_auth(email = "anthony.tsoukas@gmail.com", scopes = "https://www.googleapis.com/auth/drive.readonly")
+
+encounters <- read_sheet(ss = "https://docs.google.com/spreadsheets/d/1ifXHuiQUOqN2F-kTRnHBh8xJX98VI0NTl4pSU8XCIZM/", sheet = "RouteEncounters", skip = 0)[1:9]
+
+# Replace Nulls in Max Level with Min Level, and Encounter Set with 1
+encounters$MaxLevel <- ifelse(is.na(encounters$MaxLevel),encounters$MinLevel,encounters$MaxLevel)
+encounters$`Encounter Set`[is.na(encounters$`Encounter Set`)] <- 1
+
+# Sort data prior to cleaning for output
+encounters <- encounters[with(encounters, order(ID, `Encounter Type`, `Encounter Set`)), ]
+
+encounter_pbs <- data.frame(Output = "#----------------------------------------")
+
+encounters
+
+loc_id <- ''
+enc_id <- ''
+
+for (i in 1:nrow(encounters)) {
+  
+  ## Check Map Location ID
+  if (loc_id != encounters$ID[i]) {
+  location <- paste0("[",encounters$ID[i],"] # ",encounters$MapName[i])
+  encounter_pbs[nrow(encounter_pbs) + 1,] = c(location)
+  #print(location)
+  }
+  
+  ## Check Encounter Type
+  if (enc_id != encounters$`Encounter Type`[i] | loc_id != encounters$ID[i]) {
+    if (!is.na(encounters$Probability[i])) {
+      enc_type <- paste0(encounters$`Encounter Type`[i],",",encounters$Probability[i])
+    } else {
+      enc_type <- paste0(encounters$`Encounter Type`[i])
+    }
+    encounter_pbs[nrow(encounter_pbs) + 1,] = c(enc_type)
+    #print(enc_type)
+  }
+  
+  # Output Pokemon encounters as per normal
+  pkmn_encounter <- paste0("    ",encounters$`Encounter Chance`[i],",",encounters$Pokemon[i],",",encounters$MinLevel[i],",",encounters$MaxLevel[i])
+  encounter_pbs[nrow(encounter_pbs) + 1,] = c(pkmn_encounter)
+  #print(pkmn_encounter)
+  
+  # Update last seen row id for file outputting
+  loc_id <- encounters$ID[i]
+  enc_id <- encounters$`Encounter Type`[i]
+}
+
+## Output Innate Frame
+lapply(as.data.frame(encounter_pbs$Output), write, "../PBS/encounters_tsouk.txt", append=FALSE, ncolumns=1)
+
+```
+
+```{r}
+
+```
+
