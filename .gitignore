@@ -3,7 +3,7 @@ Audio/
 Graphics/
 Plugins/
 Screenshots/
-!Graphics/Tilesets/
+!Graphics/Tilesets/Custom/
 
 # Data folder, but not Data/Scripts folder or messages_core.dat
 Data/*
