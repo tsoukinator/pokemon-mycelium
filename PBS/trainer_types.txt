@@ -24,6 +24,8 @@ BaseMoney = 60
 Name = Rival
 Gender = Male
 BaseMoney = 16
+#SkillLevel = 100
+#Flags = ReserveLastPokemon#,UsePokemonInOrder
 #-------------------------------
 [RIVAL2]
 Name = Rival
@@ -332,6 +334,7 @@ Gender = Male
 BaseMoney = 140
 BattleBGM = Battle Gym Leader
 VictoryBGM = Battle victory leader
+#Flags = UsePokemonInOrder
 #-------------------------------
 [LEADER_Brock]
 Name = Gym Leader

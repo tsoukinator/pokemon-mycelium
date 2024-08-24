@@ -1,5 +1,5 @@
 #----------------------------------------
-[077] # Kilcunda Forest - East
+[077,0] # Kilcunda Forest - East
 GoodRod
     20,GYARADOS,22,30
 Land,21
@@ -14,7 +14,7 @@ Land,21
     1,BEEDRILL,8,10
 OldRod
     20,MAGIKARP,3,8
-[079] # Kilcunda Forest - West
+[079,0] # Kilcunda Forest - West
 GoodRod
     20,SLOWPOKE,5,8
 Land,21
@@ -28,7 +28,7 @@ Land,21
     5,TYROGUE,2,3
 OldRod
     20,SLOWPOKE,3,8
-[080] # Whitehorse City
+[080,0] # Whitehorse City
 GoodRod
     20,MAGIKARP,5,8
     5,CHINCHOU,4,8
@@ -39,7 +39,7 @@ Land,21
     5,EEVEE,14,16
 OldRod
     20,MAGIKARP,3,8
-[083] # Renmao Waterfront
+[083,0] # Renmao Waterfront
 GoodRod
     20,MAGIKARP,5,12
     5,CARVANHA,4,8
@@ -54,7 +54,7 @@ Land,21
     5,TAILLOW,8,10
 OldRod
     20,MAGIKARP,3,8
-[085] # Sinking Marsh
+[085,0] # Sinking Marsh
 GoodRod
     20,MAGIKARP,5,8
     5,GOLDEEN,4,8
@@ -70,7 +70,7 @@ Land,21
 OldRod
     20,MAGIKARP,3,8
     5,BARBOACH,3,5
-[086] # Route 101
+[086,0] # Route 101
 GoodRod
     20,MAGIKARP,5,8
     5,GOLDEEN,4,8
@@ -84,7 +84,7 @@ Land,21
     5,ROSELIA,6,9
 OldRod
     20,MAGIKARP,3,8
-[090] # Myalo Cave Entrance
+[090,0] # Myalo Cave Entrance
 Cave,5
     20,DIGLETT,10,12
     20,GEODUDE,10,12
@@ -97,7 +97,7 @@ Land,20
     5,BULBASAUR,5,5
     5,UHRLEX_1,14,20
     2,CHARMANDER,6,8
-[092] # Myalo Cave B1F
+[092,0] # Myalo Cave B1F
 Cave,5
     20,PARAS,12,16
     10,BROTHER,10,12
@@ -115,6 +115,6 @@ Land,21
     20,PARASECT,15,18
     20,PARAS_6,11,15
     1,OINKOLOGNE,12,16
-[102] # Myalo Cave B2F
+[102,0] # Myalo Cave B2F
 Land,21
     20,BULBASAUR,16,16
