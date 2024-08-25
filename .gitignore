@@ -2,6 +2,7 @@
 Audio/
 Graphics/*
 !Graphics/Tilesets/
+!Graphics/Characters/
 Plugins/
 Screenshots/
 
