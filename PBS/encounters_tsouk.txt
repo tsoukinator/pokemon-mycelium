@@ -1,4 +1,11 @@
 #----------------------------------------
+[033,0] # Frosty Hills
+Land,21
+    5,SWINUB,16,20
+    5,AMAURA,16,20
+    5,VULPIX_1,16,20
+    5,SNOVER,16,20
+    3,PHANTUMP,16,20
 [077,0] # Kilcunda Forest - East
 GoodRod
     20,GYARADOS,22,30
@@ -95,8 +102,18 @@ Cave,5
 Land,20
     10,TEDDIURSA,9,12
     5,BULBASAUR,5,5
-    5,UHRLEX_1,14,20
     2,CHARMANDER,6,8
+[091,0] # Sporeville Basin
+Cave,21
+    3,SLOWPOKE,12,14
+    4,GEODUDE,11,14
+    2,SHUCKLE,10,16
+Land,21
+    5,ANORITH,12,15
+    5,TIRTOUGA,11,14
+    3,POLIWAG,10,14
+Water,21
+    5,BINACLE,30,32
 [092,0] # Myalo Cave B1F
 Cave,5
     20,PARAS,12,16
@@ -118,3 +135,48 @@ Land,21
 [102,0] # Myalo Cave B2F
 Land,21
     20,BULBASAUR,16,16
+[106,0] # Sporeville Cavern
+Land,21
+    3,WHISMUR,12,15
+    4,PARAS,14,17
+    2,SEEDOT,14,15
+[110,0] # Rhythm Meadow
+GoodRod
+    5,CHINCHOU,14,18
+Land,21
+    6,DODUO,14,20
+    5,BUNEARY,12,16
+    4,CHATOT,10,14
+    1,ORICORIO,14,18
+    1,ORICORIO_1,14,18
+    1,ORICORIO_2,14,18
+    1,ORICORIO_3,14,18
+OldRod
+    5,FINNEON,12,14
+    5,CHINCHOU,12,14
+Water,21
+    5,CARVANHA,14,16
+[111,0] # Strut Lane
+Land,21
+    4,VUCKOMON,18,20
+    5,ROCKRUFF,16,20
+[112,0] # Frosty Path
+Land,21
+    2,ELSAMON,16,18
+    3,PANCHAM,16,18
+    2,VULPIX,14,16
+    3,MRMIME,14,16
+[115,0] # Frosty Cavern
+Cave,45
+    2,ARON,18,22
+    4,BERGMITE,18,22
+    3,CARBINK,18,22
+    2,SNOM,14,16
+    5,VANILLITE,16,20
+[116,0] # Old Man's Well
+GoodRod
+    5,TRUBBISH,14,16
+    10,BARBOACH,14,16
+OldRod
+    5,TRUBBISH,10,12
+    10,BARBOACH,10,12

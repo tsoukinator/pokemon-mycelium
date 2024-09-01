@@ -58,5 +58,11 @@
 105,West,0,104,East,0
 # Lunea Fields (108) - Lunea Town (107)
 108,North,0,107,South,10
-# Dance Academy (109) - Route5-B4Dance (110)
+# Idolstep Town (109) - Route5-B4Dance (110)
 109,West,0,110,East,4
+# Frosty Path (112) - Frosty Hills (33)
+112,North,0,33,South,0
+# Strut Lane (111) - Frosty Hills (33)
+111,East,0,33,West,68
+# Strut Lane (111) - Frosty Path (112)
+111,East,10,112,West,0
