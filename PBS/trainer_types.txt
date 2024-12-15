@@ -321,21 +321,6 @@ Name = Rocket Boss
 Gender = Male
 BaseMoney = 100
 #-------------------------------
-[LEADER_Shrek]
-Name = Gym Leader
-Gender = Male
-BaseMoney = 120
-BattleBGM = Battle Gym Leader
-VictoryBGM = Battle victory leader
-#-------------------------------
-[LEADER_TheShark]
-Name = Gym Leader
-Gender = Male
-BaseMoney = 140
-BattleBGM = Battle Gym Leader
-VictoryBGM = Battle victory leader
-#Flags = UsePokemonInOrder
-#-------------------------------
 [LEADER_Brock]
 Name = Gym Leader
 Gender = Male
@@ -426,3 +411,49 @@ Gender = Male
 BaseMoney = 100
 BattleBGM = Battle Champion
 VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_Jawline]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 120
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_Shrek]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 120
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#-------------------------------
+[LEADER_TheShark]
+Name = Gym Leader
+Gender = Male
+BaseMoney = 140
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+#Flags = UsePokemonInOrder
+#-------------------------------
+[LEADER_Brothers]
+Name = Gym Leader
+Gender = Unknown
+BaseMoney = 140
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+Flags = UsePokemonInOrder
+#-------------------------------
+[LEADER_Leia]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 140
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+Flags = UsePokemonInOrder
+#-------------------------------
+[LEADER_FoodBaby]
+Name = Gym Leader
+Gender = Female
+BaseMoney = 140
+BattleBGM = Battle Gym Leader
+VictoryBGM = Battle victory leader
+Flags = UsePokemonInOrder

@@ -1,0 +1,513 @@
+---
+title: "TsoukMon"
+output: html_notebook
+---
+
+<style>
+.main-container {
+  max-width: 100% !important;
+}
+</style>
+
+TsoukMon Viewer: Pokemon, Moves, and Abilities
+
+```{r setup, include = FALSE}
+# https://medium.com/@SportSciData/https-medium-com-collinsneil306-how-to-create-interactive-reports-with-r-markdown-part-i-4fa9df46cd9
+
+#rm(list=ls()) # Clear workspace
+library(data.table)
+library(readxl)
+library(dplyr)
+library(readr)
+library(rlist)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(DT)
+
+# Define the path to the folder where your files are located
+file_path <- "../PBS/"
+
+############################################################################
+############################# MOVE LIST ####################################
+############################################################################
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+move_files <- list.files(path = file_path, pattern = "^moves", full.names = TRUE)
+
+# Read all the files using read_delim
+move_data <- map(move_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+movelist_txt <- bind_rows(move_data)
+
+# Split on Equals sign
+movelist_split <- data.frame(do.call('rbind', strsplit(as.character(movelist_txt$X1),'=',fixed=TRUE)))
+movelist_split$X1 <- trimws(movelist_split$X1)
+movelist_split$X2 <- trimws(movelist_split$X2)
+
+##########################################
+## Add Move Name to Moves
+movelist_split_end <- movelist_split %>%
+  mutate(Move_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Move_ID)                                            # Fill down the group name
+
+# Remove Key Fields from data-frame
+movelist_split_end <- filter(movelist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Explicitly specifying the key column 'Move_Name'
+move_db <- pivot_wider(
+  data = movelist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Move_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+move_db$Move_ID <- substr(move_db$Move_ID, 2, nchar(move_db$Move_ID) - 1)
+
+move_db <- move_db[order(move_db$Move_ID),]
+move_db_short <- move_db %>% select(Name, Type, Category, Power, Accuracy, TotalPP, Target, Description, EffectChance, Priority) 
+############################################################################
+############################# Pokemon LIST ####################################
+############################################################################
+
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+pokemon_files <- list.files(path = file_path, pattern = "^pokemon", full.names = TRUE)
+# Filter out files that contain "_metrics" in the name
+pokemon_files <- pokemon_files[!grepl("_metrics", pokemon_files)]
+
+# Read all the files using read_delim
+pokemon_data <- map(pokemon_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+pokelist_txt <- bind_rows(pokemon_data)
+
+# Split on Equals sign
+pokelist_split <- data.frame(do.call('rbind', strsplit(as.character(pokelist_txt$X1),'=',fixed=TRUE)))
+pokelist_split$X1 <- trimws(pokelist_split$X1)
+pokelist_split$X2 <- trimws(pokelist_split$X2)
+
+##########################################
+## Add Pokemon Name to each row
+pokelist_split_end <- pokelist_split %>%
+  mutate(Pokemon_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Pokemon_ID)                                         # Fill down the group name
+
+# Assign ID order to existing Pokemon List, skipping the first row
+setDT(pokelist_split_end)[-1, Pokedex_No := .GRP, by = Pokemon_ID]
+
+# Remove Key Fields from data-frame
+pokelist_split_end <- filter(pokelist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Summarize multiple key values by concatenating them
+pokelist_split_end <- pokelist_split_end %>%
+  group_by(Pokedex_No, Pokemon_ID, X1) %>%
+  summarise(X2 = str_c(X2, collapse = ", "), .groups = "drop")
+
+# Explicitly specifying the key column 'Move_Name'
+poke_db <- pivot_wider(
+  data = pokelist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Pokedex_No, Pokemon_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+poke_db$Pokemon_ID <- substr(poke_db$Pokemon_ID, 2, nchar(poke_db$Pokemon_ID) - 1)
+# If Name is not present, replace with proper case ID (split prior to comma)
+poke_db$Name <- ifelse(
+  is.na(poke_db$Name), 
+  str_to_title(sapply(str_split(poke_db$Pokemon_ID, ",", simplify = TRUE), function(x) x[1])),
+  poke_db$Name
+)
+
+# If FormName is not present, replace with "Standard Form"
+poke_db$FormName <- ifelse(is.na(poke_db$FormName),"Standard Form",poke_db$FormName)
+# Split out base stats
+poke_db <- poke_db %>%
+  separate(BaseStats, into = c("HP", "ATTACK","DEFENSE","SPEED","SPECIAL_ATTACK","SPECIAL_DEFENSE"), sep = ",", fill = "right")
+
+poke_db <- poke_db[order(poke_db$Pokedex_No),]
+poke_db_short <- poke_db %>% select(Pokedex_No, Name, FormName, Types, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions) 
+############################################################################
+############################# Abilities LIST ####################################
+############################################################################
+
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+ability_files <- list.files(path = file_path, pattern = "^abilities", full.names = TRUE)
+# Filter out files that contain "_metrics" in the name
+ability_files <- ability_files[!grepl("_Innate", ability_files)]
+
+# Read all the files using read_delim
+ability_data <- map(ability_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+abilitylist_txt <- bind_rows(ability_data)
+
+# Split on Equals sign
+abilitylist_split <- data.frame(do.call('rbind', strsplit(as.character(abilitylist_txt$X1),'=',fixed=TRUE)))
+abilitylist_split$X1 <- trimws(abilitylist_split$X1)
+abilitylist_split$X2 <- trimws(abilitylist_split$X2)
+
+##########################################
+## Add Move Name to Moves
+abilitylist_split_end <- abilitylist_split %>%
+  mutate(Ability_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Ability_ID)                                            # Fill down the group name
+
+# Remove Key Fields from data-frame
+abilitylist_split_end <- filter(abilitylist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Explicitly specifying the key column 'Ability_ID'
+ability_db <- pivot_wider(
+  data = abilitylist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Ability_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+ability_db$Ability_ID <- substr(ability_db$Ability_ID, 2, nchar(ability_db$Ability_ID) - 1)
+
+ability_db <- ability_db[order(ability_db$Ability_ID),]
+
+#ability_db_short <- ability_db %>% select(Name, FormName, Type, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions) 
+
+```
+
+## {.tabset}
+
+### Pokemon
+
+Pokemon
+```{r, echo = FALSE, warning=FALSE}
+DT::datatable(poke_db_short, rownames = FALSE, filter = "top", class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), search = list(search = "")))  %>%
+  DT::formatStyle(columns = c(1:ncol(poke_db)), fontSize = '80%')
+```
+
+### Moves
+Moves
+```{r, echo = FALSE}
+DT::datatable(move_db_short, rownames = FALSE, filter = "top", class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), search = list(search = "")))  %>%
+  DT::formatStyle(columns = c(1:ncol(move_db)), fontSize = '80%')
+
+```
+
+### Abilities
+Abilities
+```{r, echo = FALSE}
+DT::datatable(ability_db, rownames = FALSE, filter = "top", class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), search = list(search = "")))  %>%
+  DT::formatStyle(columns = c(1:ncol(ability_db)), fontSize = '80%')
+```
+
+
+```{r}
+# Pokemon Summary
+poke_filter <- filter(poke_db, Name == "Geodude")
+#poke_filter
+
+#################
+# Base Stats
+poke_filter_base <- select(poke_filter, Name, Types, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions)
+
+selected_poke_stats <- gather(poke_filter_base, key = "Pokemon_ID", value = "Stat")
+colnames(selected_poke_stats) <- c("Stat","Value")
+
+#################
+# Ability
+ability_filter <- select(poke_filter,Pokemon_ID,Abilities,HiddenAbilities)
+ability_filter <- ability_filter %>% separate(Abilities, into = c("Ability1", "Ability2"), sep = ",", fill = "right")
+ability_filter <- ability_filter %>% separate(HiddenAbilities, into = c("HiddenAbility1","HiddenAbility2","HiddenAbility3"), sep = ",", fill = "right")
+ability_end <- gather(ability_filter, key="Pokemon_ID", value = "Ability", na.rm = TRUE)
+
+ability_list <- left_join(ability_end, ability_db, by = c("Ability" = "Ability_ID"))
+colnames(ability_list) <- c(" ","Ability_ID","Ability","Description","Flags")
+
+selected_poke_abilities <- select(ability_list, Ability, Description, " ")
+#ability_summary
+
+#################
+# Selected Pokemon Moves
+# Split learned moves into vector
+elements <- unlist(strsplit(poke_filter$Moves, ","))
+# Extract levels and moves (odd vs even indexed values)
+levels <- as.integer(elements[c(TRUE, FALSE)]) # Odd-indexed values
+moves <- elements[c(FALSE, TRUE)]              # Even-indexed values
+
+# Create the data frame
+moves_df <- data.frame(Level = levels, Move = moves, stringsAsFactors = FALSE)
+selected_poke_moves <- left_join(moves_df, move_db, by = c("Move" = "Move_ID"))[,1:8]
+
+```
+```{r}
+# Pokemon Summary
+#poke_filter <- filter(poke_db, Name == "Geodude")
+poke_filter <- poke_db
+
+###################
+#### Base Stats ###
+###################
+poke_filter_base <- select(poke_filter, Pokemon_ID, Name, FormName, Types, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions, Moves)
+
+selected_poke_stats <- pivot_longer(poke_filter_base
+             ,cols = c("Types","HP","ATTACK","DEFENSE","SPECIAL_ATTACK","SPECIAL_DEFENSE","SPEED","Moves","Evolutions","Abilities","HiddenAbilities")
+             ,names_to = "Stat"
+             ,values_to = "Value"
+             )
+
+selected_poke_stats <- filter(selected_poke_stats,! Stat %in% c("Moves", "Abilities", "HiddenAbilities", "Evolutions"))
+names(selected_poke_stats)[names(selected_poke_stats) == 'Name'] <- 'Pokemon'
+#colnames(selected_poke_stats) <- c("Stat","Value")
+#selected_poke_stats
+
+###################
+##### Ability ####
+##################
+ability_filter <- select(poke_filter,Pokemon_ID,Name,FormName,Abilities,HiddenAbilities)
+ability_filter <- ability_filter %>% separate(Abilities, into = c("Ability1", "Ability2"), sep = ",", fill = "right")
+ability_filter <- ability_filter %>% separate(HiddenAbilities, into = c("HiddenAbility1","HiddenAbility2","HiddenAbility3"), sep = ",", fill = "right")
+#ability_end <- gather(ability_filter, key="Pokemon_ID", value = "Ability", na.rm = TRUE)
+
+ability_end <- pivot_longer(ability_filter
+             ,cols = c("Ability1","Ability2","HiddenAbility1","HiddenAbility2","HiddenAbility3")
+             ,names_to = "Type"
+             ,values_to = "Ability")
+
+ability_list <- filter(left_join(ability_end, ability_db, by = c("Ability" = "Ability_ID")), !is.na(Ability))
+colnames(ability_list) <- c("Pokemon_ID","Pokemon","FormName"," ","Ability","Name","Description","Flags")
+
+selected_poke_abilities <- select(ability_list, Pokemon, Ability, Description, " ")
+#ability_summary
+
+###############################
+### Selected Pokemon Moves ###
+##############################
+poke_filter_NA_RM <- filter(poke_filter, !is.na(Moves))
+poke_filter_moves <- select(poke_filter_NA_RM, Pokemon_ID, Name, Moves)
+
+# Step 1: Split the Moves column into separate rows based on commas
+# Transform the data
+poke_move_summary <- poke_filter_NA_RM %>%
+  # Separate each value in the Moves column into individual rows
+  separate_rows(Moves, sep = ",") %>%
+  # Add a column with row numbers to distinguish between level and move names
+  group_by(Name) %>%
+  mutate(row_id = 2 * ceiling(row_number() / 2)) %>%
+  # Use modulo to identify odd rows as move levels and even rows as move names
+  mutate(category = ifelse(row_number() %% 2 == 1, "Move_Level", "Move_Name")) %>%
+  # Pivot data so that Move_Level and Move_Name are in separate columns
+  pivot_wider(names_from = category, values_from = Moves) %>%
+  # Remove the row_id column and ungroup
+  select(-row_id) %>%
+  ungroup() %>%
+  # Convert the Move_Level column to numeric (since it's character after splitting)
+  mutate(Move_Level = as.integer(Move_Level)) %>%
+  # Select relevant columns
+  select(Pokemon_ID, Name, Move_Level, Move_Name)
+
+# Remove duplicates
+poke_move_summary <- unique(poke_move_summary)
+
+selected_poke_moves <- left_join(poke_move_summary, move_db, by = c("Move_Name" = "Move_ID"))[,1:11]
+colnames(selected_poke_moves) <- c("Pokemon_ID","Pokemon","Level","Move_ID","Name","Type","Category","Power","Accuracy","PP","Target")
+```
+
+```{r}
+filter(selected_poke_moves, Pokemon == "Tsoukinator")
+
+
+filter(poke_move_summary, Name == "Abomasnow")
+filter(poke_move_summary, Name == "Tsoukinator")
+
+filter(poke_filter_NA_RM, Name == "Tsoukinator")
+```
+
+```{r}
+test <- data.frame(Name = poke_filter_NA_RM$Name, Moves = poke_filter_NA_RM$Moves)
+
+tidy_moves <- test %>%
+  # Separate each value in the Moves column into individual rows
+  separate_rows(Moves, sep = ",") %>%
+  # Add a column with row numbers to distinguish between level and move names
+  group_by(Name) %>%
+  mutate(row_id = 2 * ceiling(row_number()/2)) %>%
+  # Use modulo to identify the odd rows as move levels and even rows as move names
+  mutate(category = ifelse(row_id %% 2 == 1, "Move_Level", "Move_Name")) %>%
+  # Pivot data so that Move_Level and Move_Name are in separate columns
+  pivot_wider(names_from = category, values_from = Moves) %>%
+  # Remove the row_id column and ungroup
+  #select(-row_id) %>%
+  ungroup()
+
+tsouk <- filter(tidy_moves, Name == "Tsoukinator")
+
+#2 * round(df$a/2)
+t <- unlist(tsouk$Move_Name[[1]])
+t
+```
+```{r}
+# Assuming you've already transformed the data as described
+tidy_moves <- poke_filter_NA_RM %>%
+  # Separate each value in the Moves column into individual rows
+  separate_rows(Moves, sep = ",") %>%
+  # Add a column with row numbers to distinguish between level and move names
+  group_by(Name) %>%
+  mutate(row_id = 2 * ceiling(row_number() / 2)) %>%
+  # Use modulo to identify odd rows as move levels and even rows as move names
+  mutate(category = ifelse(row_number() %% 2 == 1, "Move_Level", "Move_Name")) %>%
+  # Pivot data so that Move_Level and Move_Name are in separate columns
+  pivot_wider(names_from = category, values_from = Moves) %>%
+  # Remove the row_id column and ungroup
+  select(-row_id) %>%
+  ungroup() %>%
+  # Convert the Move_Level column to numeric (since it's character after splitting)
+  mutate(Move_Level = as.integer(Move_Level)) %>%
+  # Select relevant columns
+  select(Pokemon_ID, Name, Move_Level, Move_Name)
+
+# View the result
+print(tidy_moves)
+
+
+filter(tidy_moves, Name == "Tsoukinator")
+```
+```{r}
+tsoukmon_pkmn <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "PkmnStats"), is.na(`Pokedex Number`)), Name)
+tsoukmon_pkmn$Pokemon_ID <- toupper(gsub(" ","",tsoukmon_pkmn$Name))
+
+tsoukmon_moves <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "Moves")), Name)
+tsoukmon_moves$Move_ID <- toupper(gsub(" ","",tsoukmon_moves$Name))
+
+tsoukmon_abilities <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "Abilities")), Name)
+tsoukmon_abilities$Ability_ID <- toupper(gsub(" ","",tsoukmon_abilities$Name))
+
+test <- filter(poke_db_short, (Name == "Tsoukinator" | Name == "Pikachu"))
+
+test_join <- left_join(test, tsoukmon_pkmn, by = c("Name" = "Name"))
+test_join
+
+test$TsoukMon_OG <- test$Name %in% tsoukmon_pkmn$Name
+```
+
+```{r}
+library(plotly)
+library(RColorBrewer)
+
+palette_blues <- colorRampPalette(colors =c("#F34444","#FF7F0F","#FFDD57","#A0E515","#00C2B8"))
+
+tsouk_colours <- c("#F34444","#FF7F0F","#FFDD57","#A0E515","#00C2B8")
+tsouk_palette <- brewer.pal(n=5, name="Dark2")
+tsouk_palette <- tsouk_palette
+#val
+
+foodbaby <- filter(selected_poke_stats, Pokemon == "FoodBaby" & Stat != "Types")
+foodbaby$Stat <- factor(foodbaby$Stat, levels = c("HP", "ATTACK", "DEFENSE", "SPECIAL_ATTACK", "SPECIAL_DEFENSE", "SPEED"))
+
+foodbaby$Value <- as.numeric(foodbaby$Value)
+fig <- plot_ly(x = foodbaby$Value, y = foodbaby$Stat, type = 'bar', orientation = 'h',
+               marker = list(color = brewer.pal(6, "Dark2")),
+               text = foodbaby$Value,       # Show the Value as text
+               textposition = 'auto') %>%
+  layout(
+    xaxis = list(range = c(0, 200),showticklabels = FALSE),
+    yaxis = list(autorange = "reversed"
+    ),
+    height = 300
+  )
+
+fig
+
+
+
+#brewer.pal(6, "Dark2")
+```
+
+```{r}
+library(plotly)
+
+# Your custom color palette
+tsouk_colours <- c("#F34444", "#FF7F0F", "#FFDD57", "#A0E515", "#00C2B8")
+
+# Define breaks and corresponding colors
+breaks <- c(-1, 40, 60, 90, 120, 200)
+colors <- tsouk_colours
+
+# Function to assign colors based on breaks
+assign_color <- function(value) {
+  cut(value, breaks = breaks, labels = colors, include.lowest = TRUE)
+}
+
+# Apply the color assignment function
+value_colors <- assign_color(foodbaby$Value)
+
+# Create the Plotly figure
+fig <- plot_ly(x = foodbaby$Value, y = foodbaby$Stat, type = 'bar', orientation = 'h',
+               marker = list(color = value_colors), # Use discrete colors
+               text = foodbaby$Value,       # Show the Value as text
+               textposition = 'auto') %>%
+  layout(
+    xaxis = list(range = c(0, 200), showticklabels = FALSE),
+    yaxis = list(autorange = "reversed"),
+    height = 300
+  )
+
+fig
+
+
+```
+
+```{r}
+# Load necessary library
+library(plotly)
+library(grDevices)
+
+# Original color palette
+tsouk_colours <- c("#F34444", "#FF7F0F", "#FFDD57", "#A0E515", "#00C2B8")
+
+# Function to create a color scale with intermediate colors
+create_color_scale <- function(colors, n) {
+  # Interpolate colors
+  color_scale <- colorRampPalette(colors)(n)
+  return(color_scale)
+}
+
+# Create a new color scale with 10 colors
+expanded_colours <- create_color_scale(tsouk_colours, 8)
+
+# Define breaks (one more than the number of colors)
+breaks <- c(-1, 0, 20, 40, 60, 80, 100, 150, 200)
+colors <- expanded_colours  # Use the expanded color palette
+
+# Function to assign colors based on breaks
+assign_color <- function(value) {
+  cut(value, breaks = breaks, labels = colors, include.lowest = TRUE)
+}
+```
+
+```{r}
+
+base_stats <- filter(selected_poke_stats, Pokemon == "Haydos" & Stat != "Types")
+base_stats$Stat <- factor(base_stats$Stat, levels = c("HP", "ATTACK", "DEFENSE", "SPECIAL_ATTACK", "SPECIAL_DEFENSE", "SPEED"))
+
+base_stats$Value <- as.numeric(base_stats$Value)
+
+# Apply the color assignment function
+value_colors <- assign_color(base_stats$Value)
+
+# Create the Plotly figure
+fig <- plot_ly(x = base_stats$Value, y = base_stats$Stat, type = 'bar', orientation = 'h',
+               marker = list(color = value_colors), # Use discrete colors
+               text = base_stats$Value,       # Show the Value as text
+               textposition = 'auto') %>%
+  layout(
+    xaxis = list(range = c(0, 200), showticklabels = FALSE, showgrid = FALSE),
+    yaxis = list(autorange = "reversed"),
+    height = 270,
+    plot_bgcolor  = "transparent",
+           paper_bgcolor = "transparent"
+  )
+
+fig
+
+```
+

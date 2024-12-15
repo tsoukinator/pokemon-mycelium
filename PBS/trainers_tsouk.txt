@@ -1,9 +1,26 @@
 #-------------------------------
+[CAMPER,Austin,0]            #---- TrainerBattle.start(:CAMPER,"Austin",0)
+LoseText = Did anybody ever hear what happened to James Mulgrave?
+#--------------
+Pokemon = FOONGUS,15
+    Gender = female
+    Shiny = false
+#--------------
+Pokemon = PARAS_6,16
+    Form = 6
+    Gender = female
+    Shiny = false
+#--------------
+Pokemon = SHROOMISH_6,15
+    Form = 6
+    Gender = male
+    Shiny = false
+#-------------------------------
 [FISHERMAN,Barry,0]            #---- TrainerBattle.start(:FISHERMAN,"Barry",0)
 LoseText = Why do I always lose?
 #--------------
 Pokemon = MAGIKARP,2
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = MAGIKARP,4
@@ -22,7 +39,7 @@ Pokemon = POOCHYENA,4
     Shiny = false
 #--------------
 Pokemon = BABYRAGNAR,6
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [LEADER_Brock,Brock,2]            #---- TrainerBattle.start(:LEADER_Brock,"Brock",2)
@@ -47,6 +64,46 @@ Pokemon = ONIX,14
     IV = 20,20,20,20,20,20
     Ball = HEAVYBALL
 #-------------------------------
+[LEADER_Brothers,Brothers,0]            #---- TrainerBattle.start(:LEADER_Brothers,"Brothers",0)
+LoseText = To be fair, you were better.
+Items = FULLRESTORE
+#--------------
+Pokemon = FOONGUS,18
+    Gender = female
+    Shiny = false
+    Moves = GROWTH,POISONPOWDER,MEGADRAIN,SYNTHESIS
+    Ability = REGENERATOR
+    IV = 20,20,20,20,20,20
+#--------------
+Pokemon = FOMANTIS,18
+    Gender = female
+    Shiny = false
+    Moves = RAZORLEAF,INGRAIN,GROWTH,FURYCUTTER
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = PETILIL,18
+    Gender = female
+    Shiny = false
+    Moves = AROMATHERAPY,MAGICALLEAF,SLEEPPOWDER,GIGADRAIN
+    Ability = OWNTEMPO
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = PARASECT_6,22
+    Form = 6
+    Gender = male
+    Shiny = false
+    Moves = LEECHLIFE,POISONJAB,FOLIAGEFEAST,SPORE
+    Ability = MOSSBODY
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = BRELOOM_6,20
+    Form = 6
+    Gender = female
+    Shiny = false
+    Moves = MEGADRAIN,HEADBUTT,DAZZLINGGLEAM,LEECHSEED
+    Ability = MOSSBODY
+    IV = 15,15,15,15,15,15
+#-------------------------------
 [FISHERMAN,Darryl,0]            #---- TrainerBattle.start(:FISHERMAN,"Darryl",0)
 LoseText = Who knew a fish would struggle on land?
 #--------------
@@ -55,7 +112,7 @@ Pokemon = GOLDEEN,10
     Shiny = false
 #--------------
 Pokemon = MAGIKARP,15
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = KRABBY,12
@@ -66,22 +123,22 @@ Pokemon = KRABBY,12
 LoseText = My bugs, why?
 #--------------
 Pokemon = WEEDLE,6
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = WEEDLE,8
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = SCATTERBUG,6
-    Gender = female
+    Gender = male
     Shiny = false
 #-------------------------------
 [BIRDKEEPER,David,0]            #---- TrainerBattle.start(:BIRDKEEPER,"David",0)
 LoseText = Ah dang it.
 #--------------
 Pokemon = PIDGEY,12
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = STARLY,14
@@ -100,29 +157,29 @@ Pokemon = KAKUNA,12
     Shiny = false
 #--------------
 Pokemon = BEEDRILL,10
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [RIVAL1,Family,1]            #---- TrainerBattle.start(:RIVAL1,"Family",1)
 LoseText = Oh no
 #--------------
 Pokemon = BROTHER,16
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = UHRLEX,16
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = TSOUKINATOR,16
-    Gender = female
+    Gender = male
     Shiny = false
 #-------------------------------
 [RIVAL1,Family,2]            #---- TrainerBattle.start(:RIVAL1,"Family",2)
 LoseText = Oh no
 #--------------
 Pokemon = BROTHER,25
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = UHRLEX,25
@@ -137,22 +194,23 @@ Pokemon = TSOUKINATOR,25
 LoseText = Oh no
 #--------------
 Pokemon = BROTHERHIVE,36
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = UHRLEX_1,36
-    Gender = male
+    Form = 1
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = TSOUKINATOR,36
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [BEAUTY,FoodBaby,1]            #---- TrainerBattle.start(:BEAUTY,"FoodBaby",1)
 LoseText = GODDAMMIT
 #--------------
 Pokemon = CYNDAQUIL,15
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = EDGARMON,16
@@ -162,11 +220,11 @@ Pokemon = EDGARMON,16
     Moves = YAWN,REST,CHEWSLIPPERS,SNORE
 #--------------
 Pokemon = TSOUKINATOR,14
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = XERRI,14
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = FOODBABY,16
@@ -177,11 +235,12 @@ Pokemon = FOODBABY,16
 LoseText = GODDAMMIT
 #--------------
 Pokemon = QUILAVA,26
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = EDGARMON_1,27
     Name = GaGa
+    Form = 1
     Gender = male
     Shiny = false
     Moves = DIG,OVEREAT,REST,TOXIC
@@ -213,7 +272,7 @@ Pokemon = EDGARNATOR,38
     Item = CHESTOBERRY
 #--------------
 Pokemon = TSOUKINATOR,37
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = XERRI,36
@@ -221,8 +280,39 @@ Pokemon = XERRI,36
     Shiny = false
 #--------------
 Pokemon = FOODBABY,40
+    Gender = male
+    Shiny = false
+#-------------------------------
+[LEADER_FoodBaby,FoodBaby,0]            #---- TrainerBattle.start(:LEADER_FoodBaby,"FoodBaby",0)
+LoseText = THAT'S NOT FAIR!!!!
+Items = HYPERPOTION,FULLRESTORE
+#--------------
+Pokemon = VANILLISH,28
     Gender = female
     Shiny = false
+    Moves = ICYWIND,ICICLESPEAR,UPROAR,ACIDARMOR
+    Ability = SNOWCLOAK
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = SLURPUFF,28
+    Gender = male
+    Shiny = false
+    Moves = PLAYNICE,DRAININGKISS,ROUND,AROMATHERAPY
+    Ability = SWEETVEIL
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = ALCREMIE,28
+    Gender = male
+    Shiny = false
+    Moves = DRAININGKISS,ACIDARMOR,RECOVER,SWEETKISS
+    Ability = SWEETVEIL
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = FOODBABY,30
+    Gender = male
+    Shiny = false
+    Moves = LASEREYES,CHINESEWATER,GLOWINGROUTINE,SPICYNOODLES
+    IV = 31,31,31,31,31,31
 #-------------------------------
 [CAMPER,Genevieve,0]            #---- TrainerBattle.start(:CAMPER,"Genevieve",0)
 LoseText = This comes as a surprise.
@@ -243,11 +333,11 @@ Pokemon = PSYDUCK,10
 LoseText = Aww, I lost.
 #--------------
 Pokemon = WEEDLE,5
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = KAKUNA,10
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = WEEDLE,5
@@ -258,11 +348,11 @@ Pokemon = WEEDLE,5
 LoseText = Not my cute Pokemon!
 #--------------
 Pokemon = EEVEE,7
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = CLEFAIRY,7
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = FOODBABY,5
@@ -273,7 +363,7 @@ Pokemon = FOODBABY,5
 LoseText = You're too good for me!
 #--------------
 Pokemon = RATTATA,21
-    Gender = male
+    Gender = female
     Shiny = false
     Shadow = false
 #-------------------------------
@@ -281,7 +371,7 @@ Pokemon = RATTATA,21
 LoseText = Waaah, Mom.....!!!!
 #--------------
 Pokemon = ZIGZAGOON,3
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = LECHONK,4
@@ -296,18 +386,54 @@ Pokemon = LEDYBA,5
     Shiny = false
 #--------------
 Pokemon = WEEDLE,6
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = KAKUNA,10
+    Gender = female
+    Shiny = false
+#-------------------------------
+[CAMPER,Jawline,0]            #---- TrainerBattle.start(:CAMPER,"Jawline",0)
+LoseText = Time to get my boys back home for a rest.
+#--------------
+Pokemon = VUCKOMON,16
+    Gender = female
+    Shiny = false
+    Moves = QUICKATTACK,BITE,SWAGGER,SPARK
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = JAWLINE,14
+    Gender = female
+    Shiny = false
+    Moves = SMOULDER,SUPERSUB,POLITICS,SHIRTDROP
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = PSYDUCK,16
+    Gender = female
+    Shiny = false
+    Moves = WATERGUN,CONFUSION,FURYSWIPES,ZENHEADBUTT
+    Ability = CLOUDNINE
+    Innates = LEOPRIDEFULROAR
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[LEADER_Jawline,Jawline,0]            #---- TrainerBattle.start(:LEADER_Jawline,"Jawline",0)
+LoseText = I only came here for a nice hike.
+#--------------
+Pokemon = VUCKOMON,10
     Gender = male
     Shiny = false
+    IV = 20,20,20,20,20,20
+#--------------
+Pokemon = JAWLINE,10
+    Gender = female
+    Shiny = false
+    IV = 20,20,20,20,20,20
 #-------------------------------
 [BEAUTY,Jennifer,0]            #---- TrainerBattle.start(:BEAUTY,"Jennifer",0)
 LoseText = Oh no, you beat me!
 #--------------
 Pokemon = BIDOOF,12
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = JIGGLYPUFF,14
@@ -322,7 +448,7 @@ Pokemon = BUTTERFREE,12
 LoseText = How could this happen?
 #--------------
 Pokemon = BUDEW,6
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = BEAUTIFLY,10
@@ -333,7 +459,7 @@ Pokemon = BEAUTIFLY,10
 LoseText = Ah well, at least I still have my mud...
 #--------------
 Pokemon = GEODUDE,12
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = BIDOOF,12
@@ -341,7 +467,7 @@ Pokemon = BIDOOF,12
     Shiny = false
 #--------------
 Pokemon = MUDKIP,10
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [BUGCATCHER,Jon,0]            #---- TrainerBattle.start(:BUGCATCHER,"Jon",0)
@@ -363,14 +489,64 @@ Pokemon = JJ,3
 LoseText = This couldn't have happened to anyone nicer...
 #--------------
 Pokemon = POOCHYENA,4
-    Gender = male
-    Shiny = false
-#--------------
-Pokemon = RATTATA,4
     Gender = female
     Shiny = false
 #--------------
+Pokemon = RATTATA,4
+    Gender = male
+    Shiny = false
+#--------------
 Pokemon = BABYEDGAR,4
+    Gender = female
+    Shiny = false
+#-------------------------------
+[LEADER_Leia,Leia,0]            #---- TrainerBattle.start(:LEADER_Leia,"Leia",0)
+LoseText = Maybe you should spend less time battling, and more on your dance moves.
+Items = SUPERPOTION,SUPERPOTION,SUPERPOTION
+#--------------
+Pokemon = GOTHORITA,24
+    Gender = male
+    Shiny = false
+    Moves = HYPNOSIS,PSYSHOCK,CHARM,FAKETEARS
+    Ability = COMPETITIVE
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = DODRIO,25
+    Gender = male
+    Shiny = false
+    Moves = DOUBLEHIT,PLUCK,WINGATTACK,FURYATTACK
+    Ability = EARLYBIRD
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = HITMONTOP,24
+    Gender = female
+    Shiny = false
+    Moves = TRIPLEKICK,FAKEOUT,SUCKERPUNCH,FEINT
+    Ability = INTIMIDATE
+    IV = 15,15,15,15,15,15
+#--------------
+Pokemon = ORICORIO_3,25
+    Form = 3
+    Gender = female
+    Shiny = false
+    Moves = AIRSLASH,TEETERDANCE,ROOST,ACROBATICS
+    Ability = DANCER
+    IV = 15,15,15,15,15,15
+#-------------------------------
+[CAMPER,Ned,0]            #---- TrainerBattle.start(:CAMPER,"Ned",0)
+LoseText = Have you considered coming to my comedy show?
+#--------------
+Pokemon = SHROOMISH_6,15
+    Form = 6
+    Gender = male
+    Shiny = false
+#--------------
+Pokemon = PARAS_6,16
+    Form = 6
+    Gender = male
+    Shiny = false
+#--------------
+Pokemon = MORELULL,15
     Gender = female
     Shiny = false
 #-------------------------------
@@ -378,15 +554,15 @@ Pokemon = BABYEDGAR,4
 LoseText = Damn, you got us
 #--------------
 Pokemon = JAWLINE,16
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = JJ,16
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = THESHARK,16
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = XERRI,16
@@ -397,11 +573,11 @@ Pokemon = XERRI,16
 LoseText = Damn, you got us
 #--------------
 Pokemon = JAWLINE,28
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = JJ,26
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = THESHARK,24
@@ -409,26 +585,26 @@ Pokemon = THESHARK,24
     Shiny = false
 #--------------
 Pokemon = XERRI,26
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [RIVAL1,OtherDudes,3]            #---- TrainerBattle.start(:RIVAL1,"OtherDudes",3)
 LoseText = Damn, you got us
 #--------------
 Pokemon = JAWLINE,40
-    Gender = female
-    Shiny = false
-#--------------
-Pokemon = JJ,36
-    Gender = female
-    Shiny = false
-#--------------
-Pokemon = THESHARK,36
     Gender = male
     Shiny = false
 #--------------
-Pokemon = XERRI,38
+Pokemon = JJ,36
+    Gender = male
+    Shiny = false
+#--------------
+Pokemon = THESHARK,36
     Gender = female
+    Shiny = false
+#--------------
+Pokemon = XERRI,38
+    Gender = male
     Shiny = false
 #-------------------------------
 [RIVAL1,PetTrainer,1]            #---- TrainerBattle.start(:RIVAL1,"PetTrainer",1)
@@ -443,7 +619,7 @@ Pokemon = ELSAMON,16
     Shiny = false
 #--------------
 Pokemon = EDGARMON,16
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = VUCKOMON,16
@@ -451,7 +627,7 @@ Pokemon = VUCKOMON,16
     Shiny = false
 #--------------
 Pokemon = FENOMON,16
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [RIVAL1,PetTrainer,2]            #---- TrainerBattle.start(:RIVAL1,"PetTrainer",2)
@@ -466,6 +642,7 @@ Pokemon = ELSAMON,27
     Shiny = false
 #--------------
 Pokemon = EDGARMON_1,28
+    Form = 1
     Gender = female
     Shiny = false
 #--------------
@@ -474,14 +651,14 @@ Pokemon = VUCKOMON,26
     Shiny = false
 #--------------
 Pokemon = FENOMON,26
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [RIVAL1,PetTrainer,3]            #---- TrainerBattle.start(:RIVAL1,"PetTrainer",3)
 LoseText = Oh no
 #--------------
 Pokemon = RAGNARNATOR,36
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = ELSANATOR,36
@@ -489,11 +666,11 @@ Pokemon = ELSANATOR,36
     Shiny = false
 #--------------
 Pokemon = EDGARNATOR,36
-    Gender = male
+    Gender = female
     Shiny = false
 #--------------
 Pokemon = VUCKOMON,40
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = FENOMON,40
@@ -504,7 +681,7 @@ Pokemon = FENOMON,40
 LoseText = No, my little Elsa!
 #--------------
 Pokemon = BABYELSA,6
-    Gender = male
+    Gender = female
     Shiny = false
 #-------------------------------
 [LEADER_Shrek,Shrek,0]            #---- TrainerBattle.start(:LEADER_Shrek,"Shrek",0)
@@ -512,7 +689,7 @@ LoseText = Gahh! You still haven't even answered my question!.
 Items = SUPERPOTION
 #--------------
 Pokemon = GOOMY,10
-    Gender = female
+    Gender = male
     Shiny = false
     AbilityIndex = 0
     IV = 20,20,20,20,20,20
@@ -524,18 +701,19 @@ Pokemon = GRIMER,10
     AbilityIndex = 2
     IV = 20,20,20,20,20,20
 #--------------
-Pokemon = WOOPER,12
-    Gender = male
+Pokemon = WOOPER_1,12
+    Form = 1
+    Gender = female
     Shiny = false
     Moves = YAWN,MUDSHOT,WATERGUN,HAZE
     AbilityIndex = 1
     Item = SITRUSBERRY
     IV = 20,20,20,20,20,20
 #--------------
-Pokemon = MUDKIP,14
+Pokemon = MUDBRAY,14
     Gender = male
     Shiny = false
-    Moves = ICYWIND,WATERPULSE,ROCKSMASH,ROCKTOMB
+    Moves = DOUBLEKICK,BULLDOZE,MUDSLAP,ROCKSMASH
     AbilityIndex = 0
     IV = 20,20,20,20,20,20
 #-------------------------------
@@ -551,14 +729,14 @@ Pokemon = WINGULL,14
     IV = 15,15,15,15,15,15
 #--------------
 Pokemon = KRABBY,14
-    Gender = female
+    Gender = male
     Shiny = false
     Moves = METALCLAW,MUDSHOT,STOMP,BUBBLEBEAM
     AbilityIndex = 2
     IV = 15,15,15,15,15,15
 #--------------
 Pokemon = JJ,12
-    Gender = male
+    Gender = female
     Shiny = false
     Moves = FISHSLAP,WETSUIT,SURFSUP,SWAGGER
     AbilityIndex = 1
@@ -566,7 +744,7 @@ Pokemon = JJ,12
     IV = 15,15,15,15,15,15
 #--------------
 Pokemon = THESHARK,14
-    Gender = female
+    Gender = male
     Shiny = false
     Moves = LOWSWEEP,WATERGUN,LEGHACK,PREWORKOUT
     AbilityIndex = 0
@@ -577,7 +755,7 @@ LoseText = Oh well.
 Items = SUPERPOTION,FULLRESTORE
 #--------------
 Pokemon = WINGULL,16
-    Gender = female
+    Gender = male
     Shiny = false
     Moves = SUPERSONIC,WINGATTACK,WATERGUN,QUICKATTACK
     AbilityIndex = 0
@@ -588,7 +766,7 @@ LoseText = Oh well.
 Items = SUPERPOTION,FULLRESTORE
 #--------------
 Pokemon = WINGULL,19
-    Gender = female
+    Gender = male
     Shiny = false
     Moves = SUPERSONIC,WINGATTACK,WATERGUN,QUICKATTACK
     AbilityIndex = 0
@@ -624,7 +802,7 @@ Pokemon = EDGARMON,16
     Shiny = false
 #--------------
 Pokemon = MAGNEMITE,18
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = TSOUKINATOR,18
@@ -632,13 +810,14 @@ Pokemon = TSOUKINATOR,18
     Shiny = false
 #--------------
 Pokemon = CARVANHA,20
-    Gender = female
+    Gender = male
     Shiny = false
 #-------------------------------
 [RIVAL1,Tsoukinator,2]            #---- TrainerBattle.start(:RIVAL1,"Tsoukinator",2)
 LoseText = Never give up, never surrender...
 #--------------
 Pokemon = EDGARMON_1,28
+    Form = 1
     Gender = female
     Shiny = false
 #--------------
@@ -662,22 +841,22 @@ Pokemon = EDGARNATOR,38
     Shiny = false
 #--------------
 Pokemon = MAGNETON,36
-    Gender = female
-    Shiny = false
-#--------------
-Pokemon = TSOUKINATOR,40
     Gender = male
     Shiny = false
 #--------------
-Pokemon = SHARPEDO,38
+Pokemon = TSOUKINATOR,40
     Gender = female
+    Shiny = false
+#--------------
+Pokemon = SHARPEDO,38
+    Gender = male
     Shiny = false
 #-------------------------------
 [BEAUTY,Winter,0]            #---- TrainerBattle.start(:BEAUTY,"Winter",0)
 LoseText = No, my Jigglys!
 #--------------
 Pokemon = JIGGLYPUFF,7
-    Gender = female
+    Gender = male
     Shiny = false
 #--------------
 Pokemon = JIGGLYPUFF,7

@@ -36,6 +36,12 @@ class Player < Trainer
   attr_accessor :mystery_gift_unlocked
   # @return [Array<Array>] downloaded Mystery Gift data
   attr_accessor :mystery_gifts
+  
+  # Stock Options
+  attr_accessor :stock_a_owned
+  attr_accessor :stock_b_owned
+  attr_accessor :stock_c_owned
+  
 
   def initialize(name, trainer_type)
     super
@@ -47,6 +53,9 @@ class Player < Trainer
     @battle_points         = 0
     @soot                  = 0
     @mush                  = 0
+    @stock_a_owned         = 0
+    @stock_b_owned         = 0
+    @stock_c_owned         = 0
     @pokedex               = Pokedex.new
     @has_pokedex           = false
     @has_pokegear          = false
@@ -110,6 +119,22 @@ class Player < Trainer
   def mush=(value)
     validate value => Integer
     @mush = value.clamp(0, Settings::MAX_MUSH)
+  end
+  
+  ## AT EDIT - Sets players stock owned to 0
+  def stock_1_owned=(value)
+    validate value => Integer
+    @stock_1_owned = value.clamp(0, Settings::MAX_MONEY)
+  end
+  
+  def stock_2_owned=(value)
+    validate value => Integer
+    @stock_2_owned = value.clamp(0, Settings::MAX_MONEY)
+  end
+  
+  def stock_3_owned=(value)
+    validate value => Integer
+    @stock_3_owned = value.clamp(0, Settings::MAX_MONEY)
   end
 
   # @return [Integer] the number of Gym Badges owned by the player

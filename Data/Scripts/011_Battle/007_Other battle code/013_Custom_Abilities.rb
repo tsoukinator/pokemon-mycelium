@@ -95,19 +95,20 @@ Battle::AbilityEffects::OnBeingHit.add(:INJURYPRONE,
   proc { |ability, user, target, move, battle|
   
   roll = rand(1..20)
+  #roll = 1
   
   if roll == 1
     next if !move.pbContactMove?(user)
     next if user.paralyzed?
     battle.pbShowAbilitySplash(target)
     if user.pbCanParalyze?(target, Battle::Scene::USE_ABILITY_SPLASH) &&
-       user.affectedByContactEffect?(Battle::Scene::USE_ABILITY_SPLASH)
+       target.affectedByContactEffect?(Battle::Scene::USE_ABILITY_SPLASH)
       msg = nil
       if !Battle::Scene::USE_ABILITY_SPLASH
-        msg = _INTL("{1}'s {2} paralyzed {3}! It may be unable to move!",
-           target.pbThis, target.abilityName, user.pbThis(true))
+        msg = _INTL("{1}'s {2} paralyzed themself! It may be unable to move!",
+           target.pbThis, target.abilityName)
       end
-      user.pbParalyze(target, msg)
+      target.pbParalyze(user, msg)
     end
     battle.pbHideAbilitySplash(target)
   end
@@ -136,6 +137,16 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:ALLERGIES,
 Battle::AbilityEffects::DamageCalcFromTarget.add(:ALLERGIES,
   proc { |ability, user, target, move, mults, power, type|
     mults[:power_multiplier] *= 1.2 if (type == :GRASS or type == :BUG or move.powderMove?)
+  }
+)
+
+
+# 1.5x Boost to all physical attacks when under 1/3 hp
+Battle::AbilityEffects::DamageCalcFromUser.add(:IRONWILL,
+  proc { |ability, user, target, move, mults, power, type|
+    if (user.hp <= user.totalhp / 3 or user.pbHasAnyStatus?) && move.physicalMove?
+      mults[:attack_multiplier] *= 1.5
+    end
   }
 )
 

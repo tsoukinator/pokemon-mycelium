@@ -11,6 +11,7 @@ module GameData
     attr_reader :deep_bush
     attr_reader :shows_grass_rustle
     attr_reader :land_wild_encounters
+    attr_reader :land2_wild_encounters
     attr_reader :double_wild_encounters
     attr_reader :battle_environment
     attr_reader :ledge
@@ -51,6 +52,7 @@ module GameData
       @deep_bush              = hash[:deep_bush]              || false
       @shows_grass_rustle     = hash[:shows_grass_rustle]     || false
       @land_wild_encounters   = hash[:land_wild_encounters]   || false
+      @land2_wild_encounters  = hash[:land2_wild_encounters]  || false
       @double_wild_encounters = hash[:double_wild_encounters] || false
       @battle_environment     = hash[:battle_environment]
       @ledge                  = hash[:ledge]                  || false
@@ -210,5 +212,14 @@ GameData::TerrainTag.register({
   :id_number              => 18,
   :shows_grass_rustle     => true,
   :land_wild_encounters   => true,
+  :battle_environment     => :Grass
+})
+
+## AT Edit - Second Grass Terrain type
+GameData::TerrainTag.register({
+  :id                     => :Grass2,
+  :id_number              => 19,
+  :shows_grass_rustle     => true,
+  :land2_wild_encounters   => true,
   :battle_environment     => :Grass
 })

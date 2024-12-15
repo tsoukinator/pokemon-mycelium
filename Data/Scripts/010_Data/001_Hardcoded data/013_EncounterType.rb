@@ -33,6 +33,12 @@ GameData::EncounterType.register({
 })
 
 GameData::EncounterType.register({
+  :id             => :Land2,
+  :type           => :land2,
+  :trigger_chance => 21
+})
+
+GameData::EncounterType.register({
   :id             => :LandDay,
   :type           => :land,
   :trigger_chance => 21

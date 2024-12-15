@@ -322,7 +322,7 @@ for (i in 1:nrow(all_pkmn_list)) {
     else if (nrow(existing_innates) == 0) {
       #print("NoInnate")
       for (j in 1:length(star_sign_list)) {
-        if (all_pkmn_list$Output[i] %in% c("[EDGARMON]","[EDGARNATOR]","[RAGNARMON]","[RAGNARNATOR]","[ELSAMON]","[ELSANATOR]") ) {
+        if (all_pkmn_list$Output[i] %in% c("[EDGARMON]","[EDGARNATOR]","[RAGNARMON]","[RAGNARNATOR]","[ELSAMON]","[ELSANATOR]","[VUCKOMON]") ) {
           innate_frame[nrow(innate_frame) + 1,] = c(paste0("Innates",j," = ",dog_innate_list[j]))
         } else {
           innate_frame[nrow(innate_frame) + 1,] = c(paste0("Innates",j," = ",star_sign_list[j]))

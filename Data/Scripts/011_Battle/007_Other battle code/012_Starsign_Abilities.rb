@@ -29,6 +29,7 @@ current_moon_index = moonphase(pbGetTimeNow())
 # Get current moon phase (name)
 current_moon_phase = moon_phases[moonphase(pbGetTimeNow())]
 current_moon_day = moonphase_day(pbGetTimeNow()-1)
+#current_moon_day = 27
 
 def announce_moon_sign(battler, battle, zodiac, moon_day, moon_phase, ability)
   puts "Current Zodiac sign is: #{zodiac}"
@@ -40,12 +41,12 @@ def announce_moon_sign(battler, battle, zodiac, moon_day, moon_phase, ability)
   
   # If moon day is not a day where Critical Hits or Immunity is concerned
   # Apply the stat boosts here (otherwise, apply in handlers lower in page)
-  if ![8, 18, 27, 7, 14, 22].include?(moon_day)
+  if ![8, 18, 27, 7, 14, 22, -1].include?(moon_day)
     bonus_frame = [:SPEED, :ATTACK, :SPECIAL_ATTACK, :EVASION, :ACCURACY, :DEFENSE, :SPECIAL_DEFENSE, :HP, :HP, :SPEED, :EVASION, :ACCURACY, :DEFENSE, :SPECIAL_DEFENSE, :HP, :SPECIAL_ATTACK, :ATTACK, :SPEED, :HP, :EVASION, :DEFENSE, :SPECIAL_DEFENSE, :HP, :ACCURACY, :SPECIAL_ATTACK, :ATTACK, :EVASION, :HP]
     raise_stat = bonus_frame[moon_day]
     puts "Raise Stat for #{battler}: #{raise_stat}"
-    #battler.pbRaiseStatStageSilent(raise_stat, 1, battler, showAnim = false, ignoreContrary = true)
-    battler.pbRaiseStatStage(raise_stat, 1, battler, showAnim = true, ignoreContrary = true)
+    battler.pbRaiseStatStageSilent(raise_stat, 1, battler, showAnim = false, ignoreContrary = true)
+    #battler.pbRaiseStatStage(raise_stat, 1, battler, showAnim = true, ignoreContrary = true)
   end
 end
 
@@ -173,6 +174,7 @@ Battle::AbilityEffects::OnBattlerFainting.add(:LEOPRIDEFULROAR,
     else
       battle.pbDisplay(_INTL("{1}'s Prideful Roar restores its HP!", battler.pbThis, battler.abilityName))
     end
+    battle.pbHideAbilitySplash(battler)
     if battler.status != :NONE
       battle.pbHideAbilitySplash(battler)
     end

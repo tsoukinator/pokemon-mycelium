@@ -1,0 +1,434 @@
+---
+title: "TsoukMon"
+output: html_notebook
+---
+
+<style>
+.main-container {
+  max-width: 100% !important;
+}
+</style>
+
+TsoukMon Viewer: Pokemon, Moves, and Abilities
+
+```{r setup, include = FALSE}
+# https://medium.com/@SportSciData/https-medium-com-collinsneil306-how-to-create-interactive-reports-with-r-markdown-part-i-4fa9df46cd9
+
+#rm(list=ls()) # Clear workspace
+library(data.table)
+library(readxl)
+library(dplyr)
+library(readr)
+library(rlist)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(DT)
+
+############################################################################
+#######################TSOUKMON UNIQUE ####################################
+############################################################################
+tsoukmon_pkmn <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "PkmnStats"), is.na(`Pokedex Number`)), Name)
+tsoukmon_pkmn$Pokemon_ID <- toupper(gsub(" ","",tsoukmon_pkmn$Name))
+
+tsoukmon_moves <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "Moves")), Name)
+tsoukmon_moves$Move_ID <- toupper(gsub(" ","",tsoukmon_moves$Name))
+
+tsoukmon_abilities <- select(filter(readxl::read_excel("PokeDB.xlsx", sheet = "Abilities")), Name)
+tsoukmon_abilities$Ability_ID <- toupper(gsub(" ","",tsoukmon_abilities$Name))
+
+############################################################################
+# Define the path to the folder where your files are located
+file_path <- "../PBS/"
+
+############################################################################
+############################# MOVE LIST ####################################
+############################################################################
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+move_files <- list.files(path = file_path, pattern = "^moves", full.names = TRUE)
+
+# Read all the files using read_delim
+move_data <- map(move_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+movelist_txt <- bind_rows(move_data)
+
+# Split on Equals sign
+movelist_split <- data.frame(do.call('rbind', strsplit(as.character(movelist_txt$X1),'=',fixed=TRUE)))
+movelist_split$X1 <- trimws(movelist_split$X1)
+movelist_split$X2 <- trimws(movelist_split$X2)
+
+##########################################
+## Add Move Name to Moves
+movelist_split_end <- movelist_split %>%
+  mutate(Move_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Move_ID)                                            # Fill down the group name
+
+# Remove Key Fields from data-frame
+movelist_split_end <- filter(movelist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Explicitly specifying the key column 'Move_Name'
+move_db <- pivot_wider(
+  data = movelist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Move_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+move_db$Move_ID <- substr(move_db$Move_ID, 2, nchar(move_db$Move_ID) - 1)
+
+move_db <- move_db[order(move_db$Move_ID),]
+move_db$TsoukMon_OG <- move_db$Move_ID %in% tsoukmon_moves$Move_ID
+move_db_short <- move_db %>% select(Name, Type, Category, Power, Accuracy, TotalPP, Target, Description, EffectChance, Priority, TsoukMon_OG) 
+############################################################################
+############################# Pokemon LIST ####################################
+############################################################################
+
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+pokemon_files <- list.files(path = file_path, pattern = "^pokemon", full.names = TRUE)
+# Filter out files that contain "_metrics" in the name
+pokemon_files <- pokemon_files[!grepl("_metrics", pokemon_files)]
+
+# Read all the files using read_delim
+pokemon_data <- map(pokemon_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+pokelist_txt <- bind_rows(pokemon_data)
+
+# Split on Equals sign
+pokelist_split <- data.frame(do.call('rbind', strsplit(as.character(pokelist_txt$X1),'=',fixed=TRUE)))
+pokelist_split$X1 <- trimws(pokelist_split$X1)
+pokelist_split$X2 <- trimws(pokelist_split$X2)
+
+##########################################
+## Add Pokemon Name to each row
+pokelist_split_end <- pokelist_split %>%
+  mutate(Pokemon_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Pokemon_ID)                                         # Fill down the group name
+  
+# Remove Key Fields from data-frame
+pokelist_split_end <- filter(pokelist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Summarize multiple key values by concatenating them
+pokelist_split_end <- pokelist_split_end %>%
+  group_by(Pokemon_ID, X1) %>%
+  summarise(X2 = str_c(X2, collapse = ", "), .groups = "drop")
+
+# Explicitly specifying the key column 'Move_Name'
+poke_db <- pivot_wider(
+  data = pokelist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Pokemon_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+poke_db$Pokemon_ID <- substr(poke_db$Pokemon_ID, 2, nchar(poke_db$Pokemon_ID) - 1)
+# If Name is not present, replace with proper case ID (split prior to comma)
+poke_db$Name <- ifelse(is.na(poke_db$Name),str_to_title(str_split(poke_db$Pokemon_ID,",",simplify=TRUE)[1]),poke_db$Name)
+# If FormName is not present, replace with "Standard Form"
+poke_db$FormName <- ifelse(is.na(poke_db$FormName),"Standard Form",poke_db$FormName)
+# Split out base stats
+poke_db <- poke_db %>%
+  separate(BaseStats, into = c("HP", "ATTACK","DEFENSE","SPEED","SPECIAL_ATTACK","SPECIAL_DEFENSE"), sep = ",", fill = "right")
+
+poke_db <- poke_db[order(poke_db$Pokemon_ID),]
+poke_db$TsoukMon_OG <- poke_db$Pokemon_ID %in% tsoukmon_pkmn$Pokemon_ID
+poke_db_short <- poke_db %>% select(Name, FormName, Types, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions, TsoukMon_OG) 
+############################################################################
+############################# Abilities LIST ####################################
+############################################################################
+
+# List all files in the folder that start with "pokemon" - but not pokemon metrics
+ability_files <- list.files(path = file_path, pattern = "^abilities", full.names = TRUE)
+# Filter out files that contain "_metrics" in the name
+ability_files <- ability_files[!grepl("_Innate", ability_files)]
+
+# Read all the files using read_delim
+ability_data <- map(ability_files, read_delim, delim = "\n", trim_ws = TRUE, col_names = FALSE)
+
+# Combine the list of data frames into one data frame (if applicable)
+abilitylist_txt <- bind_rows(ability_data)
+
+# Split on Equals sign
+abilitylist_split <- data.frame(do.call('rbind', strsplit(as.character(abilitylist_txt$X1),'=',fixed=TRUE)))
+abilitylist_split$X1 <- trimws(abilitylist_split$X1)
+abilitylist_split$X2 <- trimws(abilitylist_split$X2)
+
+##########################################
+## Add Move Name to Moves
+abilitylist_split_end <- abilitylist_split %>%
+  mutate(Ability_ID = ifelse(grepl("^\\[", X1), X1, NA)) %>%  # Extract rows where X1 starts with '['
+  fill(Ability_ID)                                            # Fill down the group name
+
+# Remove Key Fields from data-frame
+abilitylist_split_end <- filter(abilitylist_split_end, !grepl("^\\[", X1) & !grepl("^\\#---", X1) & !grepl("^\\#", X1))
+
+# Explicitly specifying the key column 'Ability_ID'
+ability_db <- pivot_wider(
+  data = abilitylist_split_end,
+  names_from = X1,  # Column whose values become column names
+  values_from = X2, # Column whose values fill the table
+  id_cols = c(Ability_ID)  # Explicitly specifying the key column
+)
+
+# Remove square brackets from Move_ID column
+ability_db$Ability_ID <- substr(ability_db$Ability_ID, 2, nchar(ability_db$Ability_ID) - 1)
+
+ability_db$TsoukMon_OG <- ability_db$Ability_ID %in% tsoukmon_abilities$Ability_ID
+ability_db <- ability_db[order(ability_db$Ability_ID),]
+
+#ability_db_short <- ability_db %>% select(Name, FormName, Type, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions) 
+
+###########################
+###########################
+poke_list <- unique(poke_db$Name)
+# Pokemon Summary
+#poke_filter <- filter(poke_db, Name == "Geodude")
+poke_filter <- poke_db
+
+###################
+#### Base Stats ###
+###################
+poke_filter_base <- select(poke_filter, Pokemon_ID, Name, FormName, Types, HP, ATTACK, DEFENSE, SPECIAL_ATTACK, SPECIAL_DEFENSE, SPEED, Abilities, HiddenAbilities, Evolutions, Moves)
+
+selected_poke_stats <- pivot_longer(poke_filter_base
+             ,cols = c("Types","HP","ATTACK","DEFENSE","SPECIAL_ATTACK","SPECIAL_DEFENSE","SPEED","Moves","Evolutions","Abilities","HiddenAbilities")
+             ,names_to = "Stat"
+             ,values_to = "Value"
+             )
+
+selected_poke_stats <- filter(selected_poke_stats,! Stat %in% c("Moves", "Abilities", "HiddenAbilities", "Evolutions"))
+names(selected_poke_stats)[names(selected_poke_stats) == 'Name'] <- 'Pokemon'
+
+selected_poke_stats$TsoukMon_OG = selected_poke_stats$Pokemon_ID %in% tsoukmon_pkmn$Pokemon_ID
+#colnames(selected_poke_stats) <- c("Stat","Value")
+#selected_poke_stats
+
+###################
+##### Ability ####
+##################
+ability_filter <- select(poke_filter,Pokemon_ID,Name,FormName,Abilities,HiddenAbilities)
+ability_filter <- ability_filter %>% separate(Abilities, into = c("Ability1", "Ability2"), sep = ",", fill = "right")
+ability_filter <- ability_filter %>% separate(HiddenAbilities, into = c("HiddenAbility1","HiddenAbility2","HiddenAbility3"), sep = ",", fill = "right")
+#ability_end <- gather(ability_filter, key="Pokemon_ID", value = "Ability", na.rm = TRUE)
+
+ability_end <- pivot_longer(ability_filter
+             ,cols = c("Ability1","Ability2","HiddenAbility1","HiddenAbility2","HiddenAbility3")
+             ,names_to = "Type"
+             ,values_to = "Ability")
+
+ability_list <- filter(left_join(ability_end, ability_db, by = c("Ability" = "Ability_ID")), !is.na(Ability))
+colnames(ability_list) <- c("Pokemon_ID","Pokemon","FormName"," ","Ability","Name","Description","Flags")
+
+selected_poke_abilities <- select(ability_list, Pokemon, Ability, Description, " ")
+
+#ability_summary
+
+###############################
+### Selected Pokemon Moves ###
+##############################
+poke_filter_moves <- select(poke_filter, Pokemon_ID, Name, Moves)
+
+# Step 1: Split the Moves column into separate rows based on commas
+# Transform the data
+poke_move_summary <- poke_filter_NA_RM %>%
+  # Separate each value in the Moves column into individual rows
+  separate_rows(Moves, sep = ",") %>%
+  # Add a column with row numbers to distinguish between level and move names
+  group_by(Name) %>%
+  mutate(row_id = 2 * ceiling(row_number() / 2)) %>%
+  # Use modulo to identify odd rows as move levels and even rows as move names
+  mutate(category = ifelse(row_number() %% 2 == 1, "Move_Level", "Move_Name")) %>%
+  # Pivot data so that Move_Level and Move_Name are in separate columns
+  pivot_wider(names_from = category, values_from = Moves) %>%
+  # Remove the row_id column and ungroup
+  select(-row_id) %>%
+  ungroup() %>%
+  # Convert the Move_Level column to numeric (since it's character after splitting)
+  mutate(Move_Level = as.integer(Move_Level)) %>%
+  # Select relevant columns
+  select(Pokemon_ID, Name, Move_Level, Move_Name)
+
+# Remove duplicates
+poke_move_summary <- unique(poke_move_summary)
+
+selected_poke_moves <- left_join(poke_move_summary, move_db, by = c("Move_Name" = "Move_ID"))[,1:11]
+colnames(selected_poke_moves) <- c("Pokemon_ID","Pokemon","Level","Move_ID","Name","Type","Category","Power","Accuracy","PP","Target")
+
+```
+
+
+```{r}
+library(shiny)
+
+# Define UI
+ui <- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      #checkbox_ui {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+    "))
+  ),
+  
+  # Title Panel
+  titlePanel("TsoukMon Database"),
+  
+  # Add a fixed checkbox at the top right
+  div(
+    id = "checkbox_ui",
+    checkboxInput(inputId = "p_TsoukMonOG_Checkbox", label = "TsoukMon Originals Only", value = TRUE)
+  ),
+  
+  # Main Panel with tabset
+  mainPanel(
+    tabsetPanel(
+      id = "main_tabs",
+      tabPanel("Summary View", 
+               h3("Summary Information"),
+               selectizeInput(inputId = "p_PokeSelect", label = "Select a Pokemon", choices = poke_list, selected = "FoodBaby"),
+               h3("Stats"),
+               DTOutput("selected_poke_stats"),
+               h4(),
+               h3("Abilities"),
+               DTOutput("selected_poke_abilities"),
+               h4(),
+               h3("Moves"),
+               DTOutput("selected_poke_moves")
+      ),
+      tabPanel("Pokemon", 
+               h3("Pokemon List"),
+               DTOutput("pokemon_table")
+      ),
+      tabPanel("Moves", 
+               h3("Moves List"),
+               DTOutput("moves_table")
+      ),
+      tabPanel("Abilities", 
+               h3("Abilities List"),
+               DTOutput("abilities_table")
+      )
+    )
+  )
+)
+#)
+
+# Server
+# Define server logic
+server <- function(input, output, session) {
+  
+  # Reactive expression to filter the abilities table based on the selected Pokémon
+  r_pokedb_stats <- reactive({
+    if (input$p_TsoukMonOG_Checkbox != TRUE) {
+      return(poke_db_short)
+    }
+    poke_db_short[poke_db_short$TsoukMon_OG == TRUE, ]
+  })
+  
+  # Reactive expression to filter the abilities table based on the selected Pokémon
+  r_pokedb_moves <- reactive({
+    if (input$p_TsoukMonOG_Checkbox != TRUE) {
+      return(move_db_short)
+    }
+    move_db_short[move_db_short$TsoukMon_OG == TRUE, ]
+  }) 
+  
+    # Reactive expression to filter the abilities table based on the selected Pokémon
+  r_pokedb_abilities <- reactive({
+    if (input$p_TsoukMonOG_Checkbox != TRUE) {
+      return(ability_db)
+    }
+    ability_db[ability_db$TsoukMon_OG == TRUE, ]
+  }) 
+  
+# Sample data for demonstration
+  output$pokemon_table <- renderDT({
+    DT::datatable(select(r_pokedb_stats(), -TsoukMon_OG), rownames = FALSE, class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 't', lengthChange = FALSE, pageLength = -1, lengthMenu = list(c(-1), c("All"))))  %>%
+    DT::formatStyle(columns = c(1:ncol(r_pokedb_stats())), fontSize = '80%')
+  })
+  
+  output$moves_table <- renderDT({
+DT::datatable(select(r_pokedb_moves(), -TsoukMon_OG), rownames = FALSE, class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 't', lengthChange = FALSE, pageLength = -1, lengthMenu = list(c(-1), c("All"))))  %>%
+    DT::formatStyle(columns = c(1:ncol(r_pokedb_moves())), fontSize = '80%')
+  })
+  
+  output$abilities_table <- renderDT({
+DT::datatable(select(r_pokedb_abilities(), -Ability_ID, -TsoukMon_OG), rownames = FALSE, class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 't', lengthChange = FALSE, pageLength = -1, lengthMenu = list(c(-1), c("All"))))  %>%
+    DT::formatStyle(columns = c(1:ncol(r_pokedb_abilities())), fontSize = '80%')
+  })
+  
+
+  filtered_stats <- reactive({
+    # If nothing is selected, show the whole table
+    if (is.null(input$p_PokeSelect) || length(input$p_PokeSelect) == 0) {
+      return(selected_poke_stats)
+    }
+    
+    # Filter the table by the selected Pokémon
+    selected_poke_stats[selected_poke_stats$Pokemon %in% input$p_PokeSelect, ]
+
+  })
+  
+    # Reactive expression to filter the abilities table based on the selected Pokémon
+  filtered_abilities <- reactive({
+    if (is.null(input$p_PokeSelect) || length(input$p_PokeSelect) == 0) {
+      return(selected_poke_abilities)
+    }
+    selected_poke_abilities[selected_poke_abilities$Pokemon %in% input$p_PokeSelect, ]
+  })
+
+  # Reactive expression to filter the moves table based on the selected Pokémon
+  filtered_moves <- reactive({
+    if (is.null(input$p_PokeSelect) || length(input$p_PokeSelect) == 0) {
+      return(selected_poke_moves)
+    }
+    selected_poke_moves[selected_poke_moves$Pokemon %in% input$p_PokeSelect, ]
+  })
+  
+    observeEvent(input$p_TsoukMonOG_Checkbox, {
+    if (input$p_TsoukMonOG_Checkbox == TRUE) {
+      updateSelectizeInput(session, inputId = "p_PokeSelect", selected = "FoodBaby", choices =  unique(filter(poke_db, TsoukMon_OG == TRUE)$Name))
+    } else {
+      updateSelectizeInput(session, inputId = "p_PokeSelect", choices =  unique(poke_db$Name))
+    }
+   
+    }
+    )
+    
+  
+  ########### SELECT A POKEMON - SUMMARY STATS #############
+     output$selected_poke_stats <- renderDT({
+  DT::datatable(dplyr::select(filtered_stats(), Stat, Value), rownames = FALSE, class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 't', pageLength = 8, lengthChange = FALSE))  %>%
+    DT::formatStyle(columns = c(1:ncol(selected_poke_stats)), fontSize = '80%')
+    }) 
+    
+    output$selected_poke_abilities <- renderDT({
+  DT::datatable(dplyr::select(filtered_abilities(), Ability, Description, ` `), rownames = FALSE, class = 'cell-border stripe', extensions = 'Buttons', options = list(dom = 't', pageLength = 5, lengthChange = FALSE))  %>%
+    DT::formatStyle(columns = c(1:ncol(selected_poke_abilities)), fontSize = '80%')
+    }) 
+    
+  output$selected_poke_moves <- renderDT({
+    DT::datatable(dplyr::select(filtered_moves(), Level, Name, Type, Category, Power, Accuracy, PP, Target), 
+                  rownames = FALSE, 
+                  class = 'cell-border stripe', 
+                  extensions = 'Buttons', 
+                  options = list(dom = 't', 
+                                 lengthChange = FALSE, 
+                                 pageLength = -1,  # Shows all rows
+                                 lengthMenu = list(c(-1), c("All")))) %>%
+      DT::formatStyle(columns = c(1:ncol(filtered_moves())), fontSize = '80%')
+  })
+
+
+    
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+```
+

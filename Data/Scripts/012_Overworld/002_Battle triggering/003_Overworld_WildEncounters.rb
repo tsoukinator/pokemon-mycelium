@@ -55,6 +55,14 @@ class PokemonEncounters
     end
     return false
   end
+  
+  def has_land2_encounters?
+    GameData::EncounterType.each do |enc_type|
+      next if ![:land2, :contest].include?(enc_type.type)
+      return true if has_encounter_type?(enc_type.id)
+    end
+    return false
+  end
 
   # Returns whether land-like encounters have been defined for the current map
   # (ignoring the Bug-Catching Contest one).
@@ -65,7 +73,7 @@ class PokemonEncounters
     end
     return false
   end
-
+  
   # Returns whether cave-like encounters have been defined for the current map.
   # Applies only to encounters triggered by moving around.
   def has_cave_encounters?
@@ -93,7 +101,7 @@ class PokemonEncounters
     terrain_tag = $game_map.terrain_tag($game_player.x, $game_player.y)
     return false if terrain_tag.ice
     return true if has_cave_encounters?   # i.e. this map is a cave
-    return true if has_land_encounters? && terrain_tag.land_wild_encounters
+    return true if (has_land_encounters? && terrain_tag.land_wild_encounters) || (has_land2_encounters? && terrain_tag.land2_wild_encounters)
     return false
   end
 
@@ -255,6 +263,10 @@ class PokemonEncounters
       if has_land_encounters? && $game_map.terrain_tag($game_player.x, $game_player.y).land_wild_encounters
         ret = :BugContest if pbInBugContest? && has_encounter_type?(:BugContest)
         ret = find_valid_encounter_type_for_time(:Land, time) if !ret
+      end
+      if has_land2_encounters? && $game_map.terrain_tag($game_player.x, $game_player.y).land2_wild_encounters
+        ret = :BugContest if pbInBugContest? && has_encounter_type?(:BugContest)
+        ret = find_valid_encounter_type_for_time(:Land2, time) if !ret
       end
       if !ret && has_cave_encounters?
         ret = find_valid_encounter_type_for_time(:Cave, time)

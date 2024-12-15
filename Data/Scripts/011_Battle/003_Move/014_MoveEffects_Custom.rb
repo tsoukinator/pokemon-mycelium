@@ -1000,7 +1000,7 @@ end
 #===============================================================================
 class Battle::Move::MultiTurnAttackIncreasingPower < Battle::Move
   def pbBaseDamage(baseDmg, user, target)
-    dmg = 60  # Default damage value
+    #dmg = 60  # Default damage value
     if user.effects[PBEffects::Outrage] == 0
       dmg = baseDmg * 1.0 # 60
     elsif user.effects[PBEffects::Outrage] == 2
@@ -1022,5 +1022,151 @@ class Battle::Move::MultiTurnAttackIncreasingPower < Battle::Move
     if user.effects[PBEffects::Outrage] > 0
       user.effects[PBEffects::Outrage] -= 1
     end
+  end
+  
+  def pbAdditionalEffect(user, target)
+    return if target.fainted? || target.damageState.substitute
+    return if target.effects[PBEffects::MeanLook] >= 0
+    return if Settings::MORE_TYPE_EFFECTS && target.pbHasType?(:GHOST)
+    target.effects[PBEffects::MeanLook] = user.index
+    @battle.pbDisplay(_INTL("{1} is captivated by the hattrick!", target.pbThis))
+  end
+end
+
+#===============================================================================
+# Burger Time - Heal User, Decrease Speed
+#===============================================================================
+class Battle::Move::BurgerTime < Battle::Move::HealingMove
+  def pbHealAmount(user)
+    if user.pbCanLowerStatStage?(:SPEED, user, self)
+      user.pbLowerStatStage(:SPEED, 1, user)
+    end
+    return (user.totalhp / 2.0).round
+  end
+  
+ # def pbEffectAgainstTarget(user, target)
+ #   if user.pbCanLowerStatStage?(:SPEED, user, self)
+ #     user.pbLowerStatStage(:SPEED, 1, user)
+ # end
+end
+
+#===============================================================================
+# Left Foot Tumble
+#===============================================================================
+class Battle::Move::LeftFootTumble < Battle::Move::RecoilMove
+  def recoilMove?;        return true; end
+    
+  def pbCrashDamage(user)
+    return if !user.takesIndirectDamage?
+    @battle.pbDisplay(_INTL("{1} fell over and hurt themselves!", user.pbThis))
+    @battle.scene.pbDamageAnimation(user)
+    #user.pbReduceHP(user.totalhp / 16, false)
+    return user.pbReduceHP(user.totalhp / 12, false)
+    user.pbItemHPHealCheck
+    user.pbFaint if user.fainted?
+  end
+  
+  def pbRecoilDamage(user, target)
+    return (target.damageState.totalHPLost / 4.0).round
+  end
+end
+
+#===============================================================================
+# World Map - Traps Target, Lowers their Defense - (from: TrapTargetInBattle)
+#===============================================================================
+class Battle::Move::WorldMap < Battle::Move
+  def canMagicCoat?; return true; end
+
+  def pbFailsAgainstTarget?(user, target, show_message)
+    return false if damagingMove?
+    if target.effects[PBEffects::MeanLook] >= 0
+      @battle.pbDisplay(_INTL("But it failed!")) if show_message
+      return true
+    end
+    if Settings::MORE_TYPE_EFFECTS && target.pbHasType?(:GHOST)
+      @battle.pbDisplay(_INTL("It doesn't affect {1}...", target.pbThis(true))) if show_message
+      return true
+    end
+    return false
+  end
+
+  def pbEffectAgainstTarget(user, target)
+    return if damagingMove?
+    target.effects[PBEffects::MeanLook] = user.index
+    @battle.pbDisplay(_INTL("{1} is trapped by the world map!\n There's no escaping the forcefield!", target.pbThis))
+    #@battle.pbDisplay(_INTL("There's no escaping the forcefield!"))
+    if target.pbCanLowerStatStage?(:DEFENSE, target, self)
+      target.pbLowerStatStage(:DEFENSE, 1, target)
+    end
+  end
+
+  def pbAdditionalEffect(user, target)
+    return if target.fainted? || target.damageState.substitute
+    return if target.effects[PBEffects::MeanLook] >= 0
+    return if Settings::MORE_TYPE_EFFECTS && target.pbHasType?(:GHOST)
+    target.effects[PBEffects::MeanLook] = user.index
+    @battle.pbDisplay(_INTL("{1} is trapped by the world map!\n There's no escaping the forcefield!", target.pbThis))
+    #@battle.pbDisplay(_INTL("There's no escaping the forcefield!"))
+  end
+end
+
+#===============================================================================
+# Family Meal - Recover HP, Boost Defenses, Skips next turn
+#===============================================================================
+#class Battle::Move::FamilyMeal < Battle::Move
+#  def pbEffectGeneral(user)
+#    user.effects[PBEffects::HyperBeam] = 2
+#    user.currentMove = @id
+#  end
+#end
+
+class Battle::Move::FamilyMeal < Battle::Move::HealingMove
+  
+    def pbEffectGeneral(user)
+      user.effects[PBEffects::HyperBeam] = 2
+      user.currentMove = @id
+    
+    if user.pbCanRaiseStatStage?(:DEFENSE, user, self)
+      user.pbRaiseStatStage(:DEFENSE, 1, user)
+    end
+    
+    if user.pbCanRaiseStatStage?(:SPECIAL_DEFENSE, user, self)
+      user.pbRaiseStatStage(:SPECIAL_DEFENSE, 1, user)
+    end
+    
+    if user.pbCanLowerStatStage?(:SPEED, user, self)
+      user.pbLowerStatStage(:SPEED, 2, user)
+    end
+    user.pbRecoverHP(user.totalhp / 3).round
+  end
+  
+end
+
+#===============================================================================
+# Two turn attack. Skips first turn, attacks second turn. (Sky Attack)
+# May make the target flinch.
+#===============================================================================
+class Battle::Move::TwoTurnAttackParalyzeFlinchTarget < Battle::Move::TwoTurnMove
+  def flinchingMove?; return true; end
+
+  def pbChargingTurnMessage(user, targets)
+    @battle.pbDisplay(_INTL("{1} is up to something...", user.pbThis))
+  end
+
+  def pbAdditionalEffect(user, target)
+    return if target.damageState.substitute
+    @battle.pbDisplay(_INTL("{1} threw a whole couch at them!", user.pbThis))
+    target.pbParalyze(user) if target.pbCanParalyze?(user, false, self)
+    target.pbFlinch(user)
+  end
+end
+
+#===============================================================================
+# Increases the user's Defense and Speed by 1 stage each. (Floor Work)
+#===============================================================================
+class Battle::Move::RaiseUserDefSpeed1 < Battle::Move::MultiStatUpMove
+  def initialize(battle, move)
+    super
+    @statUp = [:DEFENSE, 1, :SPEED, 1]
   end
 end

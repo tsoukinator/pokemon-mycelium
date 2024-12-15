@@ -55,8 +55,48 @@ def sellPokemonToNPC(pokemon_type = nil)
   species_data = GameData::Species.get(chosen_pokemon.species)
   catch_rate = species_data.catch_rate
 
-  base_price = total_stats - (catch_rate * 1) + (chosen_pokemon.level * 2)
-  
+  #base_price = total_stats - (catch_rate * 1) + (chosen_pokemon.level * 2)
+  base_price = [(total_stats - (catch_rate * 1)),0].max + (chosen_pokemon.level * 2)
+  puts base_price
+  ######
+  # Define a function to map the proportion to a multiplier between 1 and 3 using a centered exponential curve
+  def iv_multiplier(iv_total)
+    iv_proportion = iv_total.to_f / 186.to_f
+    min_multiplier = 1
+    max_multiplier = 3
+    center_multiplier = 2
+    # Exponential scaling factor to control the curve
+    scaling_factor = 5
+    # Adjust the exponent to center the midpoint
+    exponent = 2 * iv_proportion - 1  # Center the growth around the midpoint
+    # Calculate multiplier
+    multiplier = min_multiplier + (max_multiplier - min_multiplier) * (1 / (1 + Math.exp(-scaling_factor * exponent)))
+    return ([min_multiplier, [multiplier, max_multiplier].min].max).round(3) # Ensure multiplier is within the range
+  end
+    # Calculate total IV bonus
+    iv_total = chosen_pokemon.iv[:HP] +
+               chosen_pokemon.iv[:ATTACK] +
+               chosen_pokemon.iv[:DEFENSE] +
+               chosen_pokemon.iv[:SPECIAL_ATTACK] +
+               chosen_pokemon.iv[:SPECIAL_DEFENSE] +
+               chosen_pokemon.iv[:SPEED]
+    
+    puts "IV TOTAL"
+    puts iv_total
+    # Calculate the multiplier based on IV proportion
+    multiplier = iv_multiplier(iv_total)
+    
+    # Apply the multiplier to the base price
+    base_price = (base_price * multiplier).round(0)
+                   
+    #base_price = base_price + iv_bonus
+    puts multiplier
+    puts base_price
+    #base_price = base_price + normalized_bonus  
+    
+    #base_price = [base_price,200].min
+    
+  ######
   multiplier = 1
 
   base_price *= 2 if chosen_pokemon.shiny?
@@ -68,7 +108,10 @@ def sellPokemonToNPC(pokemon_type = nil)
   end
 
   base_price += ((GameData::Item.get(chosen_pokemon.item).price rescue 0) / 2) if chosen_pokemon.item
-
+  base_price = base_price * (1 + (chosen_pokemon.level.to_f/150)).round(2)
+  base_price = [base_price.round(-1),200].max # Round to nearest 10, get max
+  
+  
   if Kernel.pbConfirmMessage(_INTL("Would you like to sell your {1} for ${2}?", chosen_pokemon.name, base_price))
     $player.remove_pokemon_at_index(chosen_index)
     $player.money += base_price

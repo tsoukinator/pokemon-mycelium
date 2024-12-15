@@ -61,6 +61,23 @@ class GameStats
   attr_writer   :play_time   # In seconds; the reader also updates the value
   attr_accessor :play_sessions
   attr_accessor :time_last_saved   # In seconds
+  
+  ## Stock Options
+  attr_accessor :stock_a_purchased_cnt
+  attr_accessor :stock_b_purchased_cnt
+  attr_accessor :stock_c_purchased_cnt
+  
+  attr_accessor :stock_a_sold_cnt
+  attr_accessor :stock_b_sold_cnt
+  attr_accessor :stock_c_sold_cnt
+  
+  attr_accessor :stock_a_purchased_val
+  attr_accessor :stock_b_purchased_val
+  attr_accessor :stock_c_purchased_val
+  
+  attr_accessor :stock_a_sold_val
+  attr_accessor :stock_b_sold_val
+  attr_accessor :stock_c_sold_val
 
   def initialize
     # Travel
@@ -147,6 +164,23 @@ class GameStats
     @play_time                     = 0
     @play_sessions                 = 0
     @time_last_saved               = 0
+    # Stock Purchased (Count)
+    @stock_a_purchased_cnt        = 0
+    @stock_b_purchased_cnt        = 0
+    @stock_c_purchased_cnt        = 0
+    # Stock Purchased (Value)
+    @stock_a_purchased_val        = 0
+    @stock_b_purchased_val        = 0
+    @stock_c_purchased_val        = 0
+    # Stock Sold (Count)
+    @stock_a_sold_cnt             = 0
+    @stock_b_sold_cnt             = 0
+    @stock_c_sold_cnt             = 0
+    # Stock Sold (Value)
+    @stock_a_sold_val             = 0
+    @stock_b_sold_val             = 0
+    @stock_c_sold_val             = 0
+    
   end
 
   def distance_moved

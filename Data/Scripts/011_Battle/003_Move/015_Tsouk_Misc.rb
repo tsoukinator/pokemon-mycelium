@@ -27,6 +27,7 @@ def set_battle_rules(rules)
   end
 end
 
+
 ####
 #
 #moss_species = [:PARAS_1, :PARASECT_1, :SHROOMISH_1, :BRELOOM_1]  # Add more species as needed

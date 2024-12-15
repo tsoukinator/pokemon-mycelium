@@ -65,10 +65,15 @@ for (i in 1:nrow(encounters)) {
 ## Output Encounters Frame
 lapply(as.data.frame(encounter_pbs$Output), write, "../PBS/encounters_tsouk.txt", append=FALSE, ncolumns=1)
 
-```
-
-```{r}
+####################################
+### Trainers
+####################################
 trainers <- read_sheet(ss = "https://docs.google.com/spreadsheets/d/1ifXHuiQUOqN2F-kTRnHBh8xJX98VI0NTl4pSU8XCIZM/", sheet = "Trainers", skip = 0)#[1:24]
+
+# Create value for FORM if Pokemon contains ID
+trainers$Form <- ifelse(grepl("_", trainers$Pokemon), 
+                        sapply(str_split(trainers$Pokemon, "_"), function(x) x[2]), 
+                        NA)
 
 # For Null Sets, replace with 0
 trainers$Set <- ifelse(is.na(trainers$Set),0,trainers$Set)

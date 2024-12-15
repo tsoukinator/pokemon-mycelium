@@ -1,0 +1,134 @@
+---
+title: "Random Seeded"
+output: html_notebook
+---
+
+
+```{r}
+seeded_random <- function(seed, day_number) {
+  # Combine seed and day_number with some scaling
+  combined_seed <- seed + (day_number * 1000)  # Scale day_number to ensure it influences the seed
+
+  # Set the seed for reproducibility
+  set.seed(combined_seed)
+
+  # Generate a random number between 0 and 1
+  result <- runif(1)
+
+  return(result)
+}
+
+# Generate a dataframe for 100 days
+generate_data <- function(seed, num_days) {
+  # Create a sequence of days
+  days <- 1:num_days
+  
+  # Generate deterministic random numbers for each day
+  random_numbers <- sapply(days, function(day) seeded_random(seed, day))
+  
+  # Create a dataframe
+  data <- data.frame(
+    Day = days,
+    RandomValue = random_numbers
+  )
+  
+  return(data)
+}
+```
+
+```{r}
+# Generate a dataframe for 100 days with a starting value
+generate_volatility <- function(seed, num_days, starting_value = 50, volt = 5, mult = 2) {
+  # Create a sequence of days
+  days <- 1:num_days
+  
+  # Generate deterministic random numbers for each day
+  random_numbers <- sapply(days, function(day) seeded_random(seed, day))
+  
+  # Calculate percentage change for each day (scaled around -volt to +volt)
+  pct_change <- sapply(random_numbers, function(random_value) (random_value * 2 - 1) * volt * mult / 100)
+  
+  # Initialize the Value column
+  values <- numeric(num_days)
+  values[1] <- starting_value  # Set the starting value
+  
+  # Iteratively calculate the value for each day
+  for (i in 2:num_days) {
+    values[i] <- values[i - 1] * (1 + pct_change[i])  # Apply percentage change
+  }
+  
+  # Create a dataframe
+  data <- data.frame(
+    Day = days,
+    RandomValue = random_numbers,
+    Pct_Change = pct_change,
+    Value = values
+  )
+  
+  return(data)
+}
+
+```
+
+```{r}
+# Function to get the data for a specific day with multiplier and volatility
+get_day_data <- function(seed, day_no, starting_value = 50, volt = 5, mult = 2) {
+  if (day_no < 1) stop("DayNo must be >= 1")
+  
+  # Generate deterministic random number for the given day
+  random_value <- seeded_random(seed, day_no)
+  
+  # Calculate percentage change (scaled between -volt to +volt)
+  pct_change <- (random_value * 2 - 1) * volt * mult / 100
+  
+  # Calculate the value iteratively for the given day
+  current_value <- starting_value
+  for (day in 2:day_no) {
+    random_value_day <- seeded_random(seed, day)
+    pct_change_day <- (random_value_day * 2 - 1) * volt * mult / 100
+    current_value <- current_value * (1 + pct_change_day)
+  }
+  
+  # Return a single-row dataframe
+  data.frame(
+    Day = day_no,
+    RandomValue = random_value,
+    Pct_Change = pct_change,
+    Value = current_value,
+    Multiplier = mult,
+    Volatility = volt
+  )
+}
+
+```
+
+```{r}
+library(ggplot2)
+# Set parameters
+seed <- 123; num_days <- 100
+# Generate the data
+#data <- generate_data(seed, num_days)
+data <- generate_volatility(seed, num_days)
+
+ggplot(data, aes(x = Day, y = Value)) +
+  geom_line(color = "blue", size = 1) +
+  labs(title = "Deterministic Random Numbers Over 100 Days",
+       x = "Day",
+       y = "Random Value") +
+  theme_minimal()
+
+```
+
+```{r}
+# Example usage
+seed <- 123
+day_no <- 10
+starting_value <- 50
+volt <- 5
+mult <- 2
+
+result <- get_day_data(seed, day_no, starting_value, volt, mult)
+print(result)
+
+```
+

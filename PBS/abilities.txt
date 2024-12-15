@@ -1257,7 +1257,7 @@ Description = May taunt the foe into attacking.
 #-------------------------------
 [SLEEPY]
 Name = Sleepy
-Description = May fall asleep and recover during battle.
+Description = May fall asleep and recover HP during battle.
 #-------------------------------
 [HIGHALERT]
 Name = High Alert
@@ -1314,3 +1314,7 @@ Description = When user is below 1/3 HP, 50% boost to move power, though user ha
 [DOGARMY]
 Name = Dog Army
 Description = (in progress) - Boosts stats based on number of dogs in the party.
+#-------------------------------
+[IRONWILL]
+Name = Iron Will
+Description = Boost to physical moves when low HP, or statused.

@@ -425,7 +425,7 @@ class Battle::Move::RecoilMove < Battle::Move
     
     if user.hasActiveAbility?(:CHONKYTHIGHS)
       amt = pbRecoilDamage(user, target)
-      amt = amt / 1.5
+      amt = amt / 1.25
       amt = 1 if amt < 1
       user.pbReduceHP(amt, false)
       @battle.pbDisplay(_INTL("{1} legs absorb some recoil.", user.pbThis))

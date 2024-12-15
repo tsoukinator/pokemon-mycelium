@@ -30,6 +30,10 @@
 31,South,32,23,North,0
 # Route 3 (31) - Ingido Plateau outside (35)
 31,West,0,35,East,10
+# Frosty Path (112) - Frosty Hills (33)
+112,North,0,33,South,0
+# Strut Lane (111) - Frosty Hills (33)
+111,East,0,33,West,68
 # Ingido Plateau outside (35) - Route 4 (39)
 35,West,11,39,East,0
 # Route 5 (41) - Route 4 Cycling Road (40)
@@ -48,21 +52,27 @@
 80,North,0,86,South,0
 # Whitehorse City - East (88) - Whitehorse City (80)
 88,West,18,80,East,0
-# Sinking Marsh (85) - Renmao Waterfront (83)
-85,North,0,83,South,0
+# WaterPatchwork (117) - Whitehorse City (80)
+117,West,39,80,East,0
+# Renmao Waterfront (83) - Sinking Marsh (85)
+83,South,0,85,North,0
 # Route 101 (86) - Sinking Marsh (85)
 86,North,0,85,South,0
+# WaterPatchwork (117) - Sinking Marsh (85)
+117,North,0,85,South,61
 # Whitehorse City - East (88) - Route 101 (86)
 88,West,0,86,East,21
+# WaterPatchwork (117) - Route 101 (86)
+117,West,0,86,East,0
 # Sporeville East (105) - Sporeville (104)
 105,West,0,104,East,0
 # Lunea Fields (108) - Lunea Town (107)
 108,North,0,107,South,10
-# Idolstep Town (109) - Route5-B4Dance (110)
+# Idolstep Town (109) - Rhythm Meadow (110)
 109,West,0,110,East,4
-# Frosty Path (112) - Frosty Hills (33)
-112,North,0,33,South,0
-# Strut Lane (111) - Frosty Hills (33)
-111,East,0,33,West,68
 # Strut Lane (111) - Frosty Path (112)
 111,East,10,112,West,0
+# Wildling Path (118) - Wildling Way (119)
+118,North,0,119,South,0
+# Nursery Reserve 2 (124) - Wildling Way (119)
+124,South,0,119,North,0

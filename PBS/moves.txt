@@ -9863,7 +9863,7 @@ TotalPP = 15
 Priority = 0
 EffectChance = 20
 Target = NearOther
-FunctionCode = RecoilQuarterOfDamageDealt
+FunctionCode = LeftFootTumble
 Flags = CanProtect,CanMirrorMove,Contact,Kicking
 Description = The user unleashes an unexpected tumbling shot catching the opponent by surprise.
 #-------------------------------
@@ -10209,7 +10209,7 @@ Description = Attempts to boost self esteem. This move does nothing.
 #-------------------------------
 [SACKTAP]
 Name = Sack Tap
-Type = FIGHTING
+Type = DARK
 Category = Physical
 Power = 50
 Accuracy = 100
@@ -10490,6 +10490,17 @@ Target = NearOther
 FunctionCode = HitTwoToFiveTimes
 Flags = CanProtect,CanMirrorMove,Contact,Kicking
 Description = User makes several attempts at tackling the opponent. The more they fail, the more they try.
+#-------------------------------
+[FLOORWORK]
+Name = Floor Work
+Type = GROUND
+Category = Status
+TotalPP = 25
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpeed1
+Flags = CanProtect,CanMirrorMove,Dance
+Description = Exercises their muscles and does some floorwork. Raises Defense and Speed.
 #-------------------------------
 [PAYROLL]
 Name = Payroll
@@ -10772,7 +10783,7 @@ Priority = 1
 Target = NearOther
 FunctionCode = RecoilQuarterOfDamageDealt
 Flags = CanProtect,CanMirrorMove,Contact,Kicking
-Description = The user recklessly slides at the foes legs, as if a ball was at their feet.
+Description = The user recklessly slides at the foes legs, as if a ball was at their feet. Strikes first.
 #-------------------------------
 [DIVEBOMB]
 Name = Dive Bomb
@@ -10795,9 +10806,9 @@ Category = Status
 TotalPP = 10
 Priority = 0
 Target = User
-FunctionCode = HealUserHalfOfTotalHP
+FunctionCode = BurgerTime
 Flags = CanProtect,CanMirrorMove
-Description = The user takes a break and has a burger, recovering their HP.
+Description = The user takes a break and has a burger, recovering their HP, but reduces their speed.
 #-------------------------------
 [DONUTFORCE]
 Name = Donut Force
@@ -10908,11 +10919,11 @@ Power = 160
 Accuracy = 100
 TotalPP = 10
 Priority = 0
-EffectChance = 50
+EffectChance = 100
 Target = AllNearFoes
-FunctionCode = TwoTurnAttackFlinchTarget
+FunctionCode = TwoTurnAttackParalyzeFlinchTarget
 Flags = CanProtect,CanMirrorMove
-Description = User recruits a friend to help throw a couch at the opposing foes. Attacks on the 2nd turn.
+Description = User recruits a friend and throws a couch at the foes. Attacks on the 2nd turn. Will paralyze.
 #-------------------------------
 [POWERKICK]
 Name = Power Kick
@@ -11248,13 +11259,13 @@ Name = The Hattrick
 Type = NORMAL
 Category = Physical
 Power = 60
-Accuracy = 100
 TotalPP = 15
 Priority = 0
+EffectChance = 100
 Target = NearOther
 FunctionCode = MultiTurnAttackIncreasingPower
 Flags = CanProtect,CanMirrorMove
-Description = Takes the foe out on memorable experiences over three turns, each one better than the last.
+Description = Three turns of memorable experiences. Each stronger than the last. Traps foe.
 #-------------------------------
 [ALLSMILES]
 Name = All Smiles
@@ -11477,3 +11488,64 @@ Target = NearOther
 FunctionCode = SwitchOutUserDamagingMove
 Flags = CanProtect,CanMirrorMove
 Description = Bows out of their performance, and returns to the trainer.
+#-------------------------------
+[WORLDMAP]
+Name = World Map
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = WorldMap
+Flags = CanProtect,CanMirrorMove
+Description = Introduces the opponent to the world map, lowering their defenses, and trapping them.
+#-------------------------------
+[MALPRACTICE]
+Name = Malpractice
+Type = POISON
+Category = Special
+Power = 150
+Accuracy = 100
+TotalPP = 5
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = PoisonTarget
+Flags = CanProtect,CanMirrorMove
+Description = Misuses their expertise in medicine, and intentionally hurts their opponent. Always inflicts poison.
+#-------------------------------
+[FAMILYMEAL]
+Name = Family Meal
+Type = NORMAL
+Category = Status
+TotalPP = 5
+Priority = 0
+Target = User
+FunctionCode = FamilyMeal
+Flags = CanProtect,CanMirrorMove
+Description = Eats an entire family meal. Recovers 1/3 HP, boosts defenses, reduces speed. Cannot move next turn.
+#-------------------------------
+[FREIGHTTRAIN]
+Name = Freight Train
+Type = STEEL
+Category = Physical
+Power = 130
+Accuracy = 95
+TotalPP = 10
+Priority = 0
+EffectChance = 30
+Target = AllNearFoes
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = Runs through the entire oppoonent team with unstoppable force. May paralyze opponents.
+#-------------------------------
+[FORCEFIELD]
+Name = Forcefield
+Type = PSYCHIC
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpDef2
+Flags = CanProtect,CanMirrorMove
+Description = Summons the power of the forcefield, sharply raising their special defense.
