@@ -1299,6 +1299,10 @@ Description = Being hit by water type moves increases speed.
 Name = Creative Burst
 Description = Increases power of moves with added effects.
 #-------------------------------
+[FATIGUE]
+Name = Fatigue
+Description = Successive damaging moves deal less power.
+#-------------------------------
 [KPOPDANCER]
 Name = Kpop Dancer
 Description = Dance moves deal more damage, and restore HP.
@@ -1318,3 +1322,7 @@ Description = (in progress) - Boosts stats based on number of dogs in the party.
 [IRONWILL]
 Name = Iron Will
 Description = Boost to physical moves when low HP, or statused.
+#-------------------------------
+[EMBRYOSHIELD]
+Name = Embryo Shield
+Description = Cannot be harmed by physical moves.

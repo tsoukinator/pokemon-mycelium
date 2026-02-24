@@ -66,7 +66,6 @@ combined_moves <- rbind(movelist_txt,data.frame(X1=value_list))
 # Write out updated moves to PBS directory
 lapply(combined_moves, write, "../PBS/moves.txt", append=FALSE, ncolumns=1)
 
-
 ############################################################################
 ############################# POKEMON LIST ################################
 ############################################################################

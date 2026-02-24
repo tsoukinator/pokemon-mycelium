@@ -9839,487 +9839,6 @@ Flags = CanProtect,CanMirrorMove
 EffectChance = 50
 Description = Wraps the target in a toxic, corrosive chain. This may also leave the target badly poisoned.
 #-------------------------------
-[FART]
-Name = Fart
-Type = POISON
-Category = Special
-Power = 45
-Accuracy = 0
-TotalPP = 25
-Priority = 0
-EffectChance = 50
-Target = NearOther
-FunctionCode = PoisonTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user gives the foe an idea of what it had for lunch. Has a chance to poison.
-#-------------------------------
-[LEFTFOOTTUMBLE]
-Name = Left Foot Tumble
-Type = GROUND
-Category = Physical
-Power = 95
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-EffectChance = 20
-Target = NearOther
-FunctionCode = LeftFootTumble
-Flags = CanProtect,CanMirrorMove,Contact,Kicking
-Description = The user unleashes an unexpected tumbling shot catching the opponent by surprise.
-#-------------------------------
-[CATCHPHRASE]
-Name = Catchphrase
-Type = NORMAL
-Category = Special
-Power = 40
-Accuracy = 100
-TotalPP = 40
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = The user comes up with a new and unique catchphrase, confusing the opponent.
-#-------------------------------
-[SPICYNOODLES]
-Name = Spicy Noodles
-Type = FIRE
-Category = Special
-Power = 1
-Accuracy = 100
-TotalPP = 25
-Priority = 0
-EffectChance = 90
-Target = NearOther
-FunctionCode = SpicyNoodlesCalc
-Flags = CanProtect,CanMirrorMove
-Description = The user creates a spicy noodle dish of varying intensity. Almost certain to burn.
-#-------------------------------
-[HOTPOT]
-Name = Hot Pot
-Type = STEEL
-Category = Physical
-Power = 70
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 25
-Target = NearOther
-FunctionCode = BurnTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user orders an authentic panda hot pot for the opponent. May burn.
-#-------------------------------
-[CHINESEWATER]
-Name = Chinese Water
-Type = FIRE
-Category = Status
-Accuracy = 0
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = HealUserHalfOfTotalHP
-Description = The user heats up and drinks some Chinese water to heal their health.
-#-------------------------------
-[SHIRTDROP]
-Name = Shirt Drop
-Type = FIRE
-Category = Special
-Power = 50
-Accuracy = 100
-TotalPP = 15
-Priority = 1
-EffectChance = 100
-Target = NearOther
-FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user drops their shirt, stunning their opponent into paralysis.
-#-------------------------------
-[STUDYHARD]
-Name = Study Hard
-Type = PSYCHIC
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = RaiseUserSpAtkSpDef1
-Description = The user engages in hardcore study activity, boosting their special stats.
-#-------------------------------
-[CHISELEDJAW]
-Name = Chiseled Jaw
-Type = FIRE
-Category = Special
-Power = 90
-Accuracy = 100
-TotalPP = 15
-Priority = -1
-Target = NearOther
-FunctionCode = DisableTargetStatusMoves
-Flags = CanProtect,CanMirrorMove
-Description = The user takes a moment to pause, and show off their chiseled jawline, angering the foe.
-#-------------------------------
-[POLITICS]
-Name = Politics
-Type = PSYCHIC
-Category = Special
-Power = 40
-Accuracy = 100
-TotalPP = 25
-Priority = 0
-EffectChance = 25
-Target = NearOther
-FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = The user discusses current world affairs with the foe. Has a chance to induce sleep.
-#-------------------------------
-[NATUREWALK]
-Name = Nature Walk
-Type = GRASS
-Category = Physical
-Power = 80
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = RecoilQuarterOfDamageDealt
-Flags = CanProtect,CanMirrorMove
-Description = The user takes the opponent on a rough hike through nature.
-#-------------------------------
-[MARATHON]
-Name = Marathon
-Type = ROCK
-Category = Physical
-Power = 30
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = BindTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user goes on a long marathon, taking 2-5 turns.
-#-------------------------------
-[BACKHEEL]
-Name = Backheel
-Type = FIGHTING
-Category = Physical
-Power = 60
-Accuracy = 95
-TotalPP = 15
-Priority = 2
-Target = NearOther
-FunctionCode = FailsIfTargetActed
-Flags = CanProtect,CanMirrorMove,Contact,Kicking
-Description = An unorthodox kicking motion aims to strike without warning. Fails if foe does not ready an attack.
-#-------------------------------
-[SMOULDER]
-Name = Smoulder
-Type = FIRE
-Category = Special
-Power = 20
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = LowerTargetAttack1
-Flags = CanProtect,CanMirrorMove
-Description = An unforgettable gaze, reducing the foes attack.
-#-------------------------------
-[SUPERSUB]
-Name = Super Sub
-Type = NORMAL
-Category = Physical
-Power = 50
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = SwitchOutUserDamagingMove
-Flags = CanProtect,CanMirrorMove
-Description = Deal some damage, and return back to the bench.
-#-------------------------------
-[THESIS]
-Name = Thesis
-Type = PSYCHIC
-Category = Special
-Power = 80
-Accuracy = 100
-TotalPP = 10
-Priority = 0
-EffectChance = 20
-Target = NearOther
-FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove
-Description = Educates the world on your learnings. Small chance to put the opponent to sleep.
-#-------------------------------
-[DANCEPRACTICE]
-Name = Dance Practice
-Type = PSYCHIC
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = RaiseUserAtkSpd1
-Flags = CanProtect,CanMirrorMove,Dance
-Description = Boosts attack and speed by rehearsing kpop dance moves.
-#-------------------------------
-[CAFFEINEBOOST]
-Name = Caffeine Boost
-Type = DARK
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = RaiseUserAttack2ConfuseSelf
-Flags = CanProtect,CanMirrorMove
-Description = Takes a well needed dosage of caffeine to boost attack. Then struggles to think straight.
-#-------------------------------
-[MYCELIUMGROWTH]
-Name = Mycelium Growth
-Type = GRASS
-Category = Status
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = AllNearOthers
-FunctionCode = StartLeechSeedTarget
-Description = Mycelium takes over all in battle, returns health to user each turn.
-#-------------------------------
-[BAIT]
-Name = Bait
-Type = WATER
-Category = Status
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = LowerTargetDefense1
-Flags = CanProtect,CanMirrorMove
-Description = The user adds bait to their rod and casts it to sea, lowering the foes defense.
-#-------------------------------
-[CASTROD]
-Name = Cast Rod
-Type = WATER
-Category = Physical
-Power = 40
-TotalPP = 15
-Priority = 1
-Target = NearOther
-FunctionCode = None
-Flags = CanProtect,CanMirrorMove
-Description = The user quickly casts their rod out, before the opponent can react.
-#-------------------------------
-[FISHSLAP]
-Name = Fish Slap
-Type = WATER
-Category = Physical
-Power = 60
-Accuracy = 100
-TotalPP = 20
-Priority = 0
-Target = NearOther
-FunctionCode = FlinchTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user slaps the opponent with a fish. May cause target to flinch.
-#-------------------------------
-[ICECUBES]
-Name = Ice Cubes
-Type = ICE
-Category = Physical
-Power = 20
-TotalPP = 25
-Priority = 0
-Target = NearOther
-FunctionCode = HitTwoToFiveTimes
-Flags = CanProtect,CanMirrorMove
-Description = Jon remembers to get ice cubes for the store, and throws them repetitively at the target.
-#-------------------------------
-[WETSUIT]
-Name = Wet Suit
-Type = WATER
-Category = Status
-TotalPP = 20
-Priority = 0
-Target = User
-FunctionCode = RaiseUserSpecialDefense1Speed1
-Flags = CanProtect,CanMirrorMove
-Description = User dons a wetsuit, increasing their special defence and speed.
-#-------------------------------
-[SURFSUP]
-Name = Surfs Up
-Type = WATER
-Category = Physical
-Power = 80
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-EffectChance = 25
-Target = AllNearFoes
-FunctionCode = AttractTarget
-Flags = CanProtect,CanMirrorMove
-Description = User grabs their surfboard, and begins showing off to the opponent (and the ladies).
-#-------------------------------
-[WIPEOUT]
-Name = Wipeout
-Type = WATER
-Category = Physical
-Power = 150
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-Target = AllNearFoes
-FunctionCode = RecoilHalfOfDamageDealt
-Flags = CanProtect,CanMirrorMove
-Description = User crashes out of a wave, hurtling directly into their opponents, causing damage to all involved.
-#-------------------------------
-[MYCELIUMDRAIN]
-Name = Mycelium Drain
-Type = MYCELIUM
-Category = Status
-Accuracy = 90
-TotalPP = 15
-Priority = 0
-Target = AllNearOthers
-FunctionCode = MyceliumDrain
-Flags = CanProtect,CanMirrorMove
-Description = User infects the field with a growing creep of mycelium, draining health.
-#-------------------------------
-[CHEWSLIPPERS]
-Name = Chew Slippers
-Type = NORMAL
-Category = Physical
-Power = 30
-Accuracy = 100
-TotalPP = 35
-Priority = 0
-Target = NearOther
-FunctionCode = BindTarget
-Flags = CanProtect,CanMirrorMove,Contact
-Description = User mistakes foe for a pair of slippers and begins chewing.
-#-------------------------------
-[DAB]
-Name = Dab
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = DoesNothingUnusableInGravity
-Flags = CanProtect,CanMirrorMove
-Description = Attempts to boost self esteem. This move does nothing.
-#-------------------------------
-[SACKTAP]
-Name = Sack Tap
-Type = DARK
-Category = Physical
-Power = 50
-Accuracy = 100
-TotalPP = 15
-Priority = 2
-EffectChance = 25
-Target = NearOther
-FunctionCode = MaleTargetFlinch
-Flags = CanProtect,CanMirrorMove,Contact
-Description = User strikes a weak spot with no remorse for future generations. Severe impact to males.
-#-------------------------------
-[CONSPIRACYTHEORY]
-Name = Conspiracy Theory
-Type = DARK
-Category = Status
-Accuracy = 90
-TotalPP = 15
-Priority = 0
-Target = AllNearOthers
-FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User discusses a story they found on the internet with the foe. Very likely to confuse.
-#-------------------------------
-[NONSENSE]
-Name = Nonsense
-Type = DARK
-Category = Special
-Power = 60
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = HealUserByHalfOfDamageDone
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User rambles about whatever wanders into their subconscious, draining the life of their foe.
-#-------------------------------
-[INDECENTEXPOSURE]
-Name = Indecent Exposure
-Type = DARK
-Category = Special
-Power = 50
-Accuracy = 100
-TotalPP = 15
-Priority = 1
-EffectChance = 25
-Target = AllNearOthers
-FunctionCode = FemaleTargetFlinch
-Flags = CanProtect,CanMirrorMove
-Description = Flashes the foe with assets that are better left covered. Additional impact to females.
-#-------------------------------
-[DRUGS]
-Name = Drugs
-Type = DARK
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = MaxUserSpAttackLoseHPPoisonChance
-Flags = CanProtect,CanMirrorMove
-Description = User engages in indecent activity to drastically boost special attack. Will lose significant HP.
-#-------------------------------
-[EXAGGERATESELF]
-Name = Exaggerate Self
-Type = DARK
-Category = Status
-TotalPP = 25
-Priority = 0
-Target = User
-FunctionCode = HealUserVarTotalHP
-Flags = CanProtect,CanMirrorMove,Sound
-Description = Talks about themselves to boost confidence and heal self. With varying degrees of success.
-#-------------------------------
-[SWEATYHANDS]
-Name = Sweaty Hands
-Type = DARK
-Category = Physical
-Power = 20
-Accuracy = 100
-TotalPP = 20
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = PoisonTarget
-Flags = CanProtect,CanMirrorMove,Contact
-Description = User strikes with an clammy, meaty hand, inflicting poison.
-#-------------------------------
-[DICTATORDOG]
-Name = Dictator Dog
-Type = FIRE
-Category = Special
-Power = 25
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 10
-Target = NearOther
-FunctionCode = HitTwoToFiveTimes
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User repetitively barks with searing conviction to boss around their foes.
-#-------------------------------
-[OVEREAT]
-Name = Overeat
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = RaiseUserDefSpD1LowerSpeed1
-Description = User eats far more than they should. Increasing bulk, at the expense of speed.
-#-------------------------------
 [YAPYAP]
 Name = Yap Yap
 Type = NORMAL
@@ -10334,375 +9853,29 @@ FunctionCode = LowerTargetSpAtk1
 Flags = CanProtect,CanMirrorMove,Sound
 Description = User yaps cutely but constantly, draining the foes desire to battle. May lower foes special attack.
 #-------------------------------
-[DEMONHOWL]
-Name = Demon Howl
-Type = DARK
-Category = Special
-Power = 50
-Accuracy = 100
+[WORLDMAP]
+Name = World Map
+Type = NORMAL
+Category = Status
 TotalPP = 15
 Priority = 0
-EffectChance = 100
 Target = NearOther
-FunctionCode = RaiseUserSpAtk1
-Flags = CanProtect,CanMirrorMove,Sound
-Description = The user lets out a guttoral howl. Dealing damage and increasing the users special attack.
+FunctionCode = WorldMap
+Flags = CanProtect,CanMirrorMove
+Description = Introduces the opponent to the world map, lowering their defenses, and trapping them.
 #-------------------------------
-[CRY]
-Name = Cry
+[WIPEOUT]
+Name = Wipeout
 Type = WATER
-Category = Special
-Power = 110
-Accuracy = 0
-TotalPP = 15
-Priority = 0
-EffectChance = 75
-Target = NearOther
-FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User produces an intolerable level of crying.
-#-------------------------------
-[FAINT]
-Name = Faint
-Type = POISON
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = SleepFaintBoostDefences
-Flags = CanProtect,CanMirrorMove
-Description = Switches the user off from the world around itself for a number of turns.
-#-------------------------------
-[FLAMEBARK]
-Name = Flame Bark
-Type = FIRE
-Category = Special
-Power = 35
-Accuracy = 90
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = HitThreeTimesAlwaysCriticalHit
-Flags = CanProtect,CanMirrorMove,Sound
-Description = Ignited with rage, the user unleashes three barks. All causing critical hits.
-#-------------------------------
-[PIERCINGYELP]
-Name = Piercing Yelp
-Type = NORMAL
-Category = Special
-Power = 60
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 25
-Target = AllNearFoes
-FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User lets out a supersonic yelp. May paralyze foes.
-#-------------------------------
-[STRESSOUT]
-Name = Stress Out
-Type = NORMAL
-Category = Special
-Power = 120
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 30
-Target = RandomNearFoe
-FunctionCode = MultiTurnAttackConfuseUserAtEnd
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User lets off steam about an upcoming challenge for 2-3 turns. Becomes confused at end.
-#-------------------------------
-[COSPLAY]
-Name = Cosplay
-Type = NORMAL
-Category = Status
-TotalPP = 35
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = CosplayUserIntoTarget
-Flags = CanProtect,CanMirrorMove
-Description = User cosplays as the target. Copying moves and abilities. Also raises two random stats.
-#-------------------------------
-[MONSTERAARMY]
-Name = Monstera Army
-Type = GRASS
 Category = Physical
-Power = 60
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = BindTarget
-Flags = CanProtect,CanMirrorMove
-Description = User calls upon the power of the Monstera, to bind and punish their opponents.
-#-------------------------------
-[MYCELIUMPUNCH]
-Name = Mycelium Punch
-Type = MYCELIUM
-Category = Physical
-Power = 65
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = HealUserByHalfOfDamageDone
-Flags = CanProtect,CanMirrorMove,Contact
-Description = User launches a punch, fueled with mycelium spores to drain life from the foe.
-#-------------------------------
-[CROTCHETNET]
-Name = Crotchet Net
-Type = GRASS
-Category = Physical
-Power = 50
-Accuracy = 100
-TotalPP = 30
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = LowerTargetSpeed1
-Flags = CanProtect,CanMirrorMove
-Description = User casts a hastily crotcheted net at the opponent, lowering their speed.
-#-------------------------------
-[PREWORKOUT]
-Name = Pre Workout
-Type = FIGHTING
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = RaiseUserAttack2
-Flags = CanProtect,CanMirrorMove
-Description = User takes some pre-workout to boost their attack.
-#-------------------------------
-[LEGHACK]
-Name = Leg Hack
-Type = FIGHTING
-Category = Physical
-Power = 25
-Accuracy = 100
-TotalPP = 20
-Priority = 0
-EffectChance = 20
-Target = NearOther
-FunctionCode = HitTwoToFiveTimes
-Flags = CanProtect,CanMirrorMove,Contact,Kicking
-Description = User makes several attempts at tackling the opponent. The more they fail, the more they try.
-#-------------------------------
-[FLOORWORK]
-Name = Floor Work
-Type = GROUND
-Category = Status
-TotalPP = 25
-Priority = 0
-Target = User
-FunctionCode = RaiseUserDefSpeed1
-Flags = CanProtect,CanMirrorMove,Dance
-Description = Exercises their muscles and does some floorwork. Raises Defense and Speed.
-#-------------------------------
-[PAYROLL]
-Name = Payroll
-Type = NORMAL
-Category = Special
-Power = 65
-Accuracy = 100
-TotalPP = 20
-Priority = 0
-Target = AllNearFoes
-FunctionCode = AddMoneyGainedFromBattle
-Flags = CanProtect,CanMirrorMove
-Description = User takes advantage of their role at work and sends out a storm of dollar bills.
-#-------------------------------
-[CONSIDERVIOLENCE]
-Name = Consider Violence
-Type = NORMAL
-Category = Status
-TotalPP = 25
-Priority = 0
-Target = User
-FunctionCode = RaiseUserAttack2
-Flags = CanProtect,CanMirrorMove
-Description = User begins to consider taking violence as a course of action. Sharply raises attack.
-#-------------------------------
-[CHAOTICTENDRILS]
-Name = Chaotic Tendrils
-Type = MYCELIUM
-Category = Physical
-Power = 250
-Accuracy = 100
-TotalPP = 5
-Priority = 0
-Target = NearOther
-FunctionCode = LowerAllStats5
-Flags = CanProtect,CanMirrorMove
-Description = User unleashes pure infected mycelium power to strike hard. Lowers all user's stats considerably.
-#-------------------------------
-[COMMANDOROLL]
-Name = Commando Roll
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = IncreaseSpeed1Evasion1
-Flags = CanProtect,CanMirrorMove
-Description = User performs a commando roll, increasing their speed and evasion.
-#-------------------------------
-[EGGSMOKE]
-Name = Egg Smoke
-Type = FIRE
-Category = Special
-Power = 30
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove
-Description = User badly overcooks a boiled egg and casts a sea of smoke at the foe, lowering their accuracy.
-#-------------------------------
-[QUESTIONREALITY]
-Name = Question Reality
-Type = NORMAL
-Category = Status
-Accuracy = 0
-TotalPP = 15
-Priority = 0
-EffectChance = 30
-Target = AllNearOthers
-FunctionCode = LowerTargetSpeed2Confuse
-Flags = CanProtect,CanMirrorMove
-Description = Question the existence of reality, and life itself, stopping all in their tracks. Lowering speed.
-#-------------------------------
-[DUBIOUSREMARK]
-Name = Dubious Remark
-Type = NORMAL
-Category = Status
-Accuracy = 0
-TotalPP = 15
-Priority = 0
-EffectChance = 30
-Target = AllNearFoes
-FunctionCode = LowerDefenses2Confuse
-Flags = CanProtect,CanMirrorMove
-Description = User makes a dubious remark in relation to the foe, unsettling them, lowering their defenses.
-#-------------------------------
-[CONTRARYTHOUGHTS]
-Name = Contrary Thoughts
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = RaiseUserSpAtk2
-Flags = CanProtect,CanMirrorMove
-Description = User begins to consider alternative acts to physical violence, sharpening their Special Attack.
-#-------------------------------
-[ENCOURAGEVIOLENCE]
-Name = Encourage Violence
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = AllNearOthers
-FunctionCode = RaiseTargetAttack2ConfuseTarget
-Flags = CanProtect,CanMirrorMove
-Description = User confuses all involved by encouraging the use of violence. Boosting everyone's attack.
-#-------------------------------
-[BUYMOREPLANTS]
-Name = Buy More Plants
-Type = GRASS
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = DoesNothingUnusableInGravity
-Flags = CanProtect,CanMirrorMove
-Description = User goes to the shop and buys some plants. This attack does nothing.
-#-------------------------------
-[MYCELIUMPLAGUE]
-Name = Mycelium Plague
-Type = MYCELIUM
-Category = Special
-Power = 80
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 30
-Target = AllNearFoes
-FunctionCode = MyceliumRain
-Flags = CanProtect,CanMirrorMove
-Description = Multi-turn attack, which may poison the foe.
-#-------------------------------
-[SWORDSTRIKE]
-Name = Sword Strike
-Type = STEEL
-Category = Physical
-Power = 75
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = None
-Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
-Description = The user whacks the opponent with a nicely placed strike.
-#-------------------------------
-[MOSSPLUME]
-Name = Moss Plume
-Type = GRASS
-Category = Special
-Power = 25
+Power = 150
 Accuracy = 95
 TotalPP = 15
 Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = MossPlume
+Target = AllNearFoes
+FunctionCode = RecoilHalfOfDamageDealt
 Flags = CanProtect,CanMirrorMove
-Description = Hits three times. Chance to effect spore the opponent.
-#-------------------------------
-[MOSSSTRIKE]
-Name = Moss Strike
-Type = GRASS
-Category = Physical
-Power = 80
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 30
-Target = NearOther
-FunctionCode = MossParPsnSleep
-Flags = CanProtect,CanMirrorMove
-Description = Strikes the opponent. Has chance to effect spore opponent.
-#-------------------------------
-[STRANGEPOWDER]
-Name = Strange Powder
-Type = GRASS
-Category = Status
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = ParalyzePoisonSleepTargetStatus
-Flags = CanProtect,CanMirrorMove
-Description = A low damaging move which will either inflict poison, paralysis or sleep.
-#-------------------------------
-[MOSSPURGE]
-Name = Moss Purge
-Type = GRASS
-Category = Physical
-Power = 150
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = RecoilThirdOfDamageDealt
-Flags = CanProtect,CanMirrorMove
-Description = Rushes at the opponent, attempting to convert them into moss. This hurts the user a lot.
+Description = User crashes out of a wave, hurtling directly into their opponents, causing damage to all involved.
 #-------------------------------
 [WHINGE]
 Name = Whinge
@@ -10718,6 +9891,667 @@ FunctionCode = ConfuseTarget
 Flags = CanProtect,CanMirrorMove,Sound
 Description = The user begins to whinge, dealing guilt damage to their opponent.
 #-------------------------------
+[WETSUIT]
+Name = Wet Suit
+Type = WATER
+Category = Status
+TotalPP = 20
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpecialDefense1Speed1
+Flags = CanProtect,CanMirrorMove
+Description = User dons a wetsuit, increasing their special defence and speed.
+#-------------------------------
+[WAIFUCHARM]
+Name = Waifu Charm
+Type = FAIRY
+Category = Status
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 40
+Target = NearOther
+FunctionCode = WaifuCharm
+Flags = CanProtect,CanMirrorMove
+Description = Uses his waifu charm to lowers opponent atk/spatk by one stage. May cause attraction
+#-------------------------------
+[WAAHHH]
+Name = WAAHHH
+Type = WATER
+Category = Special
+Power = 120
+Accuracy = 100
+TotalPP = 5
+Priority = 0
+Target = AllNearFoes
+Flags = CanProtect,CanMirrorMove
+Description = The user lets out the waterworks, and cries, and cries, and cries…
+#-------------------------------
+[VOLTAGEVOGUE]
+Name = Voltage Vogue
+Type = ELECTRIC
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = AllNearFoes
+FunctionCode = FreezeTarget
+Flags = CanProtect,CanMirrorMove,Dance
+Description = Bust out some electric dance moves. Effects opposing team. May freeze foes in their tracks.
+#-------------------------------
+[THESIS]
+Name = Thesis
+Type = PSYCHIC
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 10
+Priority = 0
+EffectChance = 20
+Target = NearOther
+FunctionCode = SleepTarget
+Flags = CanProtect,CanMirrorMove
+Description = Educates the world on your learnings. Small chance to put the opponent to sleep.
+#-------------------------------
+[THEHATTRICK]
+Name = The Hattrick
+Type = NORMAL
+Category = Physical
+Power = 60
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = MultiTurnAttackIncreasingPower
+Flags = CanProtect,CanMirrorMove
+Description = Three turns of memorable experiences. Each stronger than the last. Traps foe.
+#-------------------------------
+[THEFISH]
+Name = The Fish
+Type = NORMAL
+Category = Physical
+Power = 120
+Accuracy = 100
+TotalPP = 10
+Priority = 0
+Target = RandomNearFoe
+FunctionCode = MultiTurnAttackConfuseUserAtEnd
+Flags = CanProtect,CanMirrorMove
+Description = Flops around vigorously for 2-3 turns, striking all in it's path, then becomes confused.
+#-------------------------------
+[SWORDSTRIKE]
+Name = Sword Strike
+Type = STEEL
+Category = Physical
+Power = 75
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = None
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
+Description = The user whacks the opponent with a nicely placed strike.
+#-------------------------------
+[SWEATYHANDS]
+Name = Sweaty Hands
+Type = DARK
+Category = Physical
+Power = 20
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = PoisonTarget
+Flags = CanProtect,CanMirrorMove,Contact
+Description = User strikes with an clammy, meaty hand, inflicting poison.
+#-------------------------------
+[SURFSUP]
+Name = Surfs Up
+Type = WATER
+Category = Physical
+Power = 80
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 25
+Target = AllNearFoes
+FunctionCode = AttractTarget
+Flags = CanProtect,CanMirrorMove
+Description = User grabs their surfboard, and begins showing off to the opponent (and the ladies).
+#-------------------------------
+[SUPERSUB]
+Name = Super Sub
+Type = NORMAL
+Category = Physical
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = SwitchOutUserDamagingMove
+Flags = CanProtect,CanMirrorMove
+Description = Deal some damage, and return back to the bench.
+#-------------------------------
+[STUDYHARD]
+Name = Study Hard
+Type = PSYCHIC
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpAtkSpDef1
+Description = The user engages in hardcore study activity, boosting their special stats.
+#-------------------------------
+[STRESSOUT]
+Name = Stress Out
+Type = NORMAL
+Category = Special
+Power = 120
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = RandomNearFoe
+FunctionCode = MultiTurnAttackConfuseUserAtEnd
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User lets off steam about an upcoming challenge for 2-3 turns. Becomes confused at end.
+#-------------------------------
+[STRANGEPOWDER]
+Name = Strange Powder
+Type = GRASS
+Category = Status
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = ParalyzePoisonSleepTargetStatus
+Flags = CanProtect,CanMirrorMove
+Description = A low damaging move which will either inflict poison, paralysis or sleep.
+#-------------------------------
+[SPORESHIELD]
+Name = Spore Shield
+Type = MYCELIUM
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = UserSide
+FunctionCode = StartWeakenDamageAgainstUserSide
+Flags = CanProtect,CanMirrorMove
+Description = User employs a spore shield, increasing the teams defense and special defence.
+#-------------------------------
+[SPICYNOODLES]
+Name = Spicy Noodles
+Type = FIRE
+Category = Special
+Power = 1
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+EffectChance = 90
+Target = NearOther
+FunctionCode = SpicyNoodlesCalc
+Flags = CanProtect,CanMirrorMove
+Description = The user creates a spicy noodle dish of varying intensity. Almost certain to burn.
+#-------------------------------
+[SOCCERTRAINING]
+Name = Soccer Training
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = User
+FunctionCode = RaisePhysicalChance
+Flags = CanProtect,CanMirrorMove
+Description = The user performs some soccer drills, potentially raising their physical and speed stats.
+#-------------------------------
+[SMOULDER]
+Name = Smoulder
+Type = FIRE
+Category = Special
+Power = 20
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = LowerTargetAttack1
+Flags = CanProtect,CanMirrorMove
+Description = An unforgettable gaze, reducing the foes attack.
+#-------------------------------
+[SLIDETACKLE]
+Name = Slide Tackle
+Type = GROUND
+Category = Physical
+Power = 70
+Accuracy = 95
+TotalPP = 25
+Priority = 1
+Target = NearOther
+FunctionCode = RecoilQuarterOfDamageDealt
+Flags = CanProtect,CanMirrorMove,Contact,Kicking
+Description = The user recklessly slides at the foes legs, as if a ball was at their feet. Strikes first.
+#-------------------------------
+[SLEEPYKICK]
+Name = Sleepy Kick
+Type = NORMAL
+Category = Physical
+Power = 25
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+Target = NearOther
+FunctionCode = SleepyKick
+Flags = CanProtect,CanMirrorMove
+Description = User kicks 1-3 times. Can be used while asleep. x2 damage if user and/or target is asleep (stacks).
+#-------------------------------
+[SINGALONG]
+Name = Singalong
+Type = NORMAL
+Category = Special
+Power = 40
+Accuracy = 95
+TotalPP = 20
+Priority = 0
+Target = AllNearFoes
+FunctionCode = MultiTurnAttackPowersUpEachTurn
+Flags = CanProtect,CanMirrorMove
+Description = User locks into a singalong, increasing in intensity each turn.
+#-------------------------------
+[SHIRTDROP]
+Name = Shirt Drop
+Type = FIRE
+Category = Special
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 1
+EffectChance = 100
+Target = NearOther
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user drops their shirt, stunning their opponent into paralysis.
+#-------------------------------
+[SACKTAP]
+Name = Sack Tap
+Type = DARK
+Category = Physical
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 2
+EffectChance = 25
+Target = NearOther
+FunctionCode = MaleTargetFlinch
+Flags = CanProtect,CanMirrorMove,Contact
+Description = User strikes a weak spot with no remorse for future generations. Severe impact to males.
+#-------------------------------
+[ROCKASCENT]
+Name = Rock Ascent
+Type = ROCK
+Category = Physical
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 1
+EffectChance = 25
+Target = NearOther
+FunctionCode = LowerTargetDefense1
+Flags = CanProtect,CanMirrorMove
+Description = User quickly rushes up a rock face to strike opponent. May lower targets defense.
+#-------------------------------
+[RHYTHMSTEP]
+Name = Rhythm Step
+Type = ELECTRIC
+Category = Physical
+Power = 25
+Accuracy = 100
+TotalPP = 35
+Priority = 0
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove
+Description = Hits opponent with a flurry of well executed moves.
+#-------------------------------
+[REHABEXERCISES]
+Name = Rehab Exercises
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = CureUserBurnPoisonParalysis
+Flags = CanProtect,CanMirrorMove
+Description = User performs rehab exercises to recover from poison, burn or paralysis.
+#-------------------------------
+[QUESTIONREALITY]
+Name = Question Reality
+Type = NORMAL
+Category = Status
+Accuracy = 0
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = AllNearOthers
+FunctionCode = LowerTargetSpeed2Confuse
+Flags = CanProtect,CanMirrorMove
+Description = Question the existence of reality, and life itself, stopping all in their tracks. Lowering speed.
+#-------------------------------
+[PREPMEDS]
+Name = Prep Meds
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = CureUserRaiseSpDef1
+Flags = CanProtect,CanMirrorMove
+Description = User prepares medical supplies, healing their status ailments, and raising their special defense.
+#-------------------------------
+[PREWORKOUT]
+Name = Pre Workout
+Type = FIGHTING
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = RaiseUserAttack2
+Flags = CanProtect,CanMirrorMove
+Description = User takes some pre-workout to boost their attack.
+#-------------------------------
+[POWERPOSE]
+Name = Power Pose
+Type = FAIRY
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserAttack2
+Flags = CanProtect,CanMirrorMove
+Description = User strikes a power pose, sharply raising their attack.
+#-------------------------------
+[POWERKICK]
+Name = Power Kick
+Type = FIGHTING
+Category = Physical
+Power = 80
+Accuracy = 95
+TotalPP = 20
+Priority = 0
+EffectChance = 50
+Target = NearOther
+FunctionCode = RaiseUserAttack1
+Flags = CanProtect,CanMirrorMove
+Description = User unleashes a powerful kick at the foe. May increase attack stat.
+#-------------------------------
+[POLITICS]
+Name = Politics
+Type = PSYCHIC
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+EffectChance = 25
+Target = NearOther
+FunctionCode = SleepTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = The user discusses current world affairs with the foe. Has a chance to induce sleep.
+#-------------------------------
+[PIXELBLAST]
+Name = Pixel Blast
+Type = ELECTRIC
+Category = Special
+Power = 35
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 15
+Target = NearOther
+FunctionCode = HitThreeTimesParalyzeTarget
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate,Bomb
+Description = User blasts foe with a pixelated design energy beam. High critical hit rate. Hits three times.
+#-------------------------------
+[PINEAPPLESTRIKE]
+Name = Pineapple Strike
+Type = GRASS
+Category = Physical
+Power = 150
+Accuracy = 90
+TotalPP = 10
+Priority = 0
+EffectChance = 20
+Target = NearOther
+FunctionCode = FlinchTarget
+Flags = CanProtect,CanMirrorMove
+Description = Summons a pineapple after thin air, and drop kicks it at the opponent. May flinch the target.
+#-------------------------------
+[PIERCINGYELP]
+Name = Piercing Yelp
+Type = NORMAL
+Category = Special
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 25
+Target = AllNearFoes
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User lets out a supersonic yelp. May paralyze foes.
+#-------------------------------
+[PEANUTCRASH]
+Name = Peanut Crash
+Type = GRASS
+Category = Physical
+Power = 90
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 33
+Target = NearOther
+FunctionCode = PeanutCrash
+Flags = CanProtect,CanMirrorMove
+Description = Barrages opponent with salted peanuts. Receives half damage recoil. May confuse opponent.
+#-------------------------------
+[PAYROLL]
+Name = Payroll
+Type = NORMAL
+Category = Special
+Power = 65
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+Target = AllNearFoes
+FunctionCode = AddMoneyGainedFromBattle
+Flags = CanProtect,CanMirrorMove
+Description = User takes advantage of their role at work and sends out a storm of dollar bills.
+#-------------------------------
+[OVEREAT]
+Name = Overeat
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpD1LowerSpeed1
+Description = User eats far more than they should. Increasing bulk, at the expense of speed.
+#-------------------------------
+[NONSENSE]
+Name = Nonsense
+Type = DARK
+Category = Special
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = HealUserByHalfOfDamageDone
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User rambles about whatever wanders into their subconscious, draining the life of their foe.
+#-------------------------------
+[NATUREWALK]
+Name = Nature Walk
+Type = GRASS
+Category = Physical
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = RecoilQuarterOfDamageDealt
+Flags = CanProtect,CanMirrorMove
+Description = The user takes the opponent on a rough hike through nature.
+#-------------------------------
+[MYCELIUMPUNCH]
+Name = Mycelium Punch
+Type = MYCELIUM
+Category = Physical
+Power = 65
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = HealUserByHalfOfDamageDone
+Flags = CanProtect,CanMirrorMove,Contact
+Description = User launches a punch, fueled with mycelium spores to drain life from the foe.
+#-------------------------------
+[MYCELIUMPLAGUE]
+Name = Mycelium Plague
+Type = MYCELIUM
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = AllNearFoes
+FunctionCode = MyceliumRain
+Flags = CanProtect,CanMirrorMove
+Description = Multi-turn attack, which may poison the foe.
+#-------------------------------
+[MYCELIUMGROWTH]
+Name = Mycelium Growth
+Type = GRASS
+Category = Status
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = AllNearOthers
+FunctionCode = StartLeechSeedTarget
+Description = Mycelium takes over all in battle, returns health to user each turn.
+#-------------------------------
+[MYCELIUMDRAIN]
+Name = Mycelium Drain
+Type = MYCELIUM
+Category = Status
+Accuracy = 90
+TotalPP = 15
+Priority = 0
+Target = AllNearOthers
+FunctionCode = MyceliumDrain
+Flags = CanProtect,CanMirrorMove
+Description = User infects the field with a growing creep of mycelium, draining health.
+#-------------------------------
+[MUSHROOMMASH]
+Name = Mushroom Mash
+Type = MYCELIUM
+Category = Special
+Power = 90
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 50
+Target = AllNearFoes
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = Rains down a mushroom storm upon foes. May cause paralysis.
+#-------------------------------
+[MOSSSTRIKE]
+Name = Moss Strike
+Type = GRASS
+Category = Physical
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = NearOther
+FunctionCode = MossParPsnSleep
+Flags = CanProtect,CanMirrorMove
+Description = Strikes the opponent. Has chance to effect spore opponent.
+#-------------------------------
+[MOSSPURGE]
+Name = Moss Purge
+Type = GRASS
+Category = Physical
+Power = 150
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = RecoilThirdOfDamageDealt
+Flags = CanProtect,CanMirrorMove
+Description = Rushes at the opponent, attempting to convert them into moss. This hurts the user a lot.
+#-------------------------------
+[MOSSPLUME]
+Name = Moss Plume
+Type = GRASS
+Category = Special
+Power = 25
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = MossPlume
+Flags = CanProtect,CanMirrorMove
+Description = Hits three times. Chance to effect spore the opponent.
+#-------------------------------
+[MONSTERAARMY]
+Name = Monstera Army
+Type = GRASS
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = BindTarget
+Flags = CanProtect,CanMirrorMove
+Description = User calls upon the power of the Monstera, to bind and punish their opponents.
+#-------------------------------
+[MARATHON]
+Name = Marathon
+Type = ROCK
+Category = Physical
+Power = 30
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = BindTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user goes on a long marathon, taking 2-5 turns.
+#-------------------------------
+[MALPRACTICE]
+Name = Malpractice
+Type = POISON
+Category = Special
+Power = 150
+Accuracy = 100
+TotalPP = 5
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = PoisonTarget
+Flags = CanProtect,CanMirrorMove
+Description = Misuses their expertise in medicine, and intentionally hurts their opponent. Always inflicts poison.
+#-------------------------------
 [MAHH]
 Name = Mahh
 Type = WATER
@@ -10731,6 +10565,435 @@ Target = AllNearOthers
 FunctionCode = ConfuseTarget
 Flags = CanProtect,CanMirrorMove,Sound
 Description = The user lets out a big mahh, dealing even more guilt damage to the opponent.
+#-------------------------------
+[MAGICALMELODY]
+Name = Magical Melody
+Type = FAIRY
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = NearOther
+FunctionCode = SleepTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = A magical melody from a fairy tale which may soothe the target into sleep.
+#-------------------------------
+[MACHINESPIRIT]
+Name = Machine Spirit
+Type = STEEL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpDef1
+Flags = CanProtect,CanMirrorMove
+Description = Channels the power of the machine spirit, raising both defense and special defense.
+#-------------------------------
+[LEGHACK]
+Name = Leg Hack
+Type = FIGHTING
+Category = Physical
+Power = 25
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+EffectChance = 20
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove,Contact,Kicking
+Description = User makes several attempts at tackling the opponent. The more they fail, the more they try.
+#-------------------------------
+[LEFTFOOTTUMBLE]
+Name = Left Foot Tumble
+Type = GROUND
+Category = Physical
+Power = 95
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 20
+Target = NearOther
+FunctionCode = LeftFootTumble
+Flags = CanProtect,CanMirrorMove,Contact,Kicking
+Description = The user unleashes an unexpected tumbling shot catching the opponent by surprise.
+#-------------------------------
+[LEDGLOWUP]
+Name = LED Glowup
+Type = ELECTRIC
+Category = Special
+Power = 20
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = RaiseUserSpeed1
+Flags = CanProtect,CanMirrorMove
+Description = Impresses the foe with his latest LED Glowup. Also increases speed.
+#-------------------------------
+[LATEARRIVAL]
+Name = Late Arrival
+Type = FIRE
+Category = Special
+Power = 110
+Accuracy = 100
+TotalPP = 10
+Priority = 0
+EffectChance = 50
+Target = NearOther
+FunctionCode = LateArrival
+Flags = CanProtect,CanMirrorMove
+Description = With many tasks to juggle, a late arrival is anticipated. Fire and Psychic attack with Burn chance.
+#-------------------------------
+[LASTDANCE]
+Name = Last Dance
+Type = DARK
+Category = Physical
+Power = 140
+Accuracy = 100
+TotalPP = 5
+Priority = 0
+Target = NearOther
+FunctionCode = UserFaintsExplosive
+Flags = CanProtect,CanMirrorMove
+Description = The user puts on an explosive final dance performance, before fainting from exhaustion.
+#-------------------------------
+[LASEREYES]
+Name = Laser Eyes
+Type = FIRE
+Category = Special
+Power = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = LowerTargetAttack2
+Flags = CanProtect,CanMirrorMove
+Description = Stares intensly into the foe's soul, targetting their insecurities. Sharply lowers foe attack.
+#-------------------------------
+[JOKE]
+Name = Joke
+Type = NORMAL
+Category = Status
+Accuracy = 100
+TotalPP = 35
+Priority = 0
+Target = NearOther
+FunctionCode = LowerTargetAttack1
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User tells a funny joke, lowering the foes desire to attack.
+#-------------------------------
+[JAWBREAK]
+Name = Jaw Break
+Type = FIGHTING
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 75
+Target = NearOther
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user throws a jawbreaking punch at the opponent. High likelihood to paralyze.
+#-------------------------------
+[INKJET]
+Name = Ink Jet
+Type = DARK
+Category = Special
+Power = 60
+Accuracy = 95
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = LowerTargetAccuracy1
+Flags = CanProtect,CanMirrorMove
+Description = Sprays printer ink at foe. Also lowers accuracy.
+#-------------------------------
+[INDECENTEXPOSURE]
+Name = Indecent Exposure
+Type = DARK
+Category = Special
+Power = 50
+Accuracy = 100
+TotalPP = 15
+Priority = 1
+EffectChance = 25
+Target = AllNearOthers
+FunctionCode = FemaleTargetFlinch
+Flags = CanProtect,CanMirrorMove
+Description = Flashes the foe with assets that are better left covered. Additional impact to females.
+#-------------------------------
+[ICECUBES]
+Name = Ice Cubes
+Type = ICE
+Category = Physical
+Power = 20
+TotalPP = 25
+Priority = 0
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove
+Description = Jon remembers to get ice cubes for the store, and throws them repetitively at the target.
+#-------------------------------
+[HOTPOT]
+Name = Hot Pot
+Type = STEEL
+Category = Physical
+Power = 70
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 25
+Target = NearOther
+FunctionCode = BurnTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user orders an authentic panda hot pot for the opponent. May burn.
+#-------------------------------
+[HIPSWING]
+Name = Hip Swing
+Type = NORMAL
+Category = Status
+TotalPP = 20
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpeed1
+Flags = CanProtect,CanMirrorMove
+Description = User swings their hips, limbering up their body, and raising their speed.
+#-------------------------------
+[GLOWINGROUTINE]
+Name = Glowing Routine
+Type = FAIRY
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = GlowingRoutine
+Flags = CanProtect,CanMirrorMove
+Description = Applies a skincare routine, boosting Special Defense, and providing status immunity for 3 turns.
+#-------------------------------
+[FREIGHTTRAIN]
+Name = Freight Train
+Type = STEEL
+Category = Physical
+Power = 130
+Accuracy = 95
+TotalPP = 10
+Priority = 0
+EffectChance = 30
+Target = AllNearFoes
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = Runs through the entire oppoonent team with unstoppable force. May paralyze opponents.
+#-------------------------------
+[FORCEFIELD]
+Name = Forcefield
+Type = PSYCHIC
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpDef2
+Flags = CanProtect,CanMirrorMove
+Description = Summons the power of the forcefield, sharply raising their special defense.
+#-------------------------------
+[FOLIAGEFEAST]
+Name = Foliage Feast
+Type = GRASS
+Category = Physical
+Power = 80
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+Target = NearOther
+FunctionCode = SEvsGrass
+Flags = CanProtect,CanMirrorMove,Contact
+Description = The user attempts to feast on plant matter. Super-effective vs Grass. Drains foe's HP.
+#-------------------------------
+[FLOORWORK]
+Name = Floor Work
+Type = GROUND
+Category = Status
+TotalPP = 25
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpeed1
+Flags = CanProtect,CanMirrorMove,Dance
+Description = Exercises their muscles and does some floorwork. Raises Defense and Speed.
+#-------------------------------
+[FLASHANDDASH]
+Name = Flash and Dash
+Type = DARK
+Category = Physical
+Power = 55
+TotalPP = 15
+Priority = 2
+EffectChance = 30
+Target = NearOther
+FunctionCode = ParalyzeTarget
+Flags = CanProtect,CanMirrorMove
+Description = Distracts foe with a wardrobe malfunction, striking immediately before the foe can react.
+#-------------------------------
+[FLAMINGNOODLES]
+Name = Flaming Noodles
+Type = FIRE
+Category = Special
+Power = 140
+Accuracy = 95
+TotalPP = 5
+Priority = 0
+Target = NearOther
+FunctionCode = LowerUserSpAtk1
+Flags = CanProtect,CanMirrorMove
+Description = The user serves up a powerful dish of flaming noodles. This also lowers user's special attack.
+#-------------------------------
+[FLAMEBARK]
+Name = Flame Bark
+Type = FIRE
+Category = Special
+Power = 35
+Accuracy = 90
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = HitThreeTimesAlwaysCriticalHit
+Flags = CanProtect,CanMirrorMove,Sound
+Description = Ignited with rage, the user unleashes three barks. All causing critical hits.
+#-------------------------------
+[FISHSLAP]
+Name = Fish Slap
+Type = WATER
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+Target = NearOther
+FunctionCode = FlinchTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user slaps the opponent with a fish. May cause target to flinch.
+#-------------------------------
+[FINALREHEARSAL]
+Name = Final Rehearsal
+Type = FAIRY
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = FinalRehearsal
+Flags = CanProtect,CanMirrorMove
+Description = Boosts attack and speed. Doubles if used on the first turn the user is in battle.
+#-------------------------------
+[FART]
+Name = Fart
+Type = POISON
+Category = Special
+Power = 45
+Accuracy = 0
+TotalPP = 25
+Priority = 0
+EffectChance = 50
+Target = NearOther
+FunctionCode = PoisonTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user gives the foe an idea of what it had for lunch. Has a chance to poison.
+#-------------------------------
+[FAMILYMEAL]
+Name = Family Meal
+Type = NORMAL
+Category = Status
+TotalPP = 5
+Priority = 0
+Target = User
+FunctionCode = FamilyMeal
+Flags = CanProtect,CanMirrorMove
+Description = Eats an entire family meal. Recovers 1/3 HP, boosts defenses, reduces speed. Cannot move next turn.
+#-------------------------------
+[FAINT]
+Name = Faint
+Type = POISON
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = SleepFaintBoostDefences
+Flags = CanProtect,CanMirrorMove
+Description = Switches the user off from the world around itself for a number of turns.
+#-------------------------------
+[EXAGGERATESELF]
+Name = Exaggerate Self
+Type = DARK
+Category = Status
+TotalPP = 25
+Priority = 0
+Target = User
+FunctionCode = HealUserVarTotalHP
+Flags = CanProtect,CanMirrorMove,Sound
+Description = Talks about themselves to boost confidence and heal self. With varying degrees of success.
+#-------------------------------
+[ENTERTAIN]
+Name = Entertain
+Type = NORMAL
+Category = Status
+Accuracy = 100
+TotalPP = 35
+Priority = 0
+Target = NearOther
+FunctionCode = LowerTargetAtkSpAtk1
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User entertains the foe, lowering the foes attack and special attack.
+#-------------------------------
+[ENCOURAGEVIOLENCE]
+Name = Encourage Violence
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = AllNearOthers
+FunctionCode = RaiseTargetAttack2ConfuseTarget
+Flags = CanProtect,CanMirrorMove
+Description = User confuses all involved by encouraging the use of violence. Boosting everyone's attack.
+#-------------------------------
+[EGGSMOKE]
+Name = Egg Smoke
+Type = FIRE
+Category = Special
+Power = 30
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = LowerTargetAccuracy1
+Flags = CanProtect,CanMirrorMove
+Description = User badly overcooks a boiled egg and casts a sea of smoke at the foe, lowering their accuracy.
+#-------------------------------
+[DUBIOUSREMARK]
+Name = Dubious Remark
+Type = NORMAL
+Category = Status
+Accuracy = 0
+TotalPP = 15
+Priority = 0
+EffectChance = 30
+Target = AllNearFoes
+FunctionCode = LowerDefenses2Confuse
+Flags = CanProtect,CanMirrorMove
+Description = User makes a dubious remark in relation to the foe, unsettling them, lowering their defenses.
+#-------------------------------
+[DRUGS]
+Name = Drugs
+Type = DARK
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = MaxUserSpAttackLoseHPPoisonChance
+Flags = CanProtect,CanMirrorMove
+Description = User engages in indecent activity to drastically boost special attack. Will lose significant HP.
 #-------------------------------
 [DREAMWEAVE]
 Name = Dreamweave
@@ -10759,31 +11022,29 @@ FunctionCode = HealUserByHalfOfDamageDoneIfTargetAsleep
 Flags = CanProtect,CanMirrorMove
 Description = The user drains the energy out of the foe's dream to heal HP. Foe must be asleep.
 #-------------------------------
-[FOLIAGEFEAST]
-Name = Foliage Feast
-Type = GRASS
-Category = Physical
-Power = 80
-Accuracy = 100
-TotalPP = 20
+[DONUTTIME]
+Name = Donut Time
+Type = NORMAL
+Category = Status
+TotalPP = 25
 Priority = 0
-Target = NearOther
-FunctionCode = SEvsGrass
-Flags = CanProtect,CanMirrorMove,Contact
-Description = The user attempts to feast on plant matter. Super-effective vs Grass. Drains foe's HP.
+Target = User
+FunctionCode = RaiseUserAttack2
+Flags = CanProtect,CanMirrorMove
+Description = The user engages in a fervent activity with his donut, increasing their attack.
 #-------------------------------
-[SLIDETACKLE]
-Name = Slide Tackle
+[DONUTFORCE]
+Name = Donut Force
 Type = GROUND
 Category = Physical
-Power = 70
-Accuracy = 95
-TotalPP = 25
-Priority = 1
-Target = NearOther
-FunctionCode = RecoilQuarterOfDamageDealt
-Flags = CanProtect,CanMirrorMove,Contact,Kicking
-Description = The user recklessly slides at the foes legs, as if a ball was at their feet. Strikes first.
+Power = 120
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = RandomNearFoe
+FunctionCode = MultiTurnAttackConfuseUserAtEnd
+Flags = CanProtect,CanMirrorMove,Contact
+Description = The user goes into a donut frenzy, pinning down the foe with zealous intent.
 #-------------------------------
 [DIVEBOMB]
 Name = Dive Bomb
@@ -10799,117 +11060,145 @@ FunctionCode = RecoilThirdParalyzeChance
 Flags = CanProtect,CanMirrorMove,Contact
 Description = The user speartackles the opponent. A very unsafe technique, may cause paralysis.
 #-------------------------------
-[BURGERTIME]
-Name = Burger Time
+[DISNEYDREAM]
+Name = Disney Dream
 Type = NORMAL
 Category = Status
 TotalPP = 10
 Priority = 0
+EffectChance = 100
 Target = User
-FunctionCode = BurgerTime
+FunctionCode = RaiseAllStatsSleep
 Flags = CanProtect,CanMirrorMove
-Description = The user takes a break and has a burger, recovering their HP, but reduces their speed.
+Description = User raises all their stats by 1. May fall asleep.
 #-------------------------------
-[DONUTFORCE]
-Name = Donut Force
-Type = GROUND
-Category = Physical
-Power = 120
+[DICTATORDOG]
+Name = Dictator Dog
+Type = FIRE
+Category = Special
+Power = 25
 Accuracy = 100
 TotalPP = 15
 Priority = 0
-Target = RandomNearFoe
-FunctionCode = MultiTurnAttackConfuseUserAtEnd
-Flags = CanProtect,CanMirrorMove,Contact
-Description = The user goes into a donut frenzy, pinning down the foe with zealous intent.
+EffectChance = 10
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User repetitively barks with searing conviction to boss around their foes.
 #-------------------------------
-[DONUTTIME]
-Name = Donut Time
+[DIAGNOSIS]
+Name = Diagnosis
 Type = NORMAL
 Category = Status
+Accuracy = 100
 TotalPP = 25
 Priority = 0
 Target = User
-FunctionCode = RaiseUserAttack2
+FunctionCode = RaiseUserCriticalHitRate2
 Flags = CanProtect,CanMirrorMove
-Description = The user engages in a fervent activity with his donut, increasing their attack.
+Description = User diagnoses the task at hand, raising their likelihood of critical hits.
 #-------------------------------
-[VOLTAGEVOGUE]
-Name = Voltage Vogue
-Type = ELECTRIC
-Category = Physical
-Power = 95
+[DEMONHOWL]
+Name = Demon Howl
+Type = DARK
+Category = Special
+Power = 50
 Accuracy = 100
 TotalPP = 15
 Priority = 0
-EffectChance = 30
-Target = AllNearFoes
-FunctionCode = FreezeTarget
-Flags = CanProtect,CanMirrorMove,Dance
-Description = Bust out some electric dance moves. Effects opposing team. May freeze foes in their tracks.
+EffectChance = 100
+Target = NearOther
+FunctionCode = RaiseUserSpAtk1
+Flags = CanProtect,CanMirrorMove,Sound
+Description = The user lets out a guttoral howl. Dealing damage and increasing the users special attack.
 #-------------------------------
-[WAAHHH]
-Name = WAAHHH
-Type = WATER
+[DAZZLINGWINK]
+Name = Dazzling Wink
+Type = FAIRY
 Category = Special
-Power = 120
-Accuracy = 100
-TotalPP = 5
+Power = 50
+TotalPP = 15
 Priority = 0
-Target = AllNearFoes
+Target = NearOther
+FunctionCode = ConfuseTarget
 Flags = CanProtect,CanMirrorMove
-Description = The user lets out the waterworks, and cries, and cries, and cries…
+Description = User stuns the target with an alluring wink. May cause confusion or infatuation.
 #-------------------------------
-[JOKE]
-Name = Joke
-Type = NORMAL
-Category = Status
-Accuracy = 100
-TotalPP = 35
-Priority = 0
-Target = NearOther
-FunctionCode = LowerTargetAttack1
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User tells a funny joke, lowering the foes desire to attack.
-#-------------------------------
-[ENTERTAIN]
-Name = Entertain
-Type = NORMAL
-Category = Status
-Accuracy = 100
-TotalPP = 35
-Priority = 0
-Target = NearOther
-FunctionCode = LowerTargetAtkSpAtk1
-Flags = CanProtect,CanMirrorMove,Sound
-Description = User entertains the foe, lowering the foes attack and special attack.
-#-------------------------------
-[BUMMOVE]
-Name = Bum Move
-Type = FIGHTING
+[DANCEREVOLUTION]
+Name = Dance Revolution
+Type = ELECTRIC
 Category = Physical
 Power = 60
 Accuracy = 100
-TotalPP = 20
+TotalPP = 15
 Priority = 0
-EffectChance = 30
 Target = NearOther
-FunctionCode = FlinchTarget
+FunctionCode = MultiTurnAttackIncreasingPower
 Flags = CanProtect,CanMirrorMove
-Description = User bustles into the foe and knocks them back. May cause the target to flinch.
+Description = Three turn attack. Increases in power each turn.
 #-------------------------------
-[ACERACQUET]
-Name = Ace Racquet
+[DANCEPRACTICE]
+Name = Dance Practice
+Type = PSYCHIC
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = RaiseUserAtkSpd1
+Flags = CanProtect,CanMirrorMove,Dance
+Description = Boosts attack and speed by rehearsing kpop dance moves.
+#-------------------------------
+[DAB]
+Name = Dab
 Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = DoesNothingUnusableInGravity
+Flags = CanProtect,CanMirrorMove
+Description = Attempts to boost self esteem. This move does nothing.
+#-------------------------------
+[CURTAINCALL]
+Name = Curtain Call
+Type = NORMAL
+Category = Physical
+Power = 70
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = SwitchOutUserDamagingMove
+Flags = CanProtect,CanMirrorMove
+Description = Bows out of their performance, and returns to the trainer.
+#-------------------------------
+[CRY]
+Name = Cry
+Type = WATER
+Category = Special
+Power = 110
+Accuracy = 0
+TotalPP = 15
+Priority = 0
+EffectChance = 75
+Target = NearOther
+FunctionCode = ConfuseTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User produces an intolerable level of crying.
+#-------------------------------
+[CROTCHETNET]
+Name = Crotchet Net
+Type = GRASS
 Category = Physical
 Power = 50
 Accuracy = 100
-TotalPP = 20
-Priority = 1
+TotalPP = 30
+Priority = 0
+EffectChance = 100
 Target = NearOther
-FunctionCode = None
-Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
-Description = User swipes briskly at the foe with a tennis racquet, scoring an ace. Normally goes first.
+FunctionCode = LowerTargetSpeed1
+Flags = CanProtect,CanMirrorMove
+Description = User casts a hastily crotcheted net at the opponent, lowering their speed.
 #-------------------------------
 [COUCHTHROW]
 Name = Couch Throw
@@ -10925,408 +11214,62 @@ FunctionCode = TwoTurnAttackParalyzeFlinchTarget
 Flags = CanProtect,CanMirrorMove
 Description = User recruits a friend and throws a couch at the foes. Attacks on the 2nd turn. Will paralyze.
 #-------------------------------
-[POWERKICK]
-Name = Power Kick
-Type = FIGHTING
-Category = Physical
-Power = 80
-Accuracy = 95
-TotalPP = 20
-Priority = 0
-EffectChance = 50
-Target = NearOther
-FunctionCode = RaiseUserAttack1
-Flags = CanProtect,CanMirrorMove
-Description = User unleashes a powerful kick at the foe. May increase attack stat.
-#-------------------------------
-[REHABEXERCISES]
-Name = Rehab Exercises
+[COSPLAY]
+Name = Cosplay
 Type = NORMAL
 Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = CureUserBurnPoisonParalysis
-Flags = CanProtect,CanMirrorMove
-Description = User performs rehab exercises to recover from poison, burn or paralysis.
-#-------------------------------
-[ANAESTHESIA]
-Name = Anaesthesia
-Type = NORMAL
-Category = Status
-Accuracy = 100
-TotalPP = 10
+TotalPP = 35
 Priority = 0
 EffectChance = 100
 Target = NearOther
-FunctionCode = SleepTarget
+FunctionCode = CosplayUserIntoTarget
 Flags = CanProtect,CanMirrorMove
-Description = A measured dosage of administered sleeping gas puts the opponent to sleep.
+Description = User cosplays as the target. Copying moves and abilities. Also raises two random stats.
 #-------------------------------
-[SINGALONG]
-Name = Singalong
-Type = NORMAL
-Category = Special
-Power = 40
-Accuracy = 95
-TotalPP = 20
-Priority = 0
-Target = AllNearFoes
-FunctionCode = MultiTurnAttackPowersUpEachTurn
-Flags = CanProtect,CanMirrorMove
-Description = User locks into a singalong, increasing in intensity each turn.
-#-------------------------------
-[DIAGNOSIS]
-Name = Diagnosis
+[CONTRARYTHOUGHTS]
+Name = Contrary Thoughts
 Type = NORMAL
 Category = Status
-Accuracy = 100
-TotalPP = 25
-Priority = 0
-Target = User
-FunctionCode = RaiseUserCriticalHitRate2
-Flags = CanProtect,CanMirrorMove
-Description = User diagnoses the task at hand, raising their likelihood of critical hits.
-#-------------------------------
-[PREPMEDS]
-Name = Prep Meds
-Type = NORMAL
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = CureUserRaiseSpDef1
-Flags = CanProtect,CanMirrorMove
-Description = User prepares medical supplies, healing their status ailments, and raising their special defense.
-#-------------------------------
-[DISNEYDREAM]
-Name = Disney Dream
-Type = NORMAL
-Category = Status
-TotalPP = 10
-Priority = 0
-EffectChance = 100
-Target = User
-FunctionCode = RaiseAllStatsSleep
-Flags = CanProtect,CanMirrorMove
-Description = User raises all their stats by 1. May fall asleep.
-#-------------------------------
-[MAGICALMELODY]
-Name = Magical Melody
-Type = FAIRY
-Category = Special
-Power = 80
-Accuracy = 100
 TotalPP = 15
 Priority = 0
-EffectChance = 30
-Target = NearOther
-FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Sound
-Description = A magical melody from a fairy tale which may soothe the target into sleep.
+Target = User
+FunctionCode = RaiseUserSpAtk2
+Flags = CanProtect,CanMirrorMove
+Description = User begins to consider alternative acts to physical violence, sharpening their Special Attack.
 #-------------------------------
-[BOWLINGMOVE]
-Name = Bowling Move
-Type = NORMAL
+[CONSPIRACYTHEORY]
+Name = Conspiracy Theory
+Type = DARK
 Category = Status
 Accuracy = 90
-TotalPP = 20
-Priority = 0
-Target = NearOther
-FunctionCode = AttractTargetGenderless
-Flags = CanProtect,CanMirrorMove
-Description = The user proposes an ultimate act of commitment, causing the foe to fall in love.
-#-------------------------------
-[FLAMINGNOODLES]
-Name = Flaming Noodles
-Type = FIRE
-Category = Special
-Power = 140
-Accuracy = 95
-TotalPP = 5
-Priority = 0
-Target = NearOther
-FunctionCode = LowerUserSpAtk1
-Flags = CanProtect,CanMirrorMove
-Description = The user serves up a powerful dish of flaming noodles. This also lowers user's special attack.
-#-------------------------------
-[SOCCERTRAINING]
-Name = Soccer Training
-Type = NORMAL
-Category = Status
 TotalPP = 15
 Priority = 0
-EffectChance = 100
-Target = User
-FunctionCode = RaisePhysicalChance
-Flags = CanProtect,CanMirrorMove
-Description = The user performs some soccer drills, potentially raising their physical and speed stats.
+Target = AllNearOthers
+FunctionCode = ConfuseTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = User discusses a story they found on the internet with the foe. Very likely to confuse.
 #-------------------------------
-[SLEEPYKICK]
-Name = Sleepy Kick
+[CONSIDERVIOLENCE]
+Name = Consider Violence
 Type = NORMAL
-Category = Physical
-Power = 25
-Accuracy = 100
+Category = Status
 TotalPP = 25
-Priority = 0
-Target = NearOther
-FunctionCode = SleepyKick
-Flags = CanProtect,CanMirrorMove
-Description = User kicks 1-3 times. Can be used while asleep. x2 damage if user and/or target is asleep (stacks).
-#-------------------------------
-[INKJET]
-Name = Ink Jet
-Type = DARK
-Category = Special
-Power = 60
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove
-Description = Sprays printer ink at foe. Also lowers accuracy.
-#-------------------------------
-[MUSHROOMMASH]
-Name = Mushroom Mash
-Type = MYCELIUM
-Category = Special
-Power = 90
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-EffectChance = 50
-Target = AllNearFoes
-FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove
-Description = Rains down a mushroom storm upon foes. May cause paralysis.
-#-------------------------------
-[SPORESHIELD]
-Name = Spore Shield
-Type = MYCELIUM
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = UserSide
-FunctionCode = StartWeakenDamageAgainstUserSide
-Flags = CanProtect,CanMirrorMove
-Description = User employs a spore shield, increasing the teams defense and special defence.
-#-------------------------------
-[PIXELBLAST]
-Name = Pixel Blast
-Type = ELECTRIC
-Category = Special
-Power = 35
-Accuracy = 95
-TotalPP = 15
-Priority = 0
-EffectChance = 15
-Target = NearOther
-FunctionCode = HitThreeTimesParalyzeTarget
-Flags = CanProtect,CanMirrorMove,HighCriticalHitRate,Bomb
-Description = User blasts foe with a pixelated design energy beam. High critical hit rate. Hits three times.
-#-------------------------------
-[AWKWARDSTARE]
-Name = Awkward Stare
-Type = PSYCHIC
-Category = Special
-Power = 20
-TotalPP = 15
-Priority = 0
-EffectChance = 50
-Target = NearOther
-FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove
-Description = User gives an inescapable awkward stare, which may cause confusion. This never misses.
-#-------------------------------
-[HIPSWING]
-Name = Hip Swing
-Type = NORMAL
-Category = Status
-TotalPP = 20
-Priority = 0
-Target = User
-FunctionCode = RaiseUserSpeed1
-Flags = CanProtect,CanMirrorMove
-Description = User swings their hips, limbering up their body, and raising their speed.
-#-------------------------------
-[ROCKASCENT]
-Name = Rock Ascent
-Type = ROCK
-Category = Physical
-Power = 50
-Accuracy = 100
-TotalPP = 15
-Priority = 1
-EffectChance = 25
-Target = NearOther
-FunctionCode = LowerTargetDefense1
-Flags = CanProtect,CanMirrorMove
-Description = User quickly rushes up a rock face to strike opponent. May lower targets defense.
-#-------------------------------
-[FLASHANDDASH]
-Name = Flash and Dash
-Type = DARK
-Category = Physical
-Power = 55
-TotalPP = 15
-Priority = 2
-EffectChance = 30
-Target = NearOther
-FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove
-Description = Distracts foe with a wardrobe malfunction, striking immediately before the foe can react.
-#-------------------------------
-[DAZZLINGWINK]
-Name = Dazzling Wink
-Type = FAIRY
-Category = Special
-Power = 50
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove
-Description = User stuns the target with an alluring wink. May cause confusion or infatuation.
-#-------------------------------
-[POWERPOSE]
-Name = Power Pose
-Type = FAIRY
-Category = Status
-TotalPP = 15
 Priority = 0
 Target = User
 FunctionCode = RaiseUserAttack2
 Flags = CanProtect,CanMirrorMove
-Description = User strikes a power pose, sharply raising their attack.
+Description = User begins to consider taking violence as a course of action. Sharply raises attack.
 #-------------------------------
-[BEATDROP]
-Name = Beat Drop
-Type = DARK
-Category = Physical
-Power = 80
-Accuracy = 100
-TotalPP = 20
-Priority = 1
-Target = NearOther
-Flags = CanProtect,CanMirrorMove
-Description = User jumps up in the air and smacks down, in time with the sick beat they just dropped.
-#-------------------------------
-[LASTDANCE]
-Name = Last Dance
-Type = DARK
-Category = Physical
-Power = 140
-Accuracy = 100
-TotalPP = 5
-Priority = 0
-Target = NearOther
-FunctionCode = UserFaintsExplosive
-Flags = CanProtect,CanMirrorMove
-Description = The user puts on an explosive final dance performance, before fainting from exhaustion.
-#-------------------------------
-[BANANARANG]
-Name = Bananarang
-Type = GRASS
-Category = Physical
-Power = 50
-Accuracy = 95
-TotalPP = 20
-Priority = 0
-Target = NearOther
-FunctionCode = HitTwoTimes
-Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
-Description = A banana is thrown, like a boomerang, striking the target several times. High critical hit rate.
-#-------------------------------
-[PINEAPPLESTRIKE]
-Name = Pineapple Strike
-Type = GRASS
-Category = Physical
-Power = 150
-Accuracy = 90
-TotalPP = 10
-Priority = 0
-EffectChance = 20
-Target = NearOther
-FunctionCode = FlinchTarget
-Flags = CanProtect,CanMirrorMove
-Description = Summons a pineapple after thin air, and drop kicks it at the opponent. May flinch the target.
-#-------------------------------
-[THEHATTRICK]
-Name = The Hattrick
-Type = NORMAL
-Category = Physical
-Power = 60
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = MultiTurnAttackIncreasingPower
-Flags = CanProtect,CanMirrorMove
-Description = Three turns of memorable experiences. Each stronger than the last. Traps foe.
-#-------------------------------
-[ALLSMILES]
-Name = All Smiles
+[COMMANDOROLL]
+Name = Commando Roll
 Type = NORMAL
 Category = Status
-Accuracy = 90
 TotalPP = 15
-Priority = 0
-Target = FoeSide
-FunctionCode = LowerTargetAtkSpAtk1
-Flags = CanProtect,CanMirrorMove
-Description = Smiles kindly at the foes, lowers the opposing team's offensive stats.
-#-------------------------------
-[BLACKPOWDER]
-Name = Black Powder
-Type = MYCELIUM
-Category = Status
-TotalPP = 10
 Priority = 0
 Target = User
-FunctionCode = RaiseUserAtkDefAcc1
+FunctionCode = IncreaseSpeed1Evasion1
 Flags = CanProtect,CanMirrorMove
-Description = User takes a serving of black powder, honing  their attack, defense and accuracy.
-#-------------------------------
-[BARGAINDISCOUNT]
-Name = Bargain Discount
-Type = NORMAL
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = UserAndAllies
-FunctionCode = HealUserAndAlliesQuarterOfTotalHP
-Flags = CanProtect,CanMirrorMove
-Description = Discovers a loophole in saving money, and restores a quarter HP of itself and allies in battle.
-#-------------------------------
-[JAWBREAK]
-Name = Jaw Break
-Type = FIGHTING
-Category = Physical
-Power = 95
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 75
-Target = NearOther
-FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove
-Description = The user throws a jawbreaking punch at the opponent. High likelihood to paralyze.
-#-------------------------------
-[THEFISH]
-Name = The Fish
-Type = NORMAL
-Category = Physical
-Power = 120
-Accuracy = 100
-TotalPP = 10
-Priority = 0
-Target = RandomNearFoe
-FunctionCode = MultiTurnAttackConfuseUserAtEnd
-Flags = CanProtect,CanMirrorMove
-Description = Flops around vigorously for 2-3 turns, striking all in it's path, then becomes confused.
+Description = User performs a commando roll, increasing their speed and evasion.
 #-------------------------------
 [COASTERCRASH]
 Name = Coaster Crash
@@ -11341,118 +11284,42 @@ FunctionCode = AttackAndSkipNextTurn
 Flags = CanProtect,CanMirrorMove
 Description = User takes the opponent out on a wild coaster ride. Cannot move next turn.
 #-------------------------------
-[GLOWINGROUTINE]
-Name = Glowing Routine
-Type = FAIRY
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = GlowingRoutine
-Flags = CanProtect,CanMirrorMove
-Description = Applies a skincare routine, boosting Special Defense, and providing status immunity for 3 turns.
-#-------------------------------
-[LASEREYES]
-Name = Laser Eyes
+[CHISELEDJAW]
+Name = Chiseled Jaw
 Type = FIRE
 Category = Special
-Power = 95
+Power = 90
+Accuracy = 100
 TotalPP = 15
-Priority = 0
-EffectChance = 100
+Priority = -1
 Target = NearOther
-FunctionCode = LowerTargetAttack2
+FunctionCode = DisableTargetStatusMoves
 Flags = CanProtect,CanMirrorMove
-Description = Stares intensly into the foe's soul, targetting their insecurities. Sharply lowers foe attack.
+Description = The user takes a moment to pause, and show off their chiseled jawline, angering the foe.
 #-------------------------------
-[WAIFUCHARM]
-Name = Waifu Charm
-Type = FAIRY
+[CHINESEWATER]
+Name = Chinese Water
+Type = FIRE
 Category = Status
-Accuracy = 100
+Accuracy = 0
 TotalPP = 15
 Priority = 0
-EffectChance = 40
-Target = NearOther
-FunctionCode = WaifuCharm
-Flags = CanProtect,CanMirrorMove
-Description = Uses his waifu charm to lowers opponent atk/spatk by one stage. May cause attraction
+Target = User
+FunctionCode = HealUserHalfOfTotalHP
+Description = The user heats up and drinks some Chinese water to heal their health.
 #-------------------------------
-[LEDGLOWUP]
-Name = LED Glowup
-Type = ELECTRIC
-Category = Special
-Power = 20
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 100
-Target = NearOther
-FunctionCode = RaiseUserSpeed1
-Flags = CanProtect,CanMirrorMove
-Description = Impresses the foe with his latest LED Glowup. Also increases speed.
-#-------------------------------
-[RHYTHMSTEP]
-Name = Rhythm Step
-Type = ELECTRIC
+[CHEWSLIPPERS]
+Name = Chew Slippers
+Type = NORMAL
 Category = Physical
-Power = 25
+Power = 30
 Accuracy = 100
 TotalPP = 35
 Priority = 0
 Target = NearOther
-FunctionCode = HitTwoToFiveTimes
-Flags = CanProtect,CanMirrorMove
-Description = Hits opponent with a flurry of well executed moves.
-#-------------------------------
-[MACHINESPIRIT]
-Name = Machine Spirit
-Type = STEEL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = RaiseUserDefSpDef1
-Flags = CanProtect,CanMirrorMove
-Description = Channels the power of the machine spirit, raising both defense and special defense.
-#-------------------------------
-[ALLERGYSHIELD]
-Name = Allergy Shield
-Type = NORMAL
-Category = Status
-TotalPP = 10
-Priority = 0
-Target = User
-FunctionCode = GlowingRoutine
-Flags = CanProtect,CanMirrorMove
-Description = Protects against status moves for 3 turns. Offsets recoil of peanut based moves.
-#-------------------------------
-[PEANUTCRASH]
-Name = Peanut Crash
-Type = GRASS
-Category = Physical
-Power = 90
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-EffectChance = 33
-Target = NearOther
-FunctionCode = PeanutCrash
-Flags = CanProtect,CanMirrorMove
-Description = Barrages opponent with salted peanuts. Receives half damage recoil. May confuse opponent.
-#-------------------------------
-[DANCEREVOLUTION]
-Name = Dance Revolution
-Type = ELECTRIC
-Category = Physical
-Power = 60
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = MultiTurnAttackIncreasingPower
-Flags = CanProtect,CanMirrorMove
-Description = Three turn attack. Increases in power each turn.
+FunctionCode = BindTarget
+Flags = CanProtect,CanMirrorMove,Contact
+Description = User mistakes foe for a pair of slippers and begins chewing.
 #-------------------------------
 [CHARLESTON]
 Name = Charleston
@@ -11465,87 +11332,293 @@ FunctionCode = RaiseUserSpeed2
 Flags = CanProtect,CanMirrorMove
 Description = User breaks out the Charleston dance. Sharply raising their speed.
 #-------------------------------
-[FINALREHEARSAL]
-Name = Final Rehearsal
-Type = FAIRY
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = User
-FunctionCode = FinalRehearsal
-Flags = CanProtect,CanMirrorMove
-Description = Boosts attack and speed. Doubles if used on the first turn the user is in battle.
-#-------------------------------
-[CURTAINCALL]
-Name = Curtain Call
-Type = NORMAL
+[CHAOTICTENDRILS]
+Name = Chaotic Tendrils
+Type = MYCELIUM
 Category = Physical
-Power = 70
-Accuracy = 100
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = SwitchOutUserDamagingMove
-Flags = CanProtect,CanMirrorMove
-Description = Bows out of their performance, and returns to the trainer.
-#-------------------------------
-[WORLDMAP]
-Name = World Map
-Type = NORMAL
-Category = Status
-TotalPP = 15
-Priority = 0
-Target = NearOther
-FunctionCode = WorldMap
-Flags = CanProtect,CanMirrorMove
-Description = Introduces the opponent to the world map, lowering their defenses, and trapping them.
-#-------------------------------
-[MALPRACTICE]
-Name = Malpractice
-Type = POISON
-Category = Special
-Power = 150
+Power = 250
 Accuracy = 100
 TotalPP = 5
+Priority = 0
+Target = NearOther
+FunctionCode = LowerAllStats5
+Flags = CanProtect,CanMirrorMove
+Description = User unleashes pure infected mycelium power to strike hard. Lowers all user's stats considerably.
+#-------------------------------
+[CATCHPHRASE]
+Name = Catchphrase
+Type = NORMAL
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 40
 Priority = 0
 EffectChance = 100
 Target = NearOther
-FunctionCode = PoisonTarget
-Flags = CanProtect,CanMirrorMove
-Description = Misuses their expertise in medicine, and intentionally hurts their opponent. Always inflicts poison.
+FunctionCode = ConfuseTarget
+Flags = CanProtect,CanMirrorMove,Sound
+Description = The user comes up with a new and unique catchphrase, confusing the opponent.
 #-------------------------------
-[FAMILYMEAL]
-Name = Family Meal
-Type = NORMAL
-Category = Status
-TotalPP = 5
-Priority = 0
-Target = User
-FunctionCode = FamilyMeal
-Flags = CanProtect,CanMirrorMove
-Description = Eats an entire family meal. Recovers 1/3 HP, boosts defenses, reduces speed. Cannot move next turn.
-#-------------------------------
-[FREIGHTTRAIN]
-Name = Freight Train
-Type = STEEL
+[CASTROD]
+Name = Cast Rod
+Type = WATER
 Category = Physical
-Power = 130
-Accuracy = 95
+Power = 40
+TotalPP = 15
+Priority = 1
+Target = NearOther
+FunctionCode = None
+Flags = CanProtect,CanMirrorMove
+Description = The user quickly casts their rod out, before the opponent can react.
+#-------------------------------
+[CAFFEINEBOOST]
+Name = Caffeine Boost
+Type = DARK
+Category = Status
 TotalPP = 10
 Priority = 0
-EffectChance = 30
-Target = AllNearFoes
-FunctionCode = ParalyzeTarget
+Target = User
+FunctionCode = RaiseUserAttack2ConfuseSelf
 Flags = CanProtect,CanMirrorMove
-Description = Runs through the entire oppoonent team with unstoppable force. May paralyze opponents.
+Description = Takes a well needed dosage of caffeine to boost attack. Then struggles to think straight.
 #-------------------------------
-[FORCEFIELD]
-Name = Forcefield
-Type = PSYCHIC
+[BUYMOREPLANTS]
+Name = Buy More Plants
+Type = GRASS
 Category = Status
 TotalPP = 15
 Priority = 0
 Target = User
-FunctionCode = RaiseUserSpDef2
+FunctionCode = DoesNothingUnusableInGravity
 Flags = CanProtect,CanMirrorMove
-Description = Summons the power of the forcefield, sharply raising their special defense.
+Description = User goes to the shop and buys some plants. This attack does nothing.
+#-------------------------------
+[BURGERTIME]
+Name = Burger Time
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = BurgerTime
+Flags = CanProtect,CanMirrorMove
+Description = The user takes a break and has a burger, recovering their HP, but reduces their speed.
+#-------------------------------
+[BUMMOVE]
+Name = Bum Move
+Type = FIGHTING
+Category = Physical
+Power = 60
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+EffectChance = 30
+Target = NearOther
+FunctionCode = FlinchTarget
+Flags = CanProtect,CanMirrorMove
+Description = User bustles into the foe and knocks them back. May cause the target to flinch.
+#-------------------------------
+[BOWLINGMOVE]
+Name = Bowling Move
+Type = NORMAL
+Category = Status
+Accuracy = 90
+TotalPP = 20
+Priority = 0
+Target = NearOther
+FunctionCode = AttractTargetGenderless
+Flags = CanProtect,CanMirrorMove
+Description = The user proposes an ultimate act of commitment, causing the foe to fall in love.
+#-------------------------------
+[BLACKPOWDER]
+Name = Black Powder
+Type = MYCELIUM
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = RaiseUserAtkDefAcc1
+Flags = CanProtect,CanMirrorMove
+Description = User takes a serving of black powder, honing  their attack, defense and accuracy.
+#-------------------------------
+[BEATDROP]
+Name = Beat Drop
+Type = DARK
+Category = Physical
+Power = 80
+Accuracy = 100
+TotalPP = 20
+Priority = 1
+Target = NearOther
+Flags = CanProtect,CanMirrorMove
+Description = User jumps up in the air and smacks down, in time with the sick beat they just dropped.
+#-------------------------------
+[BARGAINDISCOUNT]
+Name = Bargain Discount
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = UserAndAllies
+FunctionCode = HealUserAndAlliesQuarterOfTotalHP
+Flags = CanProtect,CanMirrorMove
+Description = Discovers a loophole in saving money, and restores a quarter HP of itself and allies in battle.
+#-------------------------------
+[BANANARANG]
+Name = Bananarang
+Type = GRASS
+Category = Physical
+Power = 50
+Accuracy = 95
+TotalPP = 20
+Priority = 0
+Target = NearOther
+FunctionCode = HitTwoTimes
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
+Description = A banana is thrown, like a boomerang, striking the target several times. High critical hit rate.
+#-------------------------------
+[BAIT]
+Name = Bait
+Type = WATER
+Category = Status
+Accuracy = 100
+TotalPP = 15
+Priority = 0
+Target = NearOther
+FunctionCode = LowerTargetDefense1
+Flags = CanProtect,CanMirrorMove
+Description = The user adds bait to their rod and casts it to sea, lowering the foes defense.
+#-------------------------------
+[BACKHEEL]
+Name = Backheel
+Type = FIGHTING
+Category = Physical
+Power = 60
+Accuracy = 95
+TotalPP = 15
+Priority = 2
+Target = NearOther
+FunctionCode = FailsIfTargetActed
+Flags = CanProtect,CanMirrorMove,Contact,Kicking
+Description = An unorthodox kicking motion aims to strike without warning. Fails if foe does not ready an attack.
+#-------------------------------
+[AWKWARDSTARE]
+Name = Awkward Stare
+Type = PSYCHIC
+Category = Special
+Power = 20
+TotalPP = 15
+Priority = 0
+EffectChance = 50
+Target = NearOther
+FunctionCode = ConfuseTarget
+Flags = CanProtect,CanMirrorMove
+Description = User gives an inescapable awkward stare, which may cause confusion. This never misses.
+#-------------------------------
+[ANAESTHESIA]
+Name = Anaesthesia
+Type = NORMAL
+Category = Status
+Accuracy = 100
+TotalPP = 10
+Priority = 0
+EffectChance = 100
+Target = NearOther
+FunctionCode = SleepTarget
+Flags = CanProtect,CanMirrorMove
+Description = A measured dosage of administered sleeping gas puts the opponent to sleep.
+#-------------------------------
+[ALLERGYSHIELD]
+Name = Allergy Shield
+Type = NORMAL
+Category = Status
+TotalPP = 10
+Priority = 0
+Target = User
+FunctionCode = GlowingRoutine
+Flags = CanProtect,CanMirrorMove
+Description = Protects against status moves for 3 turns. Offsets recoil of peanut based moves.
+#-------------------------------
+[ALLSMILES]
+Name = All Smiles
+Type = NORMAL
+Category = Status
+Accuracy = 90
+TotalPP = 15
+Priority = 0
+Target = FoeSide
+FunctionCode = LowerTargetAtkSpAtk1
+Flags = CanProtect,CanMirrorMove
+Description = Smiles kindly at the foes, lowers the opposing team's offensive stats.
+#-------------------------------
+[ACERACQUET]
+Name = Ace Racquet
+Type = NORMAL
+Category = Physical
+Power = 50
+Accuracy = 100
+TotalPP = 20
+Priority = 1
+Target = NearOther
+FunctionCode = None
+Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
+Description = User swipes briskly at the foe with a tennis racquet, scoring an ace. Normally goes first.
+#-------------------------------
+[ANGRYCRY]
+Name = Angry Cry
+Type = NORMAL
+Category = Special
+Power = 120
+Accuracy = 100
+TotalPP = 25
+Priority = 0
+EffectChance = 25
+Target = BothSides
+Flags = CanProtect,CanMirrorMove
+Description = Baby cries with doubling power for each setback experienced.
+#-------------------------------
+[SMELLYNAPPY]
+Name = Smelly Nappy
+Type = POISON
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 20
+Priority = 0
+EffectChance = 100
+Target = BothSides
+Flags = CanProtect,CanMirrorMove
+Description = A smelly nappy, causes confusion with all who experience it.
+#-------------------------------
+[SMIRK]
+Name = Smirk
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserSpAtk1
+Flags = CanProtect,CanMirrorMove
+Description = Smirks with confidence, raising special attack power by one stage.
+#-------------------------------
+[SWADDLE]
+Name = Swaddle
+Type = NORMAL
+Category = Status
+TotalPP = 15
+Priority = 0
+Target = User
+FunctionCode = RaiseUserDefSpDef1
+Flags = CanProtect,CanMirrorMove
+Description = User is swaddled in a comforting blanket, raising both defenses by one stage.
+#-------------------------------
+[WILDWAIL]
+Name = Wild Wail
+Type = NORMAL
+Category = Special
+Power = 70
+TotalPP = 10
+Priority = 1
+Target = BothSides
+Flags = CanProtect,CanMirrorMove
+Description = Lets off a sudden sharp cry, usually goes first.

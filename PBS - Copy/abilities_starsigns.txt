@@ -1,0 +1,49 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[ARIESBATTLECHARGE]
+Name = Aries
+Description = Battle Charge - Every hit to the user under 40% HP will raise attack and speed by one stage.
+#-------------------------------
+[TAURUSHARDYBULL]
+Name = Taurus
+Description = Hardy Bull - Increases defense by one stage when the Pokemon is hit by a physical move.
+#-------------------------------
+[GEMINIPARTYSTARTER]
+Name = Gemini
+Description = Party Starter - Status moves targeting self receive priority.
+#-------------------------------
+[CANCERPROTECTIVESHELL]
+Name = Cancer
+Description = Protective Shell - Reduces damage from super-effective moves by 30%.
+#-------------------------------
+[LEOPRIDEFULROAR]
+Name = Leo
+Description = Prideful Roar - Heals 1/4 health and any status condition when the Pokemon KO's an opponent.
+#-------------------------------
+[VIRGOPUREFOCUS]
+Name = Virgo
+Description = Pure Focus - The Pokémon is completely immune to all stat reductions.
+#-------------------------------
+[LIBRAHARMONYGUARD]
+Name = Libra
+Description = Harmony Guard - 10% chance to heal 1/4 health after being hit.
+#-------------------------------
+[SCORPIOVENOMSTARE]
+Name = Scorpio
+Description = Venomous Stare - 30% chance to badly poison foes during battle.
+#-------------------------------
+[SAGITTARIUSSHARPEYE]
+Name = Sagittarius
+Description = Sharp Eye - Increases critical hit ratio by one stage.
+#-------------------------------
+[CAPRICORNENDURINGWILL]
+Name = Capricorn
+Description = Enduring Will - Every hit to the user under 40% HP will raise defense and special defense by one stage.
+#-------------------------------
+[AQUARIUSINNOVATIVESPARK]
+Name = Aquarius
+Description = Innovative Spark - Randomly boosts a stat by one stage at the beginning of each battle.
+#-------------------------------
+[PISCESMYSTICVEIL]
+Name = Pisces
+Description = Mystic Veil - Reduces damage from special attacks by 30%.

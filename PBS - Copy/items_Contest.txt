@@ -1,0 +1,8 @@
+#-------------------------------
+[CONTESTPASS]
+Name = Contest Pass
+NamePlural = Contest Pass
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A pass required for entering Pokémon Contests.
