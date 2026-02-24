@@ -1,0 +1,38 @@
+
+================================================================
+
+[Started battle] Single wild battle (1 trainer(s) vs. 1 wild Pokémon)
+"Oh! A wild FoodBaby appeared!"
+"Go! Xerri!"
+[Round order] Xerri (0), the wild FoodBaby (1)
+
+===== Round 1 =====
+
+[AI] FoodBaby (1) is considering using Sweet Kiss against Xerri (0)...
+[AI] FoodBaby (1) is considering using Attract against Xerri (0)...
+[AI] FoodBaby (1) is considering using Super Fang against Xerri (0)...
+[AI] FoodBaby (1) is considering using Catchphrase against Xerri (0)...
+[AI] Move choices for FoodBaby (1):
+   *  20.0% to use Sweet Kiss (target 0): score 100
+   *  20.0% to use Attract (target 0): score 100
+   *  20.0% to use Super Fang (target 0): score 100
+   *  20.0% to use Super Fang (target 0): score 100
+   *  20.0% to use Catchphrase (target 0): score 100
+   => will use Catchphrase (target 0)
+
+[Round order] Xerri (0), the wild FoodBaby (1)
+
+[Use move] Xerri (0) used Exaggerate Self
+"Xerri used Exaggerate Self!"
+[HP change] Xerri gained 1 HP (22 -> 23)
+"Xerri's HP was restored."
+"Xerri just confused themself!"
+[Lingering effect] Xerri's confusion count is 3
+[Use move] The wild FoodBaby (1) used Catchphrase
+"The wild FoodBaby used Catchphrase!"
+[HP change] Xerri lost 5 HP (23 -> 18)
+
+[End of round 1]
+
+===== Round 2 =====
+

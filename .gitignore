@@ -7,7 +7,7 @@ Plugins/
 Screenshots/
 
 # Data folder, but not Data/Scripts folder or messages_core.dat
-Data/*
+#Data/*
 !Data/Scripts.rxdata
 !Data/Scripts/
 !Data/messages_core.dat
